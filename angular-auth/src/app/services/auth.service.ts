@@ -31,7 +31,7 @@ export class AuthService {
 
   isUser(){
     
-    return this.cookie.get(COOKIE_NAME) ? true : false; 
+    return this.cookie.get(COOKIE_NAME); 
   }
 
 }

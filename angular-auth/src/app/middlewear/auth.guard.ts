@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { COOKIE_NAME } from 'src/environments/environment';
 
 
 @Injectable({
@@ -8,14 +10,22 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private service: AuthService, private router: Router){}
+  constructor(private service: AuthService, private router: Router, private cookie: CookieService){}
 
   canActivate(){
     
-    console.log(this.service.isUser());
+    let token = this.service.isUser();
+    if(token){
     
-    if(this.service.isUser()){
+    let payload = token.split('.')[1];
+    let user = JSON.parse(atob(payload));
     
+    if(!user.username){
+      
+      this.cookie.delete(COOKIE_NAME);
+      this.router.navigate(['login']);
+      return false; 
+    }    
       return true;
     }else{
 
