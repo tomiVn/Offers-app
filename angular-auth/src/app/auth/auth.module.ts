@@ -4,7 +4,6 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialsModule } from '../materials/materials.module';
 
-
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -12,7 +11,8 @@ import { MaterialsModule } from '../materials/materials.module';
   ],
   imports: [
     CommonModule,
-    MaterialsModule
-  ]
+    MaterialsModule,
+  ],
+  providers: []
 })
 export class AuthModule { }

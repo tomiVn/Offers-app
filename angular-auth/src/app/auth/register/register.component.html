@@ -1,17 +1,19 @@
-{{form.valid | json}}
+<!-- {{form.valid | json}}
 <br>
-{{ form.get('repeatPass')?.errors | json}}
+{{ form.get('repeatPass')?.errors | json}} -->
 <mat-card class="card-decoration">
     
     <h3>Register form!</h3>
 
-    <form [formGroup]="form" class="example-form">
+    <form [formGroup]="form" class="example-form" (ngSubmit)="signUp()">
 
         <div class="form-input-container">
+
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Names</mat-label>
                 <input matInput placeholder="Names" formControlName="name">
             </mat-form-field>
+
             <mat-error *ngIf="form.get('name')?.errors && form.get('name')?.touched">
                 <mat-error *ngIf="form.get('name')?.errors?.['required']">
                     Name is <strong>required!</strong>
@@ -83,7 +85,7 @@
             <mat-error *ngIf="!form.get('repeatPass')?.errors?.['isPasswordsMatch']">
                 Passwords <strong>not match!</strong>
             </mat-error>
-            
+
         </mat-error>
         </div>
         

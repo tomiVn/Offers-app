@@ -10,6 +10,8 @@ import { NavComponent } from './nav/nav.component';
 import { MaterialsModule } from './materials/materials.module';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { AuthModule } from './auth/auth.module';
     MatToolbarModule,
     MatIconModule,
     MaterialsModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
