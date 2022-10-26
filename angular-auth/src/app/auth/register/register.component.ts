@@ -61,7 +61,7 @@ export class RegisterComponent {
       this.service.signUpService(this.form.value).subscribe(f => {
 
         this.responseData = f;
-        let token = this.responseData.accessToken;
+        let token = this.responseData?.accessToken;
         this.cookie.set(COOKIE_NAME, token);
       });
 
