@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { COOKIE_NAME } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from '../userModel';
 
 @Component({
   selector: 'app-register',
