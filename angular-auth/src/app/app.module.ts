@@ -28,7 +28,7 @@ import {CookieService} from 'ngx-cookie-service';
     MatIconModule,
     MaterialsModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule //important
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

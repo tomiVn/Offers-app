@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { COOKIE_NAME } from 'src/environments/environment';
-import { CookieService } from 'ngx-cookie-service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +12,9 @@ export class RegisterComponent {
 
   form!: FormGroup;
   responseData: any;
+  actionToken: any;
 
-  constructor(private fb: FormBuilder, private service: AuthService, private cookie: CookieService) {
+  constructor(private fb: FormBuilder, private service: AuthService, private tokenService: TokenService) {
 
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -60,12 +60,8 @@ export class RegisterComponent {
       this.service.signUpService(this.form.value).subscribe(f => {
 
         this.responseData = f;
-        let token = this.responseData?.accessToken;
-        this.cookie.set(COOKIE_NAME, token);
+        this.tokenService.setToken(this.responseData?.accessToken);
       });
-
     }
-    //console.log(this.cookie.get(COOKIE_NAME));
   }
-
 }

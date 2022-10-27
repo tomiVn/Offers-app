@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
-import { COOKIE_NAME } from 'src/environments/environment';
+import { TokenService } from '../services/token.service';
 
 
 @Injectable({
@@ -10,28 +8,29 @@ import { COOKIE_NAME } from 'src/environments/environment';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private service: AuthService, private router: Router, private cookie: CookieService){}
+  constructor(private router: Router, private tokenService: TokenService) { }
 
-  canActivate(){
-    
-    let token = this.service.isUser();
-    if(token){
-    
-    let payload = token.split('.')[1];
-    let user = JSON.parse(atob(payload));
-    
-    if(!user.username){
-      
-      this.cookie.delete(COOKIE_NAME);
-      this.router.navigate(['login']);
-      return false; 
-    }    
+  canActivate() {
+
+    let token = this.tokenService.getToken();
+
+    if (token) {
+
+      let payload = token.split('.')[1];
+      let decodeTokenPayload = JSON.parse(atob(payload));
+
+      if (!decodeTokenPayload.exp || decodeTokenPayload.exp * 1000 < new Date().getTime()
+        || !decodeTokenPayload.username) {
+
+        this.tokenService.deleteToken();
+        this.router.navigate(['login']);
+        return false;
+      }
+
       return true;
-    }else{
-
-      this.router.navigate(['login']);
-      return false; 
     }
     
-  } 
+    this.router.navigate(['login']);
+    return false;
+  }
 }

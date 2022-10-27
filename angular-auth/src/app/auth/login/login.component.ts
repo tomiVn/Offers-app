@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
-import { COOKIE_NAME } from 'src/environments/environment';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ export class LoginComponent {
   form!: FormGroup;
   responseData: any;
 
-  constructor(private fb: FormBuilder, private service: AuthService, private cookie: CookieService) {
+  constructor(private fb: FormBuilder, private service: AuthService, private tokenService: TokenService) {
 
     this.form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -23,21 +22,15 @@ export class LoginComponent {
 
   }
 
+ signIn() {
 
+    if (this.form.valid) {
 
-  signIn() {
+      this.service.signIn(this.form.value).subscribe(f => {
 
-    if(this.form.valid){
-
-     this.service.signIn(this.form.value).subscribe(f => {
-
-       this.responseData = f;
-       
-       let token = this.responseData?.accessToken
-       this.cookie.set(COOKIE_NAME, token);
-     });
-
-
+        this.responseData = f;
+        this.tokenService.setToken(this.responseData?.accessToken);
+      });    
     }
   }
 }
