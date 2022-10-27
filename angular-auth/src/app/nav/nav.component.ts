@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -6,18 +6,25 @@ import { TokenService } from '../services/token.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.less']
 })
-export class NavComponent implements DoCheck{
+export class NavComponent implements DoCheck {
 
-  isUser!: boolean;
+  isUser: boolean = false;
 
   constructor(private service: TokenService) { }
-  
+
   ngDoCheck(): void {
-    
-    this.isUser = this.service.getToken() ? true : false;
 
+    let token = this.service.getToken();
+
+    if (token) {
+      let decodeTokent = this.service.decodeToken(token);
+
+      if (decodeTokent.username && decodeTokent.exp * 1000 > new Date().getTime()) {
+        this.isUser = true;
+        return;
+      }
+    }
+
+    this.isUser = false;
   }
-
- 
-
 }

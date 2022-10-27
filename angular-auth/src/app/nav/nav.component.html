@@ -1,25 +1,31 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <a mat-icon-button routerLink="/" 
-    class="example-icon favorite-icon" 
-    aria-label="Example icon-button with heart icon">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a mat-icon-button routerLink="/" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     Home
-    </a>
-    <span class="example-spacer"></span>
+  </a>
+  <span class="example-spacer"></span>
 
-    <a mat-icon-button routerLink="/register" 
-    class="example-icon favorite-icon" 
-    aria-label="Example icon-button with heart icon">
-     Register
+  <ng-template #anonymous>
+    <a mat-icon-button routerLink="/register" class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      Register
     </a>
     <span class="smal-spacer"></span>
-    <a mat-icon-button routerLink="/login" 
-    class="example-icon favorite-icon" 
-    aria-label="Example icon-button with heart icon">
-    LogIn
+    <a mat-icon-button routerLink="/login" class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      LogIn
     </a>
-    
-  </mat-toolbar>
+  </ng-template>
+
+  <ng-template #user>
+    <a mat-icon-button routerLink="/logout" class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon">
+      LogOut
+    </a>
+  </ng-template>
+
+  <ng-container *ngTemplateOutlet="isUser ? user : anonymous"></ng-container>
   
+</mat-toolbar>
