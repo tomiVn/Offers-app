@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +13,8 @@ export class NavComponent implements DoCheck {
   constructor(private service: TokenService) { }
 
   ngDoCheck(): void {
-
+    console.log('Hello');
+    
     let token = this.service.getToken();
 
     if (token) {
