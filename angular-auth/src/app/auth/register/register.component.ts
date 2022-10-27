@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -14,7 +15,8 @@ export class RegisterComponent {
   responseData: any;
   actionToken: any;
 
-  constructor(private fb: FormBuilder, private service: AuthService, private tokenService: TokenService) {
+  constructor(private fb: FormBuilder, private service: AuthService, 
+              private tokenService: TokenService, private router: Router) {
 
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -61,6 +63,7 @@ export class RegisterComponent {
 
         this.responseData = f;
         this.tokenService.setToken(this.responseData?.accessToken);
+        return this.router.navigate(['']);
       });
     }
   }

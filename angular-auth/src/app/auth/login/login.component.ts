@@ -1,5 +1,6 @@
 import { Component, InjectionToken } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -13,7 +14,10 @@ export class LoginComponent {
   form!: FormGroup;
   responseData: any;
 
-  constructor(private fb: FormBuilder, private service: AuthService, private tokenService: TokenService) {
+  constructor(private fb: FormBuilder, 
+              private service: AuthService, 
+              private tokenService: TokenService, 
+              private router: Router) {
 
     this.form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -30,6 +34,7 @@ export class LoginComponent {
 
         this.responseData = f;
         this.tokenService.setToken(this.responseData?.accessToken);
+        this.router.navigate(['']);
       });    
     }
   }

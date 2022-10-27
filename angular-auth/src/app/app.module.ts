@@ -10,8 +10,9 @@ import { NavComponent } from './nav/nav.component';
 import { MaterialsModule } from './materials/materials.module';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
+import { AuthInterceptor } from './middlewear/authInterceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {CookieService} from 'ngx-cookie-service';
     AuthModule,
     HttpClientModule //important
   ],
-  providers: [CookieService],
+  providers: [CookieService, {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
