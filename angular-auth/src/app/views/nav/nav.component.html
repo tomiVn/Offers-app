@@ -20,10 +20,14 @@
   </ng-template>
 
   <ng-template #user>
+    <!-- <span>{{userName}}</span> -->
+    <mat-icon>person</mat-icon>
+    <span class="smal-spacer"></span>
     <a mat-icon-button routerLink="/logout" class="example-icon favorite-icon"
       aria-label="Example icon-button with heart icon">
       LogOut
     </a>
+    <span class="smal-spacer"></span>
   </ng-template>
 
   <ng-container *ngTemplateOutlet="isUser ? user : anonymous"></ng-container>

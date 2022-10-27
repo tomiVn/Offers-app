@@ -22,9 +22,12 @@ export class RegisterComponent {
 
             name: ['', [Validators.required]],
 
-           email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(EMAIL_REGEX)]],
+           email: ['', [Validators.required, 
+                        Validators.minLength(6), 
+                        Validators.pattern(EMAIL_REGEX)]],
 
-        password: ['', [Validators.required, Validators.minLength(4)]],
+        password: ['', [Validators.required, 
+                        Validators.minLength(4)]],
 
       repeatPass: ['', [Validators.required]],
     },

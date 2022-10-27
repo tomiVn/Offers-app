@@ -9,6 +9,7 @@ import { TokenService } from '../../services/token.service';
 export class NavComponent implements DoCheck {
 
   isUser: boolean = false;
+  userName!: string;
 
   constructor(private service: TokenService) { }
 
@@ -21,6 +22,7 @@ export class NavComponent implements DoCheck {
 
       if (decodeTokent.name && decodeTokent.exp * 1000 > new Date().getTime()) {
         this.isUser = true;
+        this.userName = decodeTokent.name;
         return;
       }
     }
