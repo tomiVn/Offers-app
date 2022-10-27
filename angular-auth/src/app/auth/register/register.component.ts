@@ -14,16 +14,17 @@ export class RegisterComponent {
 
   form!: FormGroup;
   responseData: any;
-  
-  constructor(private fb: FormBuilder, private service: AuthService, 
-              private tokenService: TokenService, private router: Router) {
+
+  constructor(private fb: FormBuilder, private service: AuthService,
+    private tokenService: TokenService, private router: Router) {
 
     this.form = this.fb.group({
-      name: ['', [Validators.required]],
 
-      email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(EMAIL_REGEX)]],
+            name: ['', [Validators.required]],
 
-      password: ['', [Validators.required, Validators.minLength(4)]],
+           email: ['', [Validators.required, Validators.minLength(6), Validators.pattern(EMAIL_REGEX)]],
+
+        password: ['', [Validators.required, Validators.minLength(4)]],
 
       repeatPass: ['', [Validators.required]],
     },
@@ -61,13 +62,15 @@ export class RegisterComponent {
   signUp() {
 
     if (this.form.valid) {
-       
-        this.service.signUpService(this.form.value).subscribe(f => {
 
-        this.responseData = f;      
-        this.tokenService.setToken(this.responseData?.accessToken); 
-        this.router.navigate(['']);    
-      });     
+      this.service.signUpService(this.form.value).subscribe(f => {
+
+        this.responseData = f;
+
+        this.tokenService.setToken(this.responseData?.accessToken);
+
+        this.router.navigate(['']);
+      });
     }
 
   }

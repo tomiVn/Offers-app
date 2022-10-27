@@ -21,8 +21,9 @@ export class LoginComponent {
               private router: Router) {
 
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(6), 
-                   Validators.pattern(EMAIL_REGEX)]],
+
+         email: ['', [Validators.required, Validators.minLength(6), 
+                      Validators.pattern(EMAIL_REGEX)]],
 
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
@@ -36,7 +37,9 @@ export class LoginComponent {
       this.service.signIn(this.form.value).subscribe(f => {
 
         this.responseData = f;
+
         this.tokenService.setToken(this.responseData?.accessToken);
+
         this.router.navigate(['']);
       });    
     }
