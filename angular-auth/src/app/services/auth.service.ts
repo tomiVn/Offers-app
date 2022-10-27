@@ -12,13 +12,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signUpService(formData: any): Observable<User> {
+  signUpService(formData: any) :Observable<User>{
 
     return this.http.post<User>(this.userPathString, formData);
-
   }
 
-  signIn(formData: any) {
+  signIn(formData: any) :Observable<any>{
 
     return this.http.post(this.userPathString + '/login', formData);
   }

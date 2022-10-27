@@ -13,14 +13,13 @@ export class NavComponent implements DoCheck {
   constructor(private service: TokenService) { }
 
   ngDoCheck(): void {
-    console.log('Hello');
     
     let token = this.service.getToken();
 
     if (token) {
       let decodeTokent = this.service.decodeToken(token);
 
-      if (decodeTokent.username && decodeTokent.exp * 1000 > new Date().getTime()) {
+      if (decodeTokent.name && decodeTokent.exp * 1000 > new Date().getTime()) {
         this.isUser = true;
         return;
       }
