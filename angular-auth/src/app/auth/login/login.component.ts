@@ -1,6 +1,7 @@
 import { Component, InjectionToken } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { EMAIL_REGEX } from 'src/environments/environment';
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, 
               private service: AuthService, 
               private tokenService: TokenService, 
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
 
     this.form = this.fb.group({
 
@@ -43,6 +45,8 @@ export class LoginComponent {
         this.tokenService.setToken(this.responseData?.accessToken);
 
         this.router.navigate(['']);
+
+        this.toastr.success('Successfully logged in', 'Thank you!');
       });    
     }
   }

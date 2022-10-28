@@ -5,11 +5,12 @@ import { MaterialsModule } from '../materials/materials.module';
 import { NavComponent } from './nav/nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
+import { ContactsComponent } from './contacts/contacts.component';
 
 
 
 @NgModule({
-  declarations: [ HomeComponent, NavComponent],
+  declarations: [ HomeComponent, NavComponent, ContactsComponent],
 
   imports: [
     CommonModule,

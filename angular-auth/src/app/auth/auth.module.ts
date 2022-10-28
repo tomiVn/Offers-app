@@ -9,7 +9,7 @@ import { LogouthComponent } from './logouth/logouth.component';
   declarations: [
     RegisterComponent,
     LoginComponent,
-    LogouthComponent
+    LogouthComponent,
   ],
   imports: [
     CommonModule,

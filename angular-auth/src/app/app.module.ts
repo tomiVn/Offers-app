@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import { AuthInterceptor } from './middlewear/authInterceptor';
 import { ViewsModule } from './views/views.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,11 @@ import { ViewsModule } from './views/views.module';
     MaterialsModule,
     AuthModule,
     HttpClientModule, //important
-    ViewsModule
+    ViewsModule,
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-center",
+      preventDuplicates: true  
+    })
   ],
   providers: [CookieService, {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
