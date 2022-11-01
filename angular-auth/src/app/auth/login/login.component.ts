@@ -47,9 +47,10 @@ export class LoginComponent {
         this.router.navigate(['']);
 
         this.toastr.success('Successfully logged in', 'Thank you!');
-      },  (error) => {
-        
-        this.toastr.error('Error', error);
+      },  error => {
+
+         error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));
+
       });    
     }
   }
