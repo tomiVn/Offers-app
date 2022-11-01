@@ -47,6 +47,9 @@ export class LoginComponent {
         this.router.navigate(['']);
 
         this.toastr.success('Successfully logged in', 'Thank you!');
+      },  (error) => {
+        
+        this.toastr.error('Error', error);
       });    
     }
   }

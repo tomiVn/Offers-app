@@ -24,7 +24,17 @@ export class AuthService {
 
   logOut(){
     
-    return this.http.get(this.userPathString);
+    return this.http.get( this.userPathString );
+  }
+
+  userProfile() :Observable<any>{
+
+    return this.http.get( this.userPathString );  
+  }
+
+  updateUserProfile( formData: any ) :Observable<User>{
+
+    return this.http.put<User>( this.userPathString, formData )
   }
 
 }
