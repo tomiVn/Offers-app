@@ -6,28 +6,30 @@
     Home
   </a>
   <span class="smal-spacer"></span>
-  <a mat-icon-button routerLink="/contacts" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  <a mat-icon-button routerLink="/contacts" class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon">
     Contacts
   </a>
+
   <span class="example-spacer"></span>
 
   <ng-template #anonymous>
-    <a mat-icon-button routerLink="/register" class="example-icon favorite-icon"
+    <a mat-icon-button routerLink="/auth/register" class="example-icon favorite-icon"
       aria-label="Example icon-button with heart icon">
       Register
     </a>
     <span class="smal-spacer"></span>
-    <a mat-icon-button routerLink="/login" class="example-icon favorite-icon"
+    <a mat-icon-button routerLink="/auth/login" class="example-icon favorite-icon"
       aria-label="Example icon-button with heart icon">
       LogIn
     </a>
   </ng-template>
 
   <ng-template #user>
-    <!-- <span>{{userName}}</span> -->  
-    <mat-icon><a routerLink="/profile" class="color-white">person</a></mat-icon>
+    <!-- <span>{{userName}}</span> -->
+    <mat-icon><a routerLink="/auth/profile" class="color-white">person</a></mat-icon>
     <span class="smal-spacer"></span>
-    <a mat-icon-button routerLink="/logout" class="example-icon favorite-icon"
+    <a mat-icon-button routerLink="/auth/logout" class="example-icon favorite-icon"
       aria-label="Example icon-button with heart icon">
       LogOut
     </a>
@@ -35,5 +37,5 @@
   </ng-template>
 
   <ng-container *ngTemplateOutlet="isUser ? user : anonymous"></ng-container>
-  
+
 </mat-toolbar>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/userModel';
 
 @Injectable({
@@ -8,33 +9,32 @@ import { User } from '../models/userModel';
 })
 export class AuthService {
 
-  userPathString: string = 'http://localhost:3030/user';
-
+  userPathString: string = environment.path + '/user';
+ 
   constructor(private http: HttpClient) { }
 
-  signUpService(formData: any) :Observable<User>{
+  signUpService(formData: any): Observable<User> {
 
     return this.http.post<User>(this.userPathString, formData);
   }
 
-  signIn(formData: any) :Observable<any>{
+  signIn(formData: any): Observable<any> {
 
     return this.http.post(this.userPathString + '/login', formData);
   }
 
-  logOut(){
-    
-    return this.http.get( this.userPathString );
+  logOut() {
+
+    return this.http.get(this.userPathString);
   }
 
-  userProfile() :Observable<any>{
+  userProfile(): Observable<any> {
 
-    return this.http.get( this.userPathString );  
+    return this.http.get(this.userPathString);
   }
 
-  updateUserProfile( formData: any ) :Observable<User>{
+  updateUserProfile(formData: any): Observable<User> {
 
-    return this.http.put<User>( this.userPathString, formData )
+    return this.http.put<User>(this.userPathString, formData)
   }
-
 }

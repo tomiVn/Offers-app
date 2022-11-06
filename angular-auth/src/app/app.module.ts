@@ -28,8 +28,10 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: "toast-bottom-center",
       preventDuplicates: true  
     })
+    
   ],
-  providers: [CookieService, {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
+  providers: [CookieService, 
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

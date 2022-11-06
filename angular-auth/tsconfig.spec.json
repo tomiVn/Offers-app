@@ -7,6 +7,10 @@
       "jasmine"
     ]
   },
+  "scripts": {
+    "start": "node ../server/index.js", //your server connection file
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "files": [
     "src/test.ts",
     "src/polyfills.ts"

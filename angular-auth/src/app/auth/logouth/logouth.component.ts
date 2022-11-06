@@ -22,7 +22,7 @@ export class LogouthComponent implements OnInit{
 
    this.tokenService.deleteToken();
 
-   this.router.navigate(['login']);
+   this.router.navigate(['/auth/login']);
    
    this.toastr.success('Successfully logged out', 'Thank you!');
   }
