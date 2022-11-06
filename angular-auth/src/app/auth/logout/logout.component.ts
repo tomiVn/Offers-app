@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
+import { CommonModule } from '@angular/common';
 import { TokenService } from 'src/app/services/token.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-logouth',
-  templateUrl: './logouth.component.html',
-  styleUrls: ['./logouth.component.less']
+  selector: 'app-logout',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+  `,
+  styles: [
+  ]
 })
-export class LogouthComponent implements OnInit{
-   
+export class LogoutComponent implements OnInit {
+
   constructor(private service: AuthService, 
     private tokenService: TokenService, 
     private router: Router,
@@ -26,4 +31,5 @@ export class LogouthComponent implements OnInit{
    
    this.toastr.success('Successfully logged out', 'Thank you!');
   }
+
 }
