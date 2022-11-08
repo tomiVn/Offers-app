@@ -74,6 +74,6 @@ uModel.method('validatePassword', function (password) {
     return bcrypt.compare(password, this.password);
 });
 
-uModel.set('timestamps', true);
+uModel.set('timestamps', true);//To have 
 
 exports.User = model('User', uModel);

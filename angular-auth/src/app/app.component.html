@@ -1,3 +1,76 @@
+<mat-toolbar color="primary" class="mat-elevation-z8 top-nav">
 
-<app-nav></app-nav>
-<router-outlet></router-outlet>
+  <button mat-icon-button 
+      *ngIf="this.sideNav.mode === 'over'" 
+      (click)="this.sideNav.toggle()" 
+      aria-label="Example icon-button with menu icon">
+
+      <mat-icon *ngIf="!sideNav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sideNav.opened">close</mat-icon>
+  </button>
+
+  <span class="example-spacer"></span>
+
+  <ng-template #anonymous>
+    <a mat-button routerLink="/auth/login">
+      LogIn
+    </a>
+  </ng-template>
+
+  <ng-template #user> 
+      <a mat-button routerLink="/auth/profile" class="color-white">
+        <mat-icon>
+          person
+        </mat-icon>
+      </a>
+    
+    <a mat-button 
+       routerLink="/auth/logout">
+      LogOut
+    </a>
+  </ng-template>
+
+  <ng-container *ngTemplateOutlet="isUser 
+                  ? user : anonymous">
+  </ng-container>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-sidenav-content">
+  <mat-sidenav #sideNav="matSidenav" class="example-sidenav mat-elevation-z8">
+
+    <img src="https://cdn.logo.com/hotlink-ok/logo-social.png" 
+      alt="" class="avatar mat-elavation-z8"/>
+
+    <a mat-button class="menu-button" 
+      routerLink="/home">
+      <mat-icon class="example-icon" 
+      aria-label="Example icon-button with menu icon">
+        home
+      </mat-icon>
+      Home
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <a mat-button 
+       class="menu-button" 
+       routerLink="/about-us">
+      About us
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" 
+       routerLink="/contacts">
+       Contacts
+    </a>
+
+    <mat-divider></mat-divider>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-logout',
   standalone: true,
   imports: [CommonModule],
-  template: `
-  `,
+  template: ``,
   styles: [
   ]
 })

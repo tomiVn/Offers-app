@@ -8,10 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
-import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';  
 
-let use = [ReactiveFormsModule, MatInputModule, MatButtonModule, MatCardModule, 
-           MatFormFieldModule, MatIconModule, MatToolbarModule, MatAutocompleteModule]
+let use = [ ReactiveFormsModule, MatInputModule, MatButtonModule, MatCardModule, 
+           MatFormFieldModule, MatIconModule, MatToolbarModule, MatAutocompleteModule, 
+           MatSidenavModule, MatDividerModule ]
 
 @NgModule({
   declarations: [],

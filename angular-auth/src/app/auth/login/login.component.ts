@@ -54,4 +54,8 @@ export class LoginComponent {
       });    
     }
   }
+
+  goTo(){
+    this.router.navigate(['/auth/register']);
+  }
 }
