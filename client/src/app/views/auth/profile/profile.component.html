@@ -1,0 +1,190 @@
+<!-- {{form.valid | json}}
+<br> -->
+<!-- {{ form.get('name') | json}} -->
+
+<mat-card class="card-decoration">
+    
+    <div *ngIf="responseData; else loading">
+        <h3>Profile page</h3>
+
+        <form [formGroup]="form" 
+              class="example-form" 
+              (ngSubmit)="updateProfile()">
+
+            <mat-form-field 
+                class="example-full-width" 
+                appearance="fill">
+
+                <mat-label>Names</mat-label>
+                
+                <input matInput 
+                    placeholder="Names" 
+                formControlName="name" />
+            </mat-form-field>
+
+            <mat-error 
+                class="example-full-width" 
+                *ngIf="form.get('name')?.errors && 
+                form.get('name')?.touched">
+
+                <mat-error 
+                    *ngIf="form.get('name')?.errors?.['required']">                    
+                    Name is <strong>required!</strong>
+                </mat-error>
+            </mat-error>
+
+            <mat-form-field 
+                class="example-full-width" 
+                appearance="fill">
+
+                <mat-label>@Email</mat-label> 
+
+                <input matInput #email 
+                    placeholder="@Email" 
+                formControlName="email">
+                    
+                <mat-hint align="end">
+                    Min length 6 characters {{email.value.length || 0}}
+                </mat-hint>
+            </mat-form-field>
+
+            <mat-error *ngIf="form.get('email')?.errors 
+                        && form.get('email')?.touched">
+
+                <mat-error *ngIf="form.get('email')?.errors?.['required']">
+                    @Email is <strong>required!</strong>
+                </mat-error>
+
+                <mat-error *ngIf="form.get('email')?.errors?.['minlength']">
+                    @Email min length <strong>6 characters!</strong>
+                </mat-error>
+
+                <mat-error *ngIf="form.get('email')?.errors?.['pattern']">
+                    @Email is <strong> not valid!</strong>
+                </mat-error>
+            </mat-error>
+
+                <mat-form-field 
+                    class="example-full-width" 
+                    appearance="fill">
+
+                    <mat-label>Password</mat-label>
+
+                    <input matInput #password 
+                        placeholder="Password" 
+                    formControlName="password">
+
+                    <mat-hint align="end">
+                        Min length 4 characters {{password.value.length || 0}}
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-error *ngIf="form.get('password')?.errors 
+                            && form.get('password')?.touched">
+
+                    <mat-error 
+                        *ngIf="form.get('password')?.errors?.['required']">
+                        Password is <strong>required!</strong>
+                    </mat-error>
+
+                    <mat-error 
+                        *ngIf="form.get('password')?.errors?.['minlength']">
+                        Password min length <strong>4 characters!</strong>
+                    </mat-error>
+                </mat-error>
+ 
+                <mat-form-field 
+                    class="example-full-width" 
+                    appearance="fill">
+                    <mat-label>Repeat Password</mat-label>
+                    <input matInput 
+                    placeholder="Repeat Password" 
+                    formControlName="repeatPass">
+                </mat-form-field>
+
+                <mat-error *ngIf="form.get('repeatPass')?.errors 
+                            && form.get('repeatPass')?.touched">
+
+                    <mat-error *ngIf="form.get('repeatPass')?.errors?.['required']">
+                        Password is <strong>required!</strong>
+                    </mat-error>
+
+                    <mat-error 
+                        *ngIf="!form.get('repeatPass')?.errors?.['isPasswordsMatch']">
+                        Passwords <strong>not match!</strong>
+                    </mat-error>
+                </mat-error>
+
+                <mat-form-field class="example-full-width" appearance="fill">
+
+                    <mat-label>Country dial number</mat-label>
+
+                    <input type="text" 
+                        placeholder="Pick one" 
+                        aria-label="Number" 
+                        matInput formControlName="dialCode"
+                    [matAutocomplete]="auto">
+
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option 
+                            *ngFor="let option of filteredOptions | async" 
+                            [value]="option.dial_code">
+                            {{option.name}} ({{option.dial_code}})
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-error *ngIf="form.get('dialCode')?.errors 
+                            && form.get('dialCode')?.touched">
+
+                    <mat-error *ngIf="form.get('dialCode')?.errors?.['required']">
+                        Country code is <strong>required!</strong>
+                    </mat-error>
+
+                    <mat-error 
+                        *ngIf="form.get('dialCode')?.errors?.['countruCodeError']">
+                        Country code is <strong>not valid!</strong>
+                    </mat-error>
+                </mat-error>
+
+                <mat-form-field 
+                    class="example-full-width" appearance="fill">
+
+                    <mat-label>Mobile Phone</mat-label>
+
+                    <input matInput #phone 
+                        placeholder="Mobile Phone" 
+                    formControlName="phone">
+
+                    <mat-hint align="end">
+                        Min length 6 digits {{phone.value.length || 0}}
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-error *ngIf="form.get('phone')?.errors 
+                            && form.get('phone')?.touched">
+
+                    <mat-error *ngIf="form.get('phone')?.errors?.['required']">
+                        Phone is <strong>required!</strong>
+                    </mat-error>
+                    <mat-error *ngIf="form.get('phone')?.errors?.['pattern']">
+                        Phone error - <strong>numbers only!</strong>
+                    </mat-error>
+                    <mat-error *ngIf="form.get('phone')?.errors?.['minlength']">
+                        Phone must be at least<strong> 6 digits!</strong>
+                    </mat-error>
+                    <mat-error *ngIf="form.get('phone')?.errors?.['maxlength']">
+                        Phone max<strong> 12 digits!</strong>
+                    </mat-error>
+                </mat-error>
+
+            <mat-card-actions class="form-input-container">
+                <button mat-raised-button color="primary" 
+                [disabled]="form.invalid">Submit</button>
+            </mat-card-actions>
+        </form>
+    </div>
+    <ng-template #loading>
+        <h3>Loading...</h3>
+    </ng-template>
+</mat-card>

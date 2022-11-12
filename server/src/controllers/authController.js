@@ -1,10 +1,11 @@
+const { AUTH_PATH } = require('../config/constants');
 const { guestOnly, userOnly } = require('../middlewear/guards');
 const { createToken, loginService, registerUserService, getUser, updateProfile } = require('../services/authService');
 const { parseErrors } = require('../utils/parseErrors');
 
 const router = require('express').Router();
 
-router.post('/user', guestOnly, async (req, res) => {
+router.post( AUTH_PATH, guestOnly, async (req, res) => {
 
     try {
         let { _id, name, role } = await registerUserService(req.body);
@@ -20,7 +21,7 @@ router.post('/user', guestOnly, async (req, res) => {
 
 })
 
-    .post('/user/login', guestOnly, async (req, res) => {
+    .post( AUTH_PATH + '/login', guestOnly, async (req, res) => {
 
         try {
             let { _id, name, role } = await loginService(req.body);
@@ -30,21 +31,20 @@ router.post('/user', guestOnly, async (req, res) => {
         } catch (error) {
 
             const errors = parseErrors(error);
-             console.log(errors);
              
             res.status(400).json(errors);
         }
 
     })
 
-    .get('/user', userOnly, async (req, res) => {
+    .get( AUTH_PATH, userOnly, async (req, res) => {
 
         try {
             let userId = req?.user?.id;
 
             let user = await getUser(userId);
 
-            return res.status(200).json({ user });
+            return res.status(200).json( user );
 
         } catch (error) {
 
@@ -55,12 +55,12 @@ router.post('/user', guestOnly, async (req, res) => {
 
     })
 
-    .put('/user', userOnly, async (req, res) => {
+    .put( AUTH_PATH, userOnly, async (req, res) => {
 
         try {
             let userId = req?.user?.id;
             let data = req.body;
-
+            
             let user = await updateProfile(userId, data);
             return res.status( 201 ).json( { user });
 

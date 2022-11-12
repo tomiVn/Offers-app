@@ -17,7 +17,7 @@ exports.loginService = async ( data ) => {
     throw { message: 'Invalid @email or password!' }
 };
 
-exports.getUser = ( userId ) => User.findById( userId );
+exports.getUser = ( userId ) => User.findById( userId ).select( ['_id', 'name', 'email', 'dialCode', 'phone', 'updatedAt'] );
 
 
 exports.createToken = ( id, name, role ) => {

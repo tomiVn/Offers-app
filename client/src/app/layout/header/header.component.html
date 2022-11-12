@@ -1,0 +1,35 @@
+<mat-toolbar color="primary" class="mat-elevation-z4 top-nav">
+  
+    <button mat-icon-button *ngIf="this.sideNav.mode === 'over'" (click)="this.sideNav.toggle()"
+      aria-label="Example icon-button with menu icon">
+
+      <mat-icon *ngIf="!sideNav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sideNav.opened">close</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+
+    <ng-template #anonymous>
+      <a mat-button routerLink="/auth/login">
+        LogIn
+      </a>
+    </ng-template>
+
+    <ng-template #user>
+      <span class="mat-body-2">Hello {{userName}}</span>
+      <a mat-button routerLink="/auth/profile" class="color-white">
+        <mat-icon>
+          person
+        </mat-icon>
+      </a>
+
+      <a mat-button routerLink="/auth/logout">
+        LogOut
+      </a>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="isUser 
+                ? user : anonymous">
+    </ng-container>
+  
+</mat-toolbar>
