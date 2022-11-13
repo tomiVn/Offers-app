@@ -1,14 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input-name',
   template: `
           <ng-container [formGroup]="inputName">
             <mat-form-field  class="example-full-width" appearance="fill">
-                <mat-label>Names</mat-label>
-                <input matInput placeholder="Names" 
+                <mat-label> Names </mat-label>
+                <input #name type="email" matInput placeholder="Names" 
                 formControlName="name"/>
+                <mat-hint align="end">
+                    Min length 3 characters {{name.value.length || 0}}
+                </mat-hint>
             </mat-form-field>
            
             <mat-error class="example-full-width" *ngIf="inputName.get('name')?.errors 

@@ -21,9 +21,9 @@ export class AuthGuard implements CanActivate {
 
       let decodeTokenPayload = this.tokenService.decodeToken(token);
         
-      if (!decodeTokenPayload.exp 
-        || decodeTokenPayload.exp * 1000 < new Date().getTime()
-        || !decodeTokenPayload.name) {
+      if ( !decodeTokenPayload.exp 
+           || decodeTokenPayload.exp * 1000 < new Date().getTime()
+           || !decodeTokenPayload.name ) {
 
         this.tokenService.deleteToken();
         this.router.navigate(['login']);

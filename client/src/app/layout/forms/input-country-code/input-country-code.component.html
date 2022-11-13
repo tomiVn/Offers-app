@@ -1,0 +1,22 @@
+<ng-container [formGroup]="inputCountryCode">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Country number</mat-label>
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="dialCode"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.dial_code">
+                {{option.name}} ({{option.dial_code}})
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-error *ngIf="inputCountryCode.get('dialCode')?.errors && inputCountryCode.get('dialCode')?.touched">
+        <mat-error *ngIf="inputCountryCode.get('dialCode')?.errors?.['required']">
+            Country code is <strong>required!</strong>
+        </mat-error>
+        <mat-error *ngIf="inputCountryCode.get('dialCode')?.errors?.['countruCodeError']">
+            Country code is <strong>not valid!</strong>
+        </mat-error>
+    </mat-error>
+</ng-container>
+

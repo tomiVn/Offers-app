@@ -26,7 +26,7 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
         try {
             let { _id, name, role } = await loginService(req.body);
 
-            res.status(200).json(userInfo(_id, name, role));
+            res.status(200).json( userInfo(_id, name, role));
 
         } catch (error) {
 
@@ -78,6 +78,7 @@ module.exports = router;
 function userInfo(id, name, role) {
 
     return {
-        accessToken: createToken(id, name, role)
+        accessToken: createToken(id, name, role),
+        name
     }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IToken } from 'src/app/models/tokenModel';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -15,7 +15,6 @@ import { TokenService } from 'src/app/services/token.service';
 export class LoginComponent {
 
   form!: FormGroup;
-  responseData!: IToken;
 
   constructor(private service: AuthService, 
               private tokenService: TokenService, 
@@ -31,15 +30,15 @@ export class LoginComponent {
 
     if (this.form.valid) {
       
-      this.service.signIn(this.form.value).subscribe(f => {
+      this.service.signIn(this.form.value)
+      .pipe(take(1))
+      .subscribe(user => {
 
-        this.responseData = f;
-
-        this.tokenService.setToken(this.responseData?.accessToken);
+        this.tokenService.setToken(user.accessToken);
 
         this.router.navigate(['']);
 
-        this.toastr.success('Successfully logged in', 'Thank you!');
+        this.toastr.success('Successfully logged in', 'Hello ' + user.name);
       },  error => {
 
          error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));

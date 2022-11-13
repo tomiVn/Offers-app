@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
    <ng-container [formGroup]="inputPassword">
     <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput #password placeholder="Password" formControlName="password">
+                <input matInput #password type="password" placeholder="Password" formControlName="password">
                 <mat-hint align="end">
                     Min length 4 characters {{password.value.length || 0}}
                 </mat-hint>

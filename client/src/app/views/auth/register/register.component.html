@@ -12,27 +12,9 @@
 
             <app-input-repeat-password [inputReapeatPassword]="form"></app-input-repeat-password>
 
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Country number</mat-label>
-                    <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="dialCode"
-                        [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.dial_code">
-                            {{option.name}} ({{option.dial_code}})
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+            <app-input-country-code [inputCountryCode]="form"></app-input-country-code>    
 
-                <mat-error *ngIf="form.get('dialCode')?.errors && form.get('dialCode')?.touched">
-                    <mat-error *ngIf="form.get('dialCode')?.errors?.['required']">
-                        Country code is <strong>required!</strong>
-                    </mat-error>
-                    <mat-error *ngIf="form.get('dialCode')?.errors?.['countruCodeError']">
-                        Country code is <strong>not valid!</strong>
-                    </mat-error>
-                </mat-error>
-
-                <app-input-phone [inputPhone]="form"></app-input-phone>
+            <app-input-phone [inputPhone]="form"></app-input-phone>
 
             <mat-card-actions id="button-container">
                 <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
@@ -40,6 +22,6 @@
 
         </form>
 
-        <p color="primary">Already have an account? <a mat-button (click)="goTo()">Login here</a></p>
+        <p color="primary">Already have an account? <a mat-button (click)="goTo()">Log in here</a></p>
     </div>
 </mat-card>

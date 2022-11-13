@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators  } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, startWith, take } from 'rxjs';
@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   responseData = false;
   formData: User | undefined;
-  filteredOptions: Observable<ICountry[]> | undefined;
 
   constructor(
     private service: AuthService,
@@ -43,12 +42,8 @@ export class ProfileComponent implements OnInit {
           this.form.controls['email'].setValue(user.email);
           this.form.controls['dialCode'].setValue(user.dialCode);
           this.form.controls['phone'].setValue(user.phone);
-        }, 1000)          
+        }, 600)          
       });
-
-    this.filteredOptions = this.form.get('dialCode')?.valueChanges
-      .pipe(startWith(''),
-        map(value => _filter(value || '')));
   }
 
   updateProfile() {
@@ -58,11 +53,15 @@ export class ProfileComponent implements OnInit {
       .pipe(take(1))
       .subscribe(f => {
         this.formData = f;
-      });
-      this.toastr.success('Successfully updated.', 'Thank you!');
-      this.router.navigate(['']);
+        this.toastr.success('You successfully updated your profile!', this.form.get('name')?.value);
+        this.router.navigate(['']);
+      }, 
+      (error: any) => {
+        this.toastr.error( error.message, 'ERROR' );
+      });     
     }else{
-      this.toastr.error('Not updated!', 'Error');
+
+      this.toastr.error('Your profile is updated!', 'Error');
     }
   }
 }

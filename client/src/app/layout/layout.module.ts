@@ -17,6 +17,7 @@ import { InputEmailComponent } from './forms/input-email/input-email.component';
 import { InputPasswordComponent } from './forms/input-password/input-password.component';
 import { InputRepeatPasswordComponent } from './forms/input-repeat-password/input-repeat-password.component';
 import { InputPhoneComponent } from './forms/input-phone/input-phone.component';
+import { InputCountryCodeComponent } from './forms/input-country-code/input-country-code.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { InputPhoneComponent } from './forms/input-phone/input-phone.component';
     InputPasswordComponent,
     InputRepeatPasswordComponent,
     InputPhoneComponent,
+    InputCountryCodeComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,9 @@ import { InputPhoneComponent } from './forms/input-phone/input-phone.component';
     MaterialsModule
   ],
   exports: [ HeaderComponent, SideNavComponent, InputNameComponent, InputEmailComponent,
-            InputPasswordComponent, InputRepeatPasswordComponent, InputPhoneComponent ],
+             InputPasswordComponent, InputRepeatPasswordComponent, InputPhoneComponent, 
+             InputCountryCodeComponent ],
+             
   providers: [CookieService, 
     {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]

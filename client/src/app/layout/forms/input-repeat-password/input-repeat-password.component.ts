@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
     <ng-container [formGroup]="inputReapeatPassword">
     <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Repeat Password</mat-label>
-                <input matInput placeholder="Repeat Password" formControlName="repeatPass">
+                <input matInput type="password" placeholder="Repeat Password" formControlName="repeatPass">
             </mat-form-field>
 
             <mat-error *ngIf="inputReapeatPassword.get('repeatPass')?.errors 

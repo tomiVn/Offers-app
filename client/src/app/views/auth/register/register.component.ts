@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable, startWith } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
-import { _filter } from 'src/app/utils/countryFilter';
-import { ICountry } from 'src/app/models/countryModel';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +15,6 @@ import { FormFactoryService } from 'src/app/services/form-factory.service';
 export class RegisterComponent implements OnInit {
 
   form!: FormGroup;
-  responseData: any;
-  filteredOptions: Observable<ICountry[]> | undefined;
 
   constructor(
     private service: AuthService,
@@ -31,25 +27,20 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.filteredOptions = this.form.get('dialCode')?.valueChanges
-      .pipe(startWith(''),
-        map(value => _filter(value || '')));
-  }
+  ngOnInit(): void { }
 
   signUp() {
 
     if (this.form.valid) {
 
-      this.service.signUpService(this.form.value).subscribe(f => {
-
-        this.responseData = f;
-
-        this.tokenService.setToken(this.responseData?.accessToken);
-
+      this.service.signUpService(this.form.value)
+      .pipe(take(1))
+      .subscribe(user => {
+        this.tokenService.setToken(user.accessToken);
         this.router.navigate(['']);
-
-        this.toastr.success('Successfully register.', 'Thank you!');
+        this.toastr.success('Successfully register.', 'Hello ' + user.name);
+      }, error => {
+        this.toastr.error( error.message, 'ERROR');
       });
     }
   }

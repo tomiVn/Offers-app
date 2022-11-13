@@ -24,8 +24,8 @@ export class AuthService {
     return this.http.post<IToken>(this.userPathString + '/login', formData);
   }
 
-  logOut() {
-    return this.http.get(this.userPathString);
+  logOut() : Observable<User>{
+    return this.http.get<User>(this.userPathString);
   }
 
   userProfile(): Observable<User>{

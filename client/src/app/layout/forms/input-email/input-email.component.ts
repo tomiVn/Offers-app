@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   template: `
   <ng-container [formGroup]="inputEmail">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>@Email</mat-label>
+                <mat-label> @Email </mat-label>
                 <input matInput #email placeholder="@Email" formControlName="email">
                 <mat-hint align="end">
                     Min length 6 characters {{email.value.length || 0}}
@@ -30,7 +30,7 @@ import { FormGroup } from '@angular/forms';
             </mat-error>
   </ng-container>          
   `,
-  styles: ['.example-full-width{ width: 100%; }']
+  styles: ['.example-full-width{ width: 100%;}']
 })
 export class InputEmailComponent implements OnInit {
 

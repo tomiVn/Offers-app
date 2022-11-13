@@ -4,6 +4,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-logout',
@@ -16,19 +17,27 @@ import { Router } from '@angular/router';
 export class LogoutComponent implements OnInit {
 
   constructor(private service: AuthService, 
-    private tokenService: TokenService, 
-    private router: Router,
-    private toastr: ToastrService) { }
+              private tokenService: TokenService, 
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit(){
 
-   this.service.logOut();
+    this.service.logOut()
+    .pipe(take(1))
+    .subscribe((user) => {
+    this.toastr.success('You successfully sign out.', 'Hope to see you again ' + user.name);
+    this.tokenService.deleteToken();
+    this.router.navigate(['/auth/login']);
+   }, error => {
+    this.toastr.error( error.message, 'Error');
+   })
 
-   this.tokenService.deleteToken();
-
-   this.router.navigate(['/auth/login']);
    
-   this.toastr.success('Successfully logged out', 'Thank you!');
+
+   
+   
+   
   }
 
 }
