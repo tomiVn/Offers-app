@@ -4,47 +4,34 @@ import { CookieService } from 'ngx-cookie-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../middlewear/authInterceptor';
 import { AppComponent } from '../app.component';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
-import {MatIconModule} from '@angular/material/icon'; 
 import { HeaderComponent } from './header/header.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { MatDividerModule } from '@angular/material/divider'; 
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
-import { MaterialsModule } from '../materials/materials.module';
-import { InputNameComponent } from './forms/input-name/input-name.component';
-import { InputEmailComponent } from './forms/input-email/input-email.component';
-import { InputPasswordComponent } from './forms/input-password/input-password.component';
-import { InputRepeatPasswordComponent } from './forms/input-repeat-password/input-repeat-password.component';
-import { InputPhoneComponent } from './forms/input-phone/input-phone.component';
-import { InputCountryCodeComponent } from './forms/input-country-code/input-country-code.component';
+import { FormsModule } from './forms/forms.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SideNavComponent,
-    InputNameComponent,
-    InputEmailComponent,
-    InputPasswordComponent,
-    InputRepeatPasswordComponent,
-    InputPhoneComponent,
-    InputCountryCodeComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatIconModule,
     MatDividerModule,
     MatButtonModule,
     AppRoutingModule,
-    MaterialsModule
+    FormsModule,
+    MatIconModule,
+    MatToolbarModule
   ],
-  exports: [ HeaderComponent, SideNavComponent, InputNameComponent, InputEmailComponent,
-             InputPasswordComponent, InputRepeatPasswordComponent, InputPhoneComponent, 
-             InputCountryCodeComponent ],
+  exports: [ HeaderComponent, SideNavComponent, FormsModule ],
              
-  providers: [CookieService, 
-    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
+  providers: [ CookieService, 
+    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true }],
+    
   bootstrap: [AppComponent]
 })
 export class LayoutModule { }

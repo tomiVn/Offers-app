@@ -25,7 +25,7 @@ import { LayoutModule } from './layout/layout.module';
       positionClass: "toast-bottom-center",
       preventDuplicates: true  
     }),
-    LayoutModule   
+    LayoutModule
   ],  
   bootstrap: [AppComponent]
 })

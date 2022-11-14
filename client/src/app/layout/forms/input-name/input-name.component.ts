@@ -19,6 +19,10 @@ import { FormGroup } from '@angular/forms';
                 <mat-error *ngIf="inputName.get('name')?.errors?.['required']">
                     Name is <strong>required!</strong>
                 </mat-error>
+
+                <mat-error *ngIf="inputName.get('name')?.errors?.['minlength']">
+                    Name min length <strong>3 characters!</strong>
+                </mat-error>
             </mat-error>
           </ng-container>
   `, 

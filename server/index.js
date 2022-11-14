@@ -5,11 +5,12 @@ const { dbConnect } = require('./src/config/db-configuration');
 const { cors } = require('./src/config/cors');
 const routes = require('./src/routes/routes');
 const { auth } = require('./src/middlewear/auth');
+const { CLIENT_PATH } = require('./src/config/constants');
 
 const app = express();
 const PORT = process.env.PORT;
 
- app.use( express.static(__dirname + '/angular-auth/dist/angular-auth') )
+ app.use( express.static('../' + CLIENT_PATH ) )
     .use( bodyParser.urlencoded( { extended: true } ) )
     .use( express.json() )
     .use( cors() )
