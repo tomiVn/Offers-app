@@ -12,11 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from './forms/forms.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SideNavComponent
+    SideNavComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,7 @@ import { FormsModule } from './forms/forms.module';
     MatIconModule,
     MatToolbarModule
   ],
-  exports: [ HeaderComponent, SideNavComponent, FormsModule ],
+  exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule ],
              
   providers: [ CookieService, 
     { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true }],

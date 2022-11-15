@@ -1,23 +1,21 @@
 .sidenav-container {
-  height: 100%;
-  background-color: #adadad;
+  background-color: #EEEEEE;
+  top: 56px;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
 }
 
 .sidenav {
-  top: 55px;
-  height: 100vh;
+  min-height: calc(100vh -56px);
+  top: 56px;
   min-width: 200px;
-  padding: 20px;
-  display: flex;
   position: fixed;
   z-index: 10;
-  overflow: auto;
+  overflow: auto; 
 }
 
-#content {
-  display: block;
-  max-width: 920px;
-  margin: auto;
-  margin-top: 90px;
-  padding: 5px;
+#content{
+  min-height: calc(100vh - 142px);
+  padding: 15px;
 }

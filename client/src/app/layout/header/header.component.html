@@ -6,7 +6,6 @@
       <mat-icon *ngIf="!sideNav.opened">menu</mat-icon>
       <mat-icon *ngIf="sideNav.opened">close</mat-icon>
     </button>
-
     <span class="example-spacer"></span>
 
     <ng-template #anonymous>
@@ -17,7 +16,7 @@
 
     <ng-template #user>
       <!-- <span class="mat-body-2">Hello {{userName}}</span> -->
-      <a mat-button routerLink="/auth/profile" class="color-white">
+      <a class="color-white" mat-button routerLink="/auth/profile" >
         <mat-icon>
           person
         </mat-icon>

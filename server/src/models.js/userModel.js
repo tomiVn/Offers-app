@@ -7,20 +7,31 @@ const uModel = new Schema({
 
             name: {
             type: String, 
-        required: [ true, 'Name is Required!']
+        required: [ true, 'Name is Required!'],
+       minLength: [ 3, 'Name min length 3 characters!']
     },
 
            email: {
             type: String, 
         required: [ true, 'Email is Required!'], 
           unique: true,
+       minLength: [ 6, 'Email min length 6 characters!'],
         validate: { validator: emailValidator.validate, message: 'Email is not valid!' }
     },
 
-        password: { type: String, minLength: [4, 'Password min length 4!'] },
-            role: { type: String, enum: ['user', 'admin'], default : 'user',  message: 'Not valid role'},
-        dialCode: { type: String, require: [true, 'Countrie code is required'] },
-           phone: { type: String, required: [ true, 'Phone number is required'] }
+        password: { 
+            type: String, 
+       minLength: [4, 'Password min length 4!'] },
+
+            role: { 
+            type: String, 
+            enum: ['user', 'admin'], default : 'user',  message: 'Not valid role'},
+
+        dialCode: { 
+            type: String, 
+         require: [true, 'Countrie code is required'] },
+           phone: { type: String, 
+        required: [ true, 'Phone number is required'] }
 });
 
 uModel.virtual('repeatPass')
