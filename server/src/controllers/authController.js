@@ -72,13 +72,27 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
         
     })
 
+    .get( AUTH_PATH + '/logout', userOnly, async (req, res) => {
+
+        try {
+
+            res.status(200).json({name: req.user.name});
+
+        } catch (error) {
+
+            const errors = parseErrors(error);
+             
+            res.status(400).json(errors);
+        }
+
+    })
+
 
 module.exports = router;
 
 function userInfo(id, name, role) {
 
     return {
-        accessToken: createToken(id, name, role),
-        name
+        accessToken: createToken(id, name, role)
     }
 }

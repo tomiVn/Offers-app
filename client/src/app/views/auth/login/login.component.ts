@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
+import { IToken } from 'src/app/models/tokenModel';
+import { User } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -16,25 +18,27 @@ export class LoginComponent {
 
   form!: FormGroup;
 
-  constructor(private service: AuthService, 
-              private tokenService: TokenService, 
-              private router: Router,
-              private toastr: ToastrService,
-              private formService: FormFactoryService) {
+  constructor( private service: AuthService,
+               private tokenService: TokenService,
+               private router: Router,
+               private toastr: ToastrService,
+               private formService: FormFactoryService) {
 
     this.form = this.formService.getLogIn();
 
   }
 
- signIn() {
+  signIn() {
 
     if (this.form.valid) {
       
-      this.service.signIn(this.form.value)
+      this.service.signInService(this.form.value)
       .pipe(take(1))
-      .subscribe(user => {
-
-        this.tokenService.setToken(user.accessToken);
+      .subscribe(res => {
+        
+        let token = res.accessToken;
+        let user = this.tokenService.decodeToken(token);
+        this.tokenService.setToken(token);
 
         this.router.navigate(['']);
 
@@ -43,11 +47,12 @@ export class LoginComponent {
 
          error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));
 
-      });    
+      })
     }
   }
 
-  goTo(){
+  goTo() {
     this.router.navigate(['/auth/register']);
   }
+
 }

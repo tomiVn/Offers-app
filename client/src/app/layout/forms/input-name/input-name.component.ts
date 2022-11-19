@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
           <ng-container [formGroup]="inputName">
             <mat-form-field  class="example-full-width" appearance="fill">
                 <mat-label> Names </mat-label>
-                <input #name type="email" matInput placeholder="Names" 
+                <input #name type="text" matInput placeholder="Names" 
                 formControlName="name"/>
                 <mat-hint align="end">
                     Min length 3 characters {{name.value.length || 0}}
@@ -31,10 +31,14 @@ import { FormGroup } from '@angular/forms';
 export class InputNameComponent implements OnInit {
 
   @Input() inputName!: FormGroup;
+  @Input() nameValue: string | undefined;
 
   constructor() { }
 
   ngOnInit(): void {
+    if(this.nameValue !== undefined){
+      this.inputName.controls['name'].setValue(this.nameValue);
+    }
   }
 
 }

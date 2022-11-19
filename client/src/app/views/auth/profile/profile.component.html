@@ -1,31 +1,52 @@
-<!-- {{form.valid | json}}
-<br> -->
-<!-- {{ form.get('name') | json}} -->
+<!-- {{form.valid | json}} -->
 
 <mat-card class="card-decoration">
 
-    <div *ngIf="responseData; else loading">
+    <div *ngIf="(responseData$ | async) as user; else loading">
+        
         <h3>Profile page</h3>
 
-        <form [formGroup]="form" class="example-form" (ngSubmit)="updateProfile()">
+        <form [formGroup]="form"
+            
+            class="example-form" (ngSubmit)="updateProfile()">
+            
+            <app-input-name 
+                [inputName]="form"
+                [nameValue]="user.name">
+            </app-input-name>
 
-            <app-input-name [inputName]="form"></app-input-name>
+            <app-input-email 
+                [inputEmail]="form" 
+                [emailValue]="user.email">
+            </app-input-email>
 
-            <app-input-email [inputEmail]="form"></app-input-email>
+            <app-input-password 
+                [inputPassword]="form">
+            </app-input-password>
 
-            <app-input-password [inputPassword]="form"></app-input-password>
+            <app-input-repeat-password 
+                [inputReapeatPassword]="form">
+            </app-input-repeat-password>
 
-            <app-input-repeat-password [inputReapeatPassword]="form"></app-input-repeat-password>
+            <app-input-country-code 
+                [inputCountryCode]="form" 
+                [countryCodeValue]="user.dialCode">
+            </app-input-country-code> 
 
-            <app-input-country-code [inputCountryCode]="form"></app-input-country-code> 
-
-            <app-input-phone [inputPhone]="form"></app-input-phone>
+            <app-input-phone 
+                [inputPhone]="form" 
+                [phoneValue]="user.phone">
+            </app-input-phone>
 
             <mat-card-actions class="form-input-container">
-                <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
+                <button mat-raised-button color="primary" 
+                    [disabled]="form.invalid">
+                    Submit
+                </button>
             </mat-card-actions>
+
         </form>
-    </div>
+    </div>   
     <ng-template #loading>
         <h3>Loading...</h3>
     </ng-template>

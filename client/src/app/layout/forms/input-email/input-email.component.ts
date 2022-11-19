@@ -35,10 +35,13 @@ import { FormGroup } from '@angular/forms';
 export class InputEmailComponent implements OnInit {
 
   @Input() inputEmail!: FormGroup;
-
+  @Input() emailValue: string | undefined;
   constructor() { }
 
   ngOnInit(): void {
+    if(this.emailValue !== undefined){
+        this.inputEmail.controls['email'].setValue(this.emailValue);
+      }
   }
 
 }

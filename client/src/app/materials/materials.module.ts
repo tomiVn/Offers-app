@@ -9,6 +9,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
 import { MatDividerModule } from '@angular/material/divider'; 
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
 
 let use = [ ReactiveFormsModule, 
             MatInputModule, 
@@ -16,7 +17,8 @@ let use = [ ReactiveFormsModule,
             MatFormFieldModule, 
             MatIconModule, 
             MatAutocompleteModule, 
-            MatDividerModule ]
+            MatDividerModule,
+            MatDatepickerModule ]
 
 @NgModule({
   declarations: [],

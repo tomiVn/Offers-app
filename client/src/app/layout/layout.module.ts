@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../middlewear/authInterceptor';
 import { AppComponent } from '../app.component';
@@ -13,6 +14,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from './forms/forms.module';
 import { FooterComponent } from './footer/footer.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';  
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     FormsModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatGridListModule
   ],
   exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule ],
              

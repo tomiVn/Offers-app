@@ -46,6 +46,9 @@ export class FormFactoryService {
         ]
       ];
 
+      dateValidation = ['',
+        [ Validators.required]]
+
   constructor(private fb: FormBuilder) { }
 
   getRegisterForm() {
@@ -66,6 +69,13 @@ export class FormFactoryService {
     return this.fb.group({
       email: this.emailValidation,
       password: this.passwordValidation,
+    });
+  }
+
+  getDateArange(){
+    return this.fb.group({
+      firstDay: this.dateValidation,
+      lastDay: this.dateValidation,
     });
   }
 }

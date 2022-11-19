@@ -13,11 +13,16 @@ export class InputCountryCodeComponent implements OnInit {
   
 
   @Input() inputCountryCode!: FormGroup;
+  @Input() countryCodeValue: string | undefined;
+
   filteredOptions: Observable<ICountry[]> | undefined;
   
   constructor() { }
 
   ngOnInit(): void {
+    if(this.countryCodeValue !== undefined){
+      this.inputCountryCode.controls['dialCode'].setValue(this.countryCodeValue);
+    }
     this.filteredOptions = this.inputCountryCode.get('dialCode')?.valueChanges
       .pipe(startWith(''),
         map(value => _filter(value || '')));

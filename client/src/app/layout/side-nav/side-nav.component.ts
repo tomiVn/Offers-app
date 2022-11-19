@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormFactoryService } from 'src/app/services/form-factory.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  form!: FormGroup;
+  constructor(private service: FormFactoryService) { }
 
   ngOnInit(): void {
+    this.form = this.service.getDateArange();
+  }
+
+  onSubmit(){
+    
   }
 
 }

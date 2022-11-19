@@ -1,24 +1,59 @@
 <div id="sidenav-content">
-<img src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="" class="avatar mat-elavation-z8" />
 
-<a mat-button class="menu-button" routerLink="/home">
-  <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
-    home
-  </mat-icon>
-  Home
-</a>
+  <header class="image-container">
+    <img src="../../../assets/images/logo-social.png" alt="" class="avatar"/>
+  </header>
 
-<mat-divider></mat-divider>
+  <nav>
+    <a mat-button class="menu-button" routerLink="/home">
+      <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+        home
+      </mat-icon>
+      Home
+    </a>
 
-<a mat-button class="menu-button" routerLink="/about-us">
-  About us
-</a>
+    <a mat-button class="menu-button" routerLink="/about-us">
+      <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+        info
+      </mat-icon>
+      About us
+    </a>
 
-<mat-divider></mat-divider>
+    <a mat-button class="menu-button" routerLink="/contacts">
+      <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+        contact_page
+      </mat-icon>
+      Contacts
+    </a>
+  </nav>
 
-<a mat-button class="menu-button" routerLink="/contacts">
-  Contacts
-</a>
+  <mat-divider></mat-divider>
+  <article>
+    <section>
+      <form [formGroup]="form" (onSubmit)="onSubmit()">
+        <fieldset>
+          <legend>Your first vacation day?</legend>
+          <table>
+            <tr>
+              <td>
+                <app-iput-date-picker [inputDate]="form"></app-iput-date-picker>
+              </td>
+              <td>
+                <button mat-raised-button color="primary">Submit</button>
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+    </section>
+    <footer>
+      <p>Grab our offers!</p>
+    </footer>
+  </article>
 
-<mat-divider></mat-divider>
+  <mat-grid-list cols="3" rowHeight="150px">
+    <mat-grid-tile>Activities</mat-grid-tile>
+    <mat-grid-tile>Transport</mat-grid-tile>
+    <mat-grid-tile>Hotels</mat-grid-tile>
+  </mat-grid-list>
 </div>

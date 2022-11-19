@@ -36,10 +36,13 @@ import { FormGroup } from '@angular/forms';
 export class InputPhoneComponent implements OnInit {
 
   @Input() inputPhone!: FormGroup;
-
+  @Input() phoneValue: string | undefined;
   constructor() { }
 
   ngOnInit(): void {
+    if(this.phoneValue !== undefined){
+      this.inputPhone.controls['phone'].setValue(this.phoneValue);
+    }
   }
 
 }

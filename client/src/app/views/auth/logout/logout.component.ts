@@ -4,7 +4,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { catchError, take, throwError } from 'rxjs';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-logout',
@@ -16,33 +16,29 @@ import { catchError, take, throwError } from 'rxjs';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private service: AuthService, 
-              private tokenService: TokenService, 
-              private router: Router,
-              private toastr: ToastrService) { }
+  constructor(private service: AuthService,
+    private tokenService: TokenService,
+    private router: Router,
+    private toastr: ToastrService) { }
 
-  ngOnInit(){
+  ngOnInit() {
 
-    this.service.logOut()
-    .pipe(take(1))
-    .subscribe((user) => {
-      if(!user){
-        this.router.navigate(['']);
-        throwError({message: 'Not found this user!'})
-      }
-    this.tokenService.deleteToken();
-    this.router.navigate(['/auth/login']);
-    this.toastr.success('You successfully sign out.', 'Hope to see you again ' + user.name);
-   }, (error) => { 
-    this.router.navigate(['']);
-    this.toastr.error( error.message, 'Error');
-   })
-
-   
-
-   
-   
-   
+    this.actionLogOut();
   }
 
+  actionLogOut() {
+
+    this.service.signOutService()
+      .pipe(take(1))
+      .subscribe((res) => {
+        if (!res.name) {
+          this.toastr.error('We can\'t recognize you!!!', 'Error');
+          this.router.navigate(['']);
+          throw ({ message: 'We can\'t recognize you!' })
+        }
+        this.tokenService.deleteToken();
+        this.router.navigate(['/auth/login']);
+        this.toastr.success('You successfully sign out.', res.name + ' hope to see you again ');
+      });
+  }
 }

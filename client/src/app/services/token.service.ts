@@ -25,7 +25,7 @@ export class TokenService {
      this.cookie.delete(COOKIE_NAME);
   }
 
-  decodeToken(token: any){
+  decodeToken(token: string){
     let payload = token.split('.')[1];
     return JSON.parse(atob(payload));
   }

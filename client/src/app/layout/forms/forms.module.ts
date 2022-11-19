@@ -10,6 +10,8 @@ import { InputCountryCodeComponent } from './input-country-code/input-country-co
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { MaterialsModule } from 'src/app/materials/materials.module';
+import { IputDatePickerComponent } from './iput-date-picker/iput-date-picker.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -20,11 +22,13 @@ import { MaterialsModule } from 'src/app/materials/materials.module';
     InputRepeatPasswordComponent,
     InputPhoneComponent,
     InputCountryCodeComponent,
+    IputDatePickerComponent,
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
-    MaterialsModule  
+    MaterialsModule,
+    MatNativeDateModule  
   ],
 
   //Export Fields is important!!!
@@ -33,7 +37,8 @@ import { MaterialsModule } from 'src/app/materials/materials.module';
              InputPasswordComponent, 
              InputRepeatPasswordComponent, 
              InputPhoneComponent, 
-             InputCountryCodeComponent ],
+             InputCountryCodeComponent,
+             IputDatePickerComponent],
              
              providers: [ ],
   bootstrap: [AppComponent]

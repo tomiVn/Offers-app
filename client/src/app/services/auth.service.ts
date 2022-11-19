@@ -20,19 +20,20 @@ export class AuthService {
     return this.http.post<User>(this.userPathString, formData);
   }
 
-  signIn(formData: IUserLogIn): Observable<IToken> {
+  signInService(formData: IUserLogIn): Observable<IToken> {
     return this.http.post<IToken>(this.userPathString + '/login', formData);
   }
 
-  logOut() : Observable<User>{
-    return this.http.get<User>(this.userPathString);
+  signOutService(): Observable<{name: string}>{
+    return this.http.get<{name: string}>(this.userPathString + '/logout');
   }
 
-  userProfile(): Observable<User>{
+  getUserService(): Observable<User>{
     return this.http.get<User>(this.userPathString);
+   
   }
 
-  updateUserProfile(formData:NgForm): Observable<User> {
-    return this.http.put<User>(this.userPathString, formData)
+  updateUserService(formData:NgForm): Observable<User> {
+    return this.http.put<User>(this.userPathString, formData);
   }
 }
