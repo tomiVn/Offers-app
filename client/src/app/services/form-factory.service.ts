@@ -47,7 +47,23 @@ export class FormFactoryService {
       ];
 
       dateValidation = ['',
-        [ Validators.required]]
+        [ Validators.required]];
+
+        imgValidation = ['', [Validators.required]];
+
+        titleValidation = ['',
+         [ Validators.required,
+           Validators.minLength(3),
+          //  Validators.pattern("^[\w+]*$"),
+          ]
+        ];
+
+        descriptionValidation = ['',
+         [ 
+          //  Validators.required,
+          //  Validators.pattern("^[\w+]*$")
+          ]
+        ];
 
   constructor(private fb: FormBuilder) { }
 
@@ -78,4 +94,13 @@ export class FormFactoryService {
       lastDay: this.dateValidation,
     });
   }
+
+  createPost(){
+    return this.fb.group({
+      title: this.titleValidation,
+      description: this.descriptionValidation,
+      file: this.imgValidation,
+    });
+  }
+
 }

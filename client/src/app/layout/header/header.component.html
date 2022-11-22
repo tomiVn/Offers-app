@@ -6,6 +6,7 @@
       <mat-icon *ngIf="!sideNav.opened">menu</mat-icon>
       <mat-icon *ngIf="sideNav.opened">close</mat-icon>
     </button>
+
     <span class="example-spacer"></span>
 
     <ng-template #anonymous>
@@ -16,11 +17,23 @@
 
     <ng-template #user>
       <!-- <span class="mat-body-2">Hello {{userName}}</span> -->
-      <a  mat-button routerLink="/auth/profile" >
+      
+      <a mat-icon-button 
+        [matMenuTriggerFor]="menu" 
+        aria-label="Example icon-button with a menu">
+
         <mat-icon>
           account_circle
         </mat-icon>
       </a>
+    <mat-menu #menu="matMenu">
+      <a  mat-menu-item routerLink="/auth/profile" >
+        Edit Profile
+      </a>
+      <a  mat-menu-item routerLink="/posts" >
+        Create Post
+      </a>
+    </mat-menu>
 
       <a mat-button routerLink="/auth/logout">
         LogOut

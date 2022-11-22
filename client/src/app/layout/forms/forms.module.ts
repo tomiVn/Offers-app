@@ -12,35 +12,34 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MaterialsModule } from 'src/app/materials/materials.module';
 import { IputDatePickerComponent } from './iput-date-picker/iput-date-picker.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { InputTitleComponent } from './input-title/input-title.component';
 
+const formElements = [ InputNameComponent,
+                       InputEmailComponent,
+                       InputPasswordComponent,
+                       InputRepeatPasswordComponent,
+                       InputPhoneComponent,
+                       InputCountryCodeComponent,
+                       IputDatePickerComponent,
+                       FileUploadComponent,
+                       InputTitleComponent
+                      ]
 
 @NgModule({
-  declarations: [ 
-    InputNameComponent,
-    InputEmailComponent,
-    InputPasswordComponent,
-    InputRepeatPasswordComponent,
-    InputPhoneComponent,
-    InputCountryCodeComponent,
-    IputDatePickerComponent,
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    MaterialsModule,
-    MatNativeDateModule  
-  ],
+  declarations: [ formElements ],
+
+    imports: [ CommonModule,
+               AppRoutingModule,
+               MaterialsModule,
+               MatNativeDateModule  
+              ],
 
   //Export Fields is important!!!
-  exports: [ InputNameComponent, 
-             InputEmailComponent, 
-             InputPasswordComponent, 
-             InputRepeatPasswordComponent, 
-             InputPhoneComponent, 
-             InputCountryCodeComponent,
-             IputDatePickerComponent],
+    exports: [ formElements ],
              
-             providers: [ ],
-  bootstrap: [AppComponent]
+  providers: [ ],
+
+  bootstrap: [ AppComponent ]
 })
 export class FormsModule { }

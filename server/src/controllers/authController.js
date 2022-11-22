@@ -10,13 +10,13 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
     try {
         let { _id, name, role } = await registerUserService(req.body);
 
-        res.status(201).json(userInfo(_id, name, role));
+        return res.status(201).json(userInfo(_id, name, role));
 
     } catch (error) {
 
         const errors = parseErrors(error);
 
-        res.status(400).json({ message: errors });
+        return res.status(400).json({ message: errors });
     }
 
 })
@@ -26,13 +26,13 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
         try {
             let { _id, name, role } = await loginService(req.body);
 
-            res.status(200).json( userInfo(_id, name, role));
+            return res.status(200).json( userInfo(_id, name, role));
 
         } catch (error) {
 
             const errors = parseErrors(error);
              
-            res.status(400).json(errors);
+            return  res.status(400).json(errors);
         }
 
     })
@@ -50,7 +50,7 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
 
             const errors = parseErrors(error);
 
-            res.status(400).json({ message: errors });
+            return res.status(400).json({ message: errors });
         }
 
     })
@@ -76,13 +76,13 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
 
         try {
 
-            res.status(200).json({name: req.user.name});
+            return res.status(200).json({name: req.user.name});
 
         } catch (error) {
 
             const errors = parseErrors(error);
              
-            res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
 
     })

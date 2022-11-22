@@ -16,6 +16,8 @@ import { FormsModule } from './forms/forms.module';
 import { FooterComponent } from './footer/footer.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';  
+import { NgOptimizedImage } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu'; 
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatToolbarModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    NgOptimizedImage,
+    MatMenuModule
   ],
   exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule ],
              

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { ContactsComponent } from './views/contacts/contacts.component';
 import { AboutusComponent } from './views/aboutus/aboutus.component';
+import { PostsModule } from './views/posts/posts.module';
+import { CreatePostComponent } from './views/posts/create-post/create-post.component';
 
 const routes: Routes = [
   
@@ -12,7 +14,8 @@ const routes: Routes = [
 { path: 'about-us', component: AboutusComponent, title: 'About us' },
 {
   path: 'auth',     loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
-}
+},
+{ path: 'posts', component: CreatePostComponent}
 ];
 
 @NgModule({

@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ContactsComponent } from './contacts/contacts.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { AuthModule } from './auth/auth.module';
+import { PostsModule } from './posts/posts.module';
 
 
 
@@ -18,7 +19,8 @@ import { AuthModule } from './auth/auth.module';
     MatCardModule,
     BrowserModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    PostsModule
   ],
 })
 export class ViewsModule { }

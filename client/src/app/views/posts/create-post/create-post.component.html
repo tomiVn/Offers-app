@@ -1,0 +1,16 @@
+<mat-card class="card-decoration">
+
+    <form [formGroup]="form" 
+          class="example-form" 
+          (ngSubmit)="actionForm()" 
+          enctype="multipart/form-data" 
+          method="POST">
+
+    <app-input-title [inputTitle]="form"></app-input-title>
+    <app-file-upload [uploadImage]="form"></app-file-upload>
+
+    <mat-card-actions id="button-container">
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
+    </mat-card-actions>
+    </form>
+</mat-card>
