@@ -3,67 +3,42 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { EMAIL_REGEX } from 'src/environments/environment';
 import { isPasswordsMatch } from '../utils/matchPasswords';
 import { countryCodeValidator } from '../utils/validateCountryCode';
+import { fileSizeValidator } from '../utils/validateFileSize';
+import { fileTypeValidator } from '../utils/validateFileType';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormFactoryService {
 
-      nameValidation = ['', 
-       [ Validators.required, 
-         Validators.minLength(3)
-        ]
-      ];
+      nameValidation = ['', [ Validators.required, 
+                              Validators.minLength(3)]];
 
-      emailValidation = ['', 
-       [ Validators.required,
-         Validators.minLength(6),
-         Validators.pattern(EMAIL_REGEX)
-        ]
-      ];
+     emailValidation = ['', [ Validators.required,
+                              Validators.minLength(6),
+                              Validators.pattern(EMAIL_REGEX) ]];
 
-      passwordValidation = ['', 
-       [ Validators.required,
-         Validators.minLength(4)
-        ]
-      ];
+  passwordValidation = ['', [ Validators.required,
+                              Validators.minLength(4)]];
 
-      repeatPassValidation = ['', 
-        [ Validators.required ]
-      ];
+repeatPassValidation = ['', [ Validators.required ]];
       
-      dialCodeValidation = ['', 
-        [ Validators.required, 
-          countryCodeValidator 
-        ]
-      ];
+  dialCodeValidation = ['', [ Validators.required, 
+                              countryCodeValidator ]];
 
-      phoneValidation = ['', 
-        [ Validators.required,
-          Validators.pattern("^[0-9]*$"),
-          Validators.minLength(6),
-          Validators.maxLength(12)
-        ]
-      ];
+     phoneValidation = ['', [ Validators.required,
+                              Validators.pattern("^[0-9]*$"),
+                              Validators.minLength(6),
+                              Validators.maxLength(12) ]];
 
-      dateValidation = ['',
-        [ Validators.required]];
+      dateValidation = ['', [ Validators.required ]];
 
-        imgValidation = ['', [Validators.required]];
+       imgValidation = ['', [ fileSizeValidator(), fileTypeValidator() ]];
 
-        titleValidation = ['',
-         [ Validators.required,
-           Validators.minLength(3),
-          //  Validators.pattern("^[\w+]*$"),
-          ]
-        ];
+     titleValidation = ['', [ Validators.required,
+                              Validators.minLength(3) ]];
 
-        descriptionValidation = ['',
-         [ 
-          //  Validators.required,
-          //  Validators.pattern("^[\w+]*$")
-          ]
-        ];
+descriptionValidation = ['', [ ]];
 
   constructor(private fb: FormBuilder) { }
 

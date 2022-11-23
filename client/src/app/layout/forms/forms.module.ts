@@ -12,8 +12,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MaterialsModule } from 'src/app/materials/materials.module';
 import { IputDatePickerComponent } from './iput-date-picker/iput-date-picker.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { InputTitleComponent } from './input-title/input-title.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 const formElements = [ InputNameComponent,
                        InputEmailComponent,
@@ -22,8 +22,8 @@ const formElements = [ InputNameComponent,
                        InputPhoneComponent,
                        InputCountryCodeComponent,
                        IputDatePickerComponent,
-                       FileUploadComponent,
-                       InputTitleComponent
+                       InputTitleComponent,
+                       ImageUploadComponent
                       ]
 
 @NgModule({

@@ -1,0 +1,20 @@
+<ng-container [formGroup]="uploadImage">
+    <mat-form-field class="example-full-width" appearance="fill" enctype="multipart/form-data">
+      <!-- <mat-label><mat-icon>file_upload</mat-icon></mat-label> -->
+      <input hidden matInput id="file-input" formControlName="file" accept=".jpeg,.jpg,.png">           
+      <input 
+        type="file" 
+        id="file"                
+        (change)="upload($event)"
+        accept=".jpeg,.jpg,.png"                  
+        maxFileSize="1024 * 1024 * 1"
+        #selectFile
+        multiple/>
+      <mat-hint class="mat-form-field-hint-end">JPEG / JPG / PNG / LIMIT 1MB</mat-hint>           
+    </mat-form-field>
+
+    <mat-error *ngIf="uploadImage.get('file')?.errors">
+          File must be<strong> JPEG / JPG / PNG </strong> LIMIT <strong>1MB</strong>
+    </mat-error>             
+    <!-- <img [src]="image" /> -->
+  </ng-container>
