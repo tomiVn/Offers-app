@@ -1,25 +1,17 @@
 <ng-container [formGroup]="txtArea">
-    <mat-form-field  class="example-full-width" appearance="fill">
-
-        <mat-label> Description </mat-label>
-
-        <textarea formControlName="description">
-        </textarea>
-
-        <mat-hint align="end">
-            characters {{txtArea.value.length || 0}}
-        </mat-hint>
-       
+    <mat-form-field  class="example-full-width">
+        <textarea 
+            matInput
+            formControlName="description" 
+            class="example-full-width">
+        </textarea>      
     </mat-form-field>
    
     <mat-error class="example-full-width" *ngIf="txtArea.get('description')?.errors 
-    && txtArea.get('description')?.touched">
-        <mat-error *ngIf="txtArea.get('description')?.errors?.['required']">
-            Title is <strong>required!</strong>
-        </mat-error>
-
-        <mat-error *ngIf="txtArea.get('title')?.errors?.['minlength']">
-            Title min length <strong>3 characters!</strong>
-        </mat-error>
+            && txtArea.get('description')?.touched">
+        <mat-error *ngIf="txtArea.get('description')?.errors?.['pattern']">
+            Special characters <strong>{{symbols}} are not allowed!</strong>
+        </mat-error>   
     </mat-error>
+   
   </ng-container>

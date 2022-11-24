@@ -9,11 +9,11 @@ import { FormFactoryService } from 'src/app/services/form-factory.service';
 })
 export class SideNavComponent implements OnInit {
 
-  form!: FormGroup;
+  formOffers!: FormGroup;
   constructor(private service: FormFactoryService) { }
 
   ngOnInit(): void {
-    this.form = this.service.getDateArange();
+    this.formOffers = this.service.getDateArange();
   }
 
   onSubmit(){

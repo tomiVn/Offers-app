@@ -33,7 +33,7 @@ repeatPassValidation = ['', [ Validators.required ]];
                               Validators.minLength(6),
                               Validators.maxLength(12) ]];
 
-      dateValidation = ['', [ Validators.required ]];
+      dateValidation = ['', [ ]];
 
        imgValidation = ['', [ fileSizeValidator(), fileTypeValidator() ]];
 
@@ -41,7 +41,7 @@ repeatPassValidation = ['', [ Validators.required ]];
                               Validators.minLength(3),
                               Validators.pattern(NOT_VALID_CHARACTERS) ]];
 
-descriptionValidation = ['', [ Validators.pattern(NOT_VALID_CHARACTERS) ]];
+descriptionValidation = ['',[ Validators.pattern(NOT_VALID_CHARACTERS) ]];
 
   constructor(private fb: FormBuilder) { }
 
@@ -68,16 +68,15 @@ descriptionValidation = ['', [ Validators.pattern(NOT_VALID_CHARACTERS) ]];
 
   getDateArange(){
     return this.fb.group({
-      firstDay: this.dateValidation,
-      lastDay: this.dateValidation,
+      firstDay: this.dateValidation
     });
   }
 
   createPost(){
     return this.fb.group({
       title: this.titleValidation,
-      description: this.descriptionValidation,
       file: this.imgValidation,
+      description: this.descriptionValidation
     });
   }
 

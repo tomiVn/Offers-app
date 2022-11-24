@@ -29,15 +29,17 @@
   </nav>
 
   <mat-divider></mat-divider>
+
   <article>
     <section>
-      <form [formGroup]="form" (onSubmit)="onSubmit()">
+      <!-- <mat-form-field  class="example-full-width"> -->
+      <form [formGroup]="formOffers" (onSubmit)="onSubmit()">
         <fieldset>
           <legend>Your first vacation day?</legend>
           <table>
             <tr>
               <td>
-                <app-iput-date-picker [inputDate]="form"></app-iput-date-picker>
+                <app-iput-date-picker [inputDate]="formOffers"></app-iput-date-picker>
               </td>
               <td>
                 <button mat-raised-button color="primary">Submit</button>
@@ -46,6 +48,7 @@
           </table>
         </fieldset>
       </form>
+    <!-- </mat-form-field> -->
     </section>
     <footer>
       <p>Grab our offers!</p>

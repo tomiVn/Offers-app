@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class DescriptionComponent implements OnInit {
 
   @Input() txtArea!: FormGroup;
-  
+  symbols: string = '< >';
   constructor() { }
   
   ngOnInit(): void {

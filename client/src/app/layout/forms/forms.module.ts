@@ -24,11 +24,12 @@ const formElements = [ InputNameComponent,
                        InputCountryCodeComponent,
                        IputDatePickerComponent,
                        InputTitleComponent,
-                       ImageUploadComponent
+                       ImageUploadComponent,
+                       DescriptionComponent
                       ]
 
 @NgModule({
-  declarations: [ formElements, DescriptionComponent ],
+  declarations: [ formElements ],
 
     imports: [ CommonModule,
                AppRoutingModule,
