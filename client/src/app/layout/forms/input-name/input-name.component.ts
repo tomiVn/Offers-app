@@ -23,6 +23,10 @@ import { FormGroup } from '@angular/forms';
                 <mat-error *ngIf="inputName.get('name')?.errors?.['minlength']">
                     Name min length <strong>3 characters!</strong>
                 </mat-error>
+
+                <mat-error *ngIf="inputName.get('name')?.errors?.['pattern']">
+                    Special characters <strong>< > are not allowed!</strong>
+                </mat-error>
             </mat-error>
           </ng-container>
   `, 

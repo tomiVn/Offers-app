@@ -4,14 +4,8 @@
 
 export const environment = {
   production: false,
-  'COOKIE_NAME': '%fdtsbfwh6235653',
-  'EMAIL_REGEX': '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',
    path: 'http://localhost:3030'
 };
-
-export const COOKIE_NAME = '%fdtsbfwh6235653';
-
-export const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 /*
  * For easier debugging in development mode, you can import the following file

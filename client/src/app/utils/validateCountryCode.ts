@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import countriesData from '../constants/countries.json';
+import countriesData from './countries.json';
 import { ICountry } from '../models/countryModel';
 
 export function countryCodeValidator(control: AbstractControl) {

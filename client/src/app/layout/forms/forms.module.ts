@@ -14,6 +14,7 @@ import { IputDatePickerComponent } from './iput-date-picker/iput-date-picker.com
 import { MatNativeDateModule } from '@angular/material/core';
 import { InputTitleComponent } from './input-title/input-title.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { DescriptionComponent } from './description/description.component';
 
 const formElements = [ InputNameComponent,
                        InputEmailComponent,
@@ -27,7 +28,7 @@ const formElements = [ InputNameComponent,
                       ]
 
 @NgModule({
-  declarations: [ formElements ],
+  declarations: [ formElements, DescriptionComponent ],
 
     imports: [ CommonModule,
                AppRoutingModule,

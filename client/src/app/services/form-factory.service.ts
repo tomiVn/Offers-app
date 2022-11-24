@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { EMAIL_REGEX } from 'src/environments/environment';
+import { EMAIL_REGEX, NOT_VALID_CHARACTERS } from 'src/app/utils/const';
 import { isPasswordsMatch } from '../utils/matchPasswords';
 import { countryCodeValidator } from '../utils/validateCountryCode';
 import { fileSizeValidator } from '../utils/validateFileSize';
@@ -12,14 +12,16 @@ import { fileTypeValidator } from '../utils/validateFileType';
 export class FormFactoryService {
 
       nameValidation = ['', [ Validators.required, 
-                              Validators.minLength(3)]];
+                              Validators.minLength(3),
+                              Validators.pattern(NOT_VALID_CHARACTERS)]];
 
      emailValidation = ['', [ Validators.required,
                               Validators.minLength(6),
                               Validators.pattern(EMAIL_REGEX) ]];
 
   passwordValidation = ['', [ Validators.required,
-                              Validators.minLength(4)]];
+                              Validators.minLength(4),
+                              Validators.pattern(NOT_VALID_CHARACTERS)]];
 
 repeatPassValidation = ['', [ Validators.required ]];
       
@@ -36,9 +38,10 @@ repeatPassValidation = ['', [ Validators.required ]];
        imgValidation = ['', [ fileSizeValidator(), fileTypeValidator() ]];
 
      titleValidation = ['', [ Validators.required,
-                              Validators.minLength(3) ]];
+                              Validators.minLength(3),
+                              Validators.pattern(NOT_VALID_CHARACTERS) ]];
 
-descriptionValidation = ['', [ ]];
+descriptionValidation = ['', [ Validators.pattern(NOT_VALID_CHARACTERS) ]];
 
   constructor(private fb: FormBuilder) { }
 

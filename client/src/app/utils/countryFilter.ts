@@ -1,5 +1,5 @@
 import { ICountry } from "../models/countryModel";
-import countriesData from '../constants/countries.json';
+import countriesData from './countries.json';
 
 export function _filter(value: string): ICountry[] {
 

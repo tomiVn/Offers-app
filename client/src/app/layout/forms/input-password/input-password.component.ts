@@ -23,6 +23,10 @@ import { FormGroup } from '@angular/forms';
                 <mat-error *ngIf="inputPassword.get('password')?.errors?.['minlength']">
                     Password min length <strong>4 characters!</strong>
                 </mat-error>
+
+                <mat-error *ngIf="inputPassword.get('password')?.errors?.['pattern']">
+                    Special characters <strong>< > are not allowed!</strong>
+                </mat-error>
             </mat-error>
    </ng-container>
   `,
