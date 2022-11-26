@@ -2,11 +2,17 @@ const { AUTH_PATH } = require('../config/constants');
 const { guestOnly, userOnly } = require('../middlewear/guards');
 const { createToken, loginService, registerUserService, getUser, updateProfile } = require('../services/authService');
 const { parseErrors } = require('../utils/parseErrors');
+const { trimForm } = require('../utils/trimForm');
+const cloudinary = require("../config/cloudinary-configuration");
+
+const multer = require("../config/multer-configuration");
+
+const uploadFile = multer.single('file');
 
 const router = require('express').Router();
 
-router.post( AUTH_PATH, guestOnly, async (req, res) => {
-
+router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
+   
     try {
         let { _id, name, role } = await registerUserService(req.body);
 
@@ -15,13 +21,13 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
     } catch (error) {
 
         const errors = parseErrors(error);
-
+        
         return res.status(400).json({ message: errors });
     }
 
 })
 
-    .post( AUTH_PATH + '/login', guestOnly, async (req, res) => {
+    .post( AUTH_PATH + '/login', trimForm, guestOnly, async (req, res) => {
 
         try {
             let { _id, name, role } = await loginService(req.body);
@@ -43,7 +49,7 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
             let userId = req?.user?.id;
 
             let user = await getUser(userId);
-
+            
             return res.status(200).json( user );
 
         } catch (error) {
@@ -55,21 +61,20 @@ router.post( AUTH_PATH, guestOnly, async (req, res) => {
 
     })
 
-    .put( AUTH_PATH, userOnly, async (req, res) => {
+    .put( AUTH_PATH, userOnly, trimForm, async(req, res) => {
 
         try {
             let userId = req?.user?.id;
-            let data = req.body;
-            
-            let user = await updateProfile(userId, data);
-            return res.status( 201 ).json( { user });
+                             
+            let user = await updateProfile(userId, req.body);
+               
+            return res.status( 201 ).json( { _id: user.id, name: user.name } );
 
         }catch( error ){
-
+            
             let errors = parseErrors( error );
             return res.status( 400 ).json( { message: errors.message });
         }
-        
     })
 
     .get( AUTH_PATH + '/logout', userOnly, async (req, res) => {

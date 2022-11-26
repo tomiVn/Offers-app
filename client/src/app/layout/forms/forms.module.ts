@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { InputTitleComponent } from './input-title/input-title.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { DescriptionComponent } from './description/description.component';
+import { SelectDropDownComponent } from './select-drop-down/select-drop-down.component';
 
 const formElements = [ InputNameComponent,
                        InputEmailComponent,
@@ -25,7 +26,8 @@ const formElements = [ InputNameComponent,
                        IputDatePickerComponent,
                        InputTitleComponent,
                        ImageUploadComponent,
-                       DescriptionComponent
+                       DescriptionComponent,
+                       SelectDropDownComponent
                       ]
 
 @NgModule({

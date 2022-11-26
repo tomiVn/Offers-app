@@ -8,22 +8,28 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.less']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.less']
 })
-export class ProfileComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   form: FormGroup;
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
+  genderValues = [
+    {value: 'male', viewValue: 'Male'},
+    {value: 'female', viewValue: 'Female'}
+  ]
+
+  name = 'gender'
   
   constructor( private service: AuthService,
                private router: Router,
                private toastr: ToastrService,
                private formService: FormFactoryService) {  
 
-    this.form = this.formService.getRegisterForm();  
+    this.form = this.formService.getUpdateUserForm();  
   }
   
   ngOnInit(): void {
@@ -35,12 +41,14 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
     
     if (this.form.valid) {
+      
       this.service.updateUserService(this.form.value)
       .pipe(take(1))
-      .subscribe(() => {
-        this.toastr.success('You successfully updated your profile!', 
-        this.form.get('name')?.value);
-        this.router.navigate(['']);
+      .subscribe(( user ) => {
+        
+        this.toastr.success('You successfully updated your profile!', user.name);
+        
+        this.router.navigate(['/auth/' + user._id + '/profile']);
       }, 
       (error: any) => {
         this.toastr.error( error.message, 'ERROR' );

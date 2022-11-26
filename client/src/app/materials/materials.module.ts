@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
 import { MatDividerModule } from '@angular/material/divider'; 
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatSelectModule } from '@angular/material/select'; 
 
 let use = [ ReactiveFormsModule, 
             MatInputModule, 
@@ -18,7 +19,8 @@ let use = [ ReactiveFormsModule,
             MatIconModule, 
             MatAutocompleteModule, 
             MatDividerModule,
-            MatDatepickerModule ]
+            MatDatepickerModule,
+            MatSelectModule ]
 
 @NgModule({
   declarations: [],

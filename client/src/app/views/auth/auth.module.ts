@@ -7,6 +7,11 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { MatButtonModule } from '@angular/material/button';
+import { NgOptimizedImage } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list'; 
+import { MatIconModule } from '@angular/material/icon'; 
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -14,13 +19,18 @@ import { MatButtonModule } from '@angular/material/button';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
+    EditComponent,
   ],
   imports: [
     CommonModule,
     MatCardModule,
     ReactiveFormsModule,
     LayoutModule,
-    MatButtonModule
+    MatButtonModule,
+    NgOptimizedImage,
+    MatGridListModule,
+    MatIconModule,
+    AppRoutingModule
   ],
   
   providers: []

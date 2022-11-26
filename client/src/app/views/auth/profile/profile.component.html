@@ -1,53 +1,89 @@
-<!-- {{form.valid | json}} -->
 
 <mat-card class="card-decoration">
 
     <div *ngIf="(responseData$ | async) as user; else loading">
-        
-        <h3>Profile page</h3>
 
-        <form [formGroup]="form"
-            
-            class="example-form" (ngSubmit)="updateProfile()">
-            
-            <app-input-name 
-                [inputName]="form"
-                [nameValue]="user.name">
-            </app-input-name>
+        <mat-card-header class="header">
+            <figure class="image-container">
+                <img ngSrc="{{user.avatar || 
+                    'https://res.cloudinary.com/duyubdgsj/image/upload/v1669413105/assets/DSC_08681_owbgde.png'}}"
+                    width="120" height="120" id="avatar">
+                <div>
+                    <button mat-button class="menu-button" routerLink="/auth/{{user._id}}/edit">
+                        Edit
+                        <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                            edit
+                        </mat-icon>
+                    </button>
+                </div>
+            </figure>
+            <div>
+                <h1>{{user.name}}</h1>
+            </div>
+        </mat-card-header>
 
-            <app-input-email 
-                [inputEmail]="form" 
-                [emailValue]="user.email">
-            </app-input-email>
+        <mat-card-content>
+            <section class="profile-details">
+                <h3>Basic information:</h3>
+                <p>gender: {{user.gender}}</p>
+                <p>born: {{user.born}}</p>
+                <p>email: {{user.email}}</p>
+                <p>phone: {{user.dialCode}} {{user.phone}}</p>
+            </section>
+            <section class="profile-details">
+                <h3>posts: {{user.posts.length || 'Not posts yet!'}}</h3>
+            </section>
+        </mat-card-content>
+    </div>
 
-            <app-input-password 
-                [inputPassword]="form">
-            </app-input-password>
-
-            <app-input-repeat-password 
-                [inputReapeatPassword]="form">
-            </app-input-repeat-password>
-
-            <app-input-country-code 
-                [inputCountryCode]="form" 
-                [countryCodeValue]="user.dialCode">
-            </app-input-country-code> 
-
-            <app-input-phone 
-                [inputPhone]="form" 
-                [phoneValue]="user.phone">
-            </app-input-phone>
-
-            <mat-card-actions class="form-input-container">
-                <button mat-raised-button color="primary" 
-                    [disabled]="form.invalid">
-                    Submit
-                </button>
-            </mat-card-actions>
-
-        </form>
-    </div>   
     <ng-template #loading>
         <h3>Loading...</h3>
     </ng-template>
 </mat-card>
+
+
+
+
+
+
+
+<!-- <form [formGroup]="form"
+            
+class="example-form" (ngSubmit)="updateProfile()">
+
+<app-input-name 
+    [inputName]="form"
+    [nameValue]="user.name">
+</app-input-name>
+
+<app-input-email 
+    [inputEmail]="form" 
+    [emailValue]="user.email">
+</app-input-email>
+
+<app-input-password 
+    [inputPassword]="form">
+</app-input-password>
+
+<app-input-repeat-password 
+    [inputReapeatPassword]="form">
+</app-input-repeat-password>
+
+<app-input-country-code 
+    [inputCountryCode]="form" 
+    [countryCodeValue]="user.dialCode">
+</app-input-country-code> 
+
+<app-input-phone 
+    [inputPhone]="form" 
+    [phoneValue]="user.phone">
+</app-input-phone>
+
+<mat-card-actions class="form-input-container">
+    <button mat-raised-button color="primary" 
+        [disabled]="form.invalid">
+        Submit
+    </button>
+</mat-card-actions>
+
+</form> -->

@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   isUser: boolean = false;
 
   userName!: string;
+  userId = '';
 
   constructor( private service: TokenService, 
                private observer: BreakpointObserver, 
@@ -38,11 +39,13 @@ export class HeaderComponent implements OnInit, DoCheck {
     let token = this.service.getToken();
 
     if (token) {
+
       let decodeTokent = this.service.decodeToken(token);
 
       if (decodeTokent.name && decodeTokent.exp * 1000 > new Date().getTime()) {
         this.isUser = true;
         this.userName = decodeTokent.name;
+        this.userId = decodeTokent.id;
         return;
       }
     }

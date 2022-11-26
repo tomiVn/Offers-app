@@ -1,37 +1,53 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
 const bcrypt = require('bcrypt');
 const emailValidator = require("email-validator");
 const { SAULT_ROUNDS } = require('../config/constants');
 
 const uModel = new Schema({
 
+            role: { 
+            type: String, 
+            enum: ['user', 'admin'], default : 'user',  message: 'Not valid role'},
+
+          avatar: {
+            type: String,
+        default : null },
+
             name: {
             type: String, 
         required: [ true, 'Name is Required!'],
-       minLength: [ 3, 'Name min length 3 characters!']
-    },
+       minLength: [ 3, 'Name min length 3 characters!']},
+
+          gender: { 
+            type: String, 
+            enum: ['male', 'female', 'undefind'], default : 'undefind', message: 'Not valid gender option'},
+
+            born: {
+            type: Date,
+        default : null
+            },
 
            email: {
             type: String, 
         required: [ true, 'Email is Required!'], 
           unique: true,
        minLength: [ 6, 'Email min length 6 characters!'],
-        validate: { validator: emailValidator.validate, message: 'Email is not valid!' }
-    },
+        validate: { validator: emailValidator.validate, message: 'Email is not valid!' }},
 
         password: { 
             type: String, 
        minLength: [4, 'Password min length 4!'] },
 
-            role: { 
-            type: String, 
-            enum: ['user', 'admin'], default : 'user',  message: 'Not valid role'},
-
         dialCode: { 
             type: String, 
          require: [true, 'Countrie code is required'] },
            phone: { type: String, 
-        required: [ true, 'Phone number is required'] }
+        required: [ true, 'Phone number is required'] },
+
+           posts: [{
+            type: mongoose.Types.ObjectId,
+             ref: 'Post'
+           }]
 });
 
 uModel.virtual('repeatPass')
@@ -62,6 +78,8 @@ uModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( n
 
       const data = this.getUpdate();
       
+      if(data.password){
+ 
       if(data.password !== data.repeatPass){
 
         this.invalidate('repeatPass', 'Passwords not match!');
@@ -75,7 +93,8 @@ uModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( n
             
             next();
         });
-        
+    }  
+    next();    
 });
 
 uModel.index({ email: 1 }, { collation: { locale: 'en', strength: 2 } });

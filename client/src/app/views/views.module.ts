@@ -8,6 +8,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
+import { NgOptimizedImage } from '@angular/common';
 
 
 
@@ -20,7 +21,8 @@ import { PostsModule } from './posts/posts.module';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    PostsModule
+    PostsModule,
+    NgOptimizedImage
   ],
 })
 export class ViewsModule { }

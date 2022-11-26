@@ -16,8 +16,8 @@ export class AuthService {
  
   constructor(private http: HttpClient) { }
 
-  signUpService(formData: NgForm): Observable<User> {
-    return this.http.post<User>(this.userPathString, formData);
+  signUpService(formData: NgForm): Observable<IToken> {
+    return this.http.post<IToken>(this.userPathString, formData);
   }
 
   signInService(formData: IUserLogIn): Observable<IToken> {
@@ -29,11 +29,10 @@ export class AuthService {
   }
 
   getUserService(): Observable<User>{
-    return this.http.get<User>(this.userPathString);
-   
+    return this.http.get<User>(this.userPathString); 
   }
 
-  updateUserService(formData:NgForm): Observable<User> {
-    return this.http.put<User>(this.userPathString, formData);
+  updateUserService(form: NgForm): Observable<User> {
+    return this.http.put<User>(this.userPathString, form);
   }
 }

@@ -1,8 +1,14 @@
+import { IPosts } from "./postsModel";
+
 export interface User{
-    accessToken(accessToken: any): unknown;
-    _id: string;
-    name: string;
+      _id: string;
+     role: string;
+   avatar: string;
+     name: string;
+   gender: string;
+     born: Date;
     email: string;
-    dialCode: string;
+ dialCode: string;
     phone: string;
+    posts: Array<IPosts>;
 }

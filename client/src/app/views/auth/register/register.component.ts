@@ -32,13 +32,16 @@ export class RegisterComponent implements OnInit {
   signUp() {
 
     if (this.form.valid) {
-
+       
       this.service.signUpService(this.form.value)
       .pipe(take(1))
       .subscribe(user => {
+        console.log(user);
+        
         this.tokenService.setToken(user.accessToken);
+        this.toastr.success('Successfully register.', 'Hello ' + this.form.value.name);
         this.router.navigate(['']);
-        this.toastr.success('Successfully register.', 'Hello ' + user.name);
+        return;
       }, error => {
         this.toastr.error( error.message, 'ERROR');
       });

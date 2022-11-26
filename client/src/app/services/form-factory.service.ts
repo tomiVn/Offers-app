@@ -3,8 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { EMAIL_REGEX, NOT_VALID_CHARACTERS } from 'src/app/utils/const';
 import { isPasswordsMatch } from '../utils/matchPasswords';
 import { countryCodeValidator } from '../utils/validateCountryCode';
-import { fileSizeValidator } from '../utils/validateFileSize';
-import { fileTypeValidator } from '../utils/validateFileType';
+import { fileSizeValidator, fileTypeValidator } from '../utils/imageValidation';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +34,8 @@ repeatPassValidation = ['', [ Validators.required ]];
 
       dateValidation = ['', [ ]];
 
+    genderValidation = ['', []];
+
        imgValidation = ['', [ fileSizeValidator(), fileTypeValidator() ]];
 
      titleValidation = ['', [ Validators.required,
@@ -56,6 +57,15 @@ descriptionValidation = ['',[ Validators.pattern(NOT_VALID_CHARACTERS) ]];
     },
     {
       validators: isPasswordsMatch('password', 'repeatPass')
+    });
+  }
+
+  getUpdateUserForm() {
+    return this.fb.group({      
+      name: this.nameValidation,
+      gender: this.genderValidation,
+      dialCode: this.dialCodeValidation,
+      phone: this.phoneValidation,
     });
   }
 

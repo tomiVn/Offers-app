@@ -11,8 +11,7 @@ import { take } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   template: ``,
-  styles: [
-  ]
+  styles: []
 })
 export class LogoutComponent implements OnInit {
 
@@ -27,7 +26,8 @@ export class LogoutComponent implements OnInit {
   }
 
   actionLogOut() {
-
+     console.log('123');
+     
     this.service.signOutService()
       .pipe(take(1))
       .subscribe((res) => {

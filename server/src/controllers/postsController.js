@@ -3,10 +3,13 @@ const { guestOnly, userOnly } = require('../middlewear/guards');
 const cloudinary = require("../config/cloudinary-configuration");
 const multer = require("../config/multer-configuration");
 const { parseErrors } = require('../utils/parseErrors');
+const { trimForm } = require('../utils/trimForm');
+const { POSTS_PATH } = require('../config/constants');
+const { createPost } = require('../services/postService');
 
 const uploadFile = multer.single('file');
 
-router.post('/posts', userOnly, async (req, res) => {
+router.post( POSTS_PATH, userOnly, trimForm, async (req, res) => {
 
     uploadFile(req, res, async (error) => {
 
@@ -17,7 +20,15 @@ router.post('/posts', userOnly, async (req, res) => {
 
         try {
 
-            const upload = await cloudinary.uploader.upload(req.file.path, { folder: 'assets' });
+            const upload = await cloudinary.uploader.upload(req.file.path, { folder: req.user.id });
+            
+            await createPost({
+                  title: req.body.title, 
+                  image: upload.url,
+            description: req.body.description,
+                creator: req.user.id,
+            });
+
             return res.status(201).json({ message: 'Successfully created' });
 
         } catch (err) {

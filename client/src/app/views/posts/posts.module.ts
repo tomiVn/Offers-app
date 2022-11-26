@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { MatButtonModule } from '@angular/material/button';
+import { NgOptimizedImage } from '@angular/common';
 
 
 
@@ -17,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     ReactiveFormsModule,
     LayoutModule,
-    MatButtonModule
+    MatButtonModule,
+    NgOptimizedImage
   ]
 })
 export class PostsModule { }

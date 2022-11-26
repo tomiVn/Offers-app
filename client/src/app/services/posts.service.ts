@@ -16,8 +16,10 @@ export class PostsService {
   createPost(form: any): Observable<FormData>{
 
     const formData = new FormData();
+    
     formData.append('title', form.title);
     formData.append('file', form.file, form.file.name);
+    formData.append('description', form.description);
       
     return this.http.post<FormData>(this.postsPathString, formData);
   }

@@ -17,8 +17,8 @@ exports.loginService = async ( data ) => {
     throw { message: 'Invalid @email or password!' }
 };
 
-exports.getUser = ( userId ) => User.findById( userId ).select( ['_id', 'name', 'email', 'dialCode', 'phone', 'updatedAt'] );
-
+exports.getUser = ( userId ) => User.findById( userId )
+.select( ['_id', 'avatar', 'name', 'gender', 'born', 'email', 'dialCode', 'phone', 'updatedAt', 'posts'] );
 
 exports.createToken = ( id, name, role ) => {
 
@@ -29,4 +29,7 @@ exports.createToken = ( id, name, role ) => {
     return jwt.sign(PAYLOAD, process.env.SECRET_KEY, TOKEN_EXP);
 } 
 
-exports.updateProfile = ( userId, data ) => { return User.findByIdAndUpdate( userId , data , { runValidators: true }) };
+exports.updateProfile = async ( userId, data ) => { 
+    return await User.findByIdAndUpdate( userId , data, { runValidators: true }) 
+};
+

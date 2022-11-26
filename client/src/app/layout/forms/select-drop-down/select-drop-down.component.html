@@ -1,0 +1,11 @@
+<ng-container [formGroup] ="selectDropDown">
+  <mat-form-field appearance="fill"  class="example-full-width">
+    <mat-label>Select</mat-label>
+    <mat-select formControlName="{{name}}">
+      <mat-option *ngFor="let element of elements" [value]="element.value">
+        {{element.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+

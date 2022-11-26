@@ -27,8 +27,8 @@
         </mat-icon>
       </a>
     <mat-menu #menu="matMenu">
-      <a  mat-menu-item routerLink="/auth/profile" >
-        Edit Profile
+      <a  mat-menu-item routerLink='/auth/{{userId}}/profile' >
+        Profile
       </a>
       <a  mat-menu-item routerLink="/posts" >
         Create Post
