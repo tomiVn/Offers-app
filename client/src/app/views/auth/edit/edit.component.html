@@ -3,30 +3,38 @@
         <!-- else loading" -->
         <form [formGroup]="form" class="example-form" (ngSubmit)="updateProfile()">
 
-            <app-input-name 
-                [inputName]="form" 
-                [nameValue]="user.name">
-            </app-input-name>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="nameModel.elementName"
+             [inputLabel]="nameModel.elementLabel"
+             [inputValue]="user.name"
+            [inputErrors]="nameModel.errors">
+        </app-input-element>
 
-            <app-select-drop-down 
-                [selectDropDown]="form" 
-                [elements]="genderValues"
-                [name]="name">
-            </app-select-drop-down>
+        <app-select-drop-down 
+            [selectDropDown]="form" 
+            [elements]="genderValues"
+            [name]="name">
+        </app-select-drop-down>
 
-            <app-input-country-code [inputCountryCode]="form" 
-                [countryCodeValue]="user.dialCode">
-            </app-input-country-code>
+        <app-input-country-code [inputCountryCode]="form" 
+            [countryCodeValue]="user.dialCode">
+        </app-input-country-code>
 
-            <app-input-phone [inputPhone]="form" 
-                [phoneValue]="user.phone">
-            </app-input-phone>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="phoneModel.elementName"
+             [inputLabel]="phoneModel.elementLabel"
+              [inputType]="phoneModel.elementType"
+              [inputValue]="user.phone"
+            [inputErrors]="phoneModel.errors">
+        </app-input-element>
 
-            <mat-card-actions class="form-input-container">
-                <button mat-raised-button color="primary" [disabled]="form.invalid">
-                    Submit
-                </button>
-            </mat-card-actions>
+        <mat-card-actions class="form-input-container">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">
+                Submit
+            </button>
+        </mat-card-actions>
 
         </form>
         <ng-template #loading>

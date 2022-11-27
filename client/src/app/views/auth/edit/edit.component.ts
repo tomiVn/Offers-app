@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
+import { nameModel, phoneModel } from 'src/app/models/formElemetsModel';
 import { User } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
@@ -15,6 +16,10 @@ import { FormFactoryService } from 'src/app/services/form-factory.service';
 export class EditComponent implements OnInit {
 
   form: FormGroup;
+  
+  nameModel = nameModel();
+  phoneModel = phoneModel();
+  
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
   genderValues = [

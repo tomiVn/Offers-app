@@ -22,15 +22,15 @@ export class FormFactoryService {
                               Validators.minLength(4),
                               Validators.pattern(NOT_VALID_CHARACTERS)]];
 
-repeatPassValidation = ['', [ Validators.required ]];
+repeatPassValidation = ['', []];
       
   dialCodeValidation = ['', [ Validators.required, 
                               countryCodeValidator ]];
 
      phoneValidation = ['', [ Validators.required,
-                              Validators.pattern("^[0-9]*$"),
                               Validators.minLength(6),
-                              Validators.maxLength(12) ]];
+                              Validators.maxLength(12),
+                              Validators.pattern("^[0-9]*$") ]];
 
       dateValidation = ['', [ ]];
 

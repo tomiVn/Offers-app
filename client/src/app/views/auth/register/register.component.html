@@ -1,20 +1,53 @@
+
 <mat-card class="card-decoration">
     <div >
         <h3>Register form!</h3>
 
         <form [formGroup]="form" (ngSubmit)="signUp()">
 
-            <app-input-name [inputName]="form"></app-input-name>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="nameModel.elementName"
+             [inputLabel]="nameModel.elementLabel"
+            [inputErrors]="nameModel.errors">
+        </app-input-element>
 
-            <app-input-email [inputEmail]="form"></app-input-email>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="emailModel.elementName"
+             [inputLabel]="emailModel.elementLabel"
+              [inputType]="emailModel.elementType"
+            [inputErrors]="emailModel.errors">
+        </app-input-element>
 
-            <app-input-password [inputPassword]="form"></app-input-password>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="passwordModel.elementName"
+             [inputLabel]="passwordModel.elementLabel"
+              [inputType]="passwordModel.elementType"
+            [inputErrors]="passwordModel.errors">
+        </app-input-element>
 
-            <app-input-repeat-password [inputReapeatPassword]="form"></app-input-repeat-password>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="repeatPasswordModel.elementName"
+             [inputLabel]="repeatPasswordModel.elementLabel"
+              [inputType]="repeatPasswordModel.elementType"
+            [inputErrors]="repeatPasswordModel.errors">
+        </app-input-element>
 
-            <app-input-country-code [inputCountryCode]="form"></app-input-country-code>    
+        <app-input-country-code 
+            [inputCountryCode]="form">
+        </app-input-country-code> 
 
-            <app-input-phone [inputPhone]="form"></app-input-phone>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="phoneModel.elementName"
+             [inputLabel]="phoneModel.elementLabel"
+              [inputType]="phoneModel.elementType"
+            [inputErrors]="phoneModel.errors">
+        </app-input-element>
+            
 
             <mat-card-actions id="button-container">
                 <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>

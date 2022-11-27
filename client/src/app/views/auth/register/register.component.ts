@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { take } from 'rxjs';
+import { passwordModel, emailModel, repeatPasswordModel, nameModel, phoneModel } from 'src/app/models/formElemetsModel';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,11 @@ import { take } from 'rxjs';
 export class RegisterComponent implements OnInit {
 
   form!: FormGroup;
+   nameModel = nameModel();
+   emailModel =    emailModel();
+   passwordModel = passwordModel();
+   repeatPasswordModel = repeatPasswordModel();
+   phoneModel = phoneModel();
 
   constructor(
     private service: AuthService,
@@ -22,7 +28,6 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private formService: FormFactoryService) {
-
     this.form = this.formService.getRegisterForm();
 
   }

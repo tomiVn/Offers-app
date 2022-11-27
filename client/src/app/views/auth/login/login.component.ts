@@ -3,9 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { emailModel, passwordModel } from 'src/app/models/formElemetsModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { TokenService } from 'src/app/services/token.service';
+import { emailPattern, minLength, requiredField, specialCharactersPattern } from 'src/app/utils/errorsMessages';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ import { TokenService } from 'src/app/services/token.service';
 export class LoginComponent {
 
   form!: FormGroup;
- 
+  emailModel = emailModel();
+  passwordModel = passwordModel();
+
   constructor( private service: AuthService,
                private tokenService: TokenService,
                private router: Router,

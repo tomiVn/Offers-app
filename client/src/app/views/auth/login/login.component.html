@@ -6,10 +6,22 @@
     <h3>LogIn form!</h3>
 
     <form [formGroup]="form" class="example-form" (ngSubmit)="signIn()">
+        
+        <app-input-element
+            [contextName]="form"
+              [inputName]="emailModel.elementName"
+             [inputLabel]="emailModel.elementLabel"
+              [inputType]="emailModel.elementType"
+            [inputErrors]="emailModel.errors">
+        </app-input-element>
 
-        <app-input-email [inputEmail]="form"></app-input-email>
-
-        <app-input-password [inputPassword]="form"></app-input-password>
+        <app-input-element
+            [contextName]="form"
+              [inputName]="passwordModel.elementName"
+             [inputLabel]="passwordModel.elementLabel"
+              [inputType]="passwordModel.elementType"
+            [inputErrors]="passwordModel.errors">
+        </app-input-element>
         
         <mat-card-actions class="form-input-container">
             <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>

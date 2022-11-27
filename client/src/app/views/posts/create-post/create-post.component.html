@@ -7,7 +7,13 @@
           enctype="multipart/form-data" 
           method="POST">
 
-    <app-input-title [inputTitle]="form"></app-input-title>
+    <app-input-element 
+        [contextName] ="form"
+        [inputName]   ="title"
+        [inputLabel]  ="titleLabel"
+        [inputErrors] ="titleErrors">
+    </app-input-element>
+
     <app-image-upload [uploadImage]="form"></app-image-upload>
     <app-description [txtArea]="form"></app-description>
 

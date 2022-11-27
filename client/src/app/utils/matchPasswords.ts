@@ -7,12 +7,12 @@ export function isPasswordsMatch(password: string, repeatPass: string) {
       let pass   = formgroup.controls[ password ];
       let repass = formgroup.controls[ repeatPass ];
 
-      if ( repass.errors && !repass.errors[ 'isPasswordsMatch' ] ) {
+      if ( repass.errors && !repass.errors[ 'isPasswordsNotMatch' ] ) {
         return;
       }
-
+       
        return pass.value !== repass.value 
-                ? repass.setErrors({ isPasswordsMatch: false }) 
+                ? repass.setErrors({ 'isPasswordsNotMatch': true }) 
                 : repass.setErrors( null );
     }
   }
