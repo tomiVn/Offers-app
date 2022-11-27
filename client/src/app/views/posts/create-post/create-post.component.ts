@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { take } from 'rxjs';
+import { titleModel } from 'src/app/models/formElemetsModel';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { minLength, requiredField } from 'src/app/utils/errorsMessages';
@@ -14,9 +15,7 @@ export class CreatePostComponent implements OnInit {
   
   form!: FormGroup;
   
-  title = 'title';
-  titleLabel= 'Title';
-  titleErrors = [ requiredField('Title'), minLength(3) ];
+  titleModel = titleModel;
 
   
   constructor( private createFormService: FormFactoryService,

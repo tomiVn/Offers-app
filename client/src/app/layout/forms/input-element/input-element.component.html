@@ -1,21 +1,21 @@
 <ng-container [formGroup]="contextName">
 
     <mat-form-field  class="example-full-width" appearance="fill">
-        <mat-label> {{inputLabel}} </mat-label>
-        <input #input type="{{inputType}}" matInput placeholder="{{inputLabel}}" 
-        formControlName="{{inputName}}"/>
+        <mat-label> {{inputModel.elementLabel}} </mat-label>
+        <input #input type="{{inputModel.elementType}}" matInput placeholder="{{inputModel.elementLabel}}" 
+        formControlName="{{inputModel.elementName}}"/>
         <mat-hint align="end">
-            Characters {{input.value.length || 0}}
+            Min length {{inputModel.minimalLength}} characters {{input.value.length || 0}}
         </mat-hint>
     </mat-form-field>
    
     <mat-error 
       class="example-full-width" 
-      *ngIf="contextName.get(inputName)?.errors 
-      && contextName.get(inputName)?.touched">
+      *ngIf="contextName.get(inputModel.elementName)?.errors 
+      && contextName.get(inputModel.elementName)?.touched">
 
         <ng-container *ngFor="let error of inputErrors">
-          <mat-error *ngIf="contextName.get(inputName)?.errors?.[error.name]">
+          <mat-error *ngIf="contextName.get(inputModel.elementName)?.errors?.[error.name]">
             <strong>{{error.message}}</strong>
           </mat-error>
         </ng-container>

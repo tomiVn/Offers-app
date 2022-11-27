@@ -17,8 +17,8 @@ import { emailPattern, minLength, requiredField, specialCharactersPattern } from
 export class LoginComponent {
 
   form!: FormGroup;
-  emailModel = emailModel();
-  passwordModel = passwordModel();
+  emailModel = emailModel;
+  passwordModel = passwordModel;
 
   constructor( private service: AuthService,
                private tokenService: TokenService,

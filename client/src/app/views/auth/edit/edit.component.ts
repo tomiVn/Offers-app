@@ -17,8 +17,8 @@ export class EditComponent implements OnInit {
 
   form: FormGroup;
   
-  nameModel = nameModel();
-  phoneModel = phoneModel();
+  nameModel = nameModel;
+  phoneModel = phoneModel;
   
   isData: boolean = false;
   responseData$: Observable<User> | undefined;

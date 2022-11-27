@@ -9,17 +9,13 @@
         
         <app-input-element
             [contextName]="form"
-              [inputName]="emailModel.elementName"
-             [inputLabel]="emailModel.elementLabel"
-              [inputType]="emailModel.elementType"
+             [inputModel]="emailModel"
             [inputErrors]="emailModel.errors">
         </app-input-element>
 
         <app-input-element
             [contextName]="form"
-              [inputName]="passwordModel.elementName"
-             [inputLabel]="passwordModel.elementLabel"
-              [inputType]="passwordModel.elementType"
+             [inputModel]="passwordModel"
             [inputErrors]="passwordModel.errors">
         </app-input-element>
         

@@ -16,11 +16,11 @@ import { passwordModel, emailModel, repeatPasswordModel, nameModel, phoneModel }
 export class RegisterComponent implements OnInit {
 
   form!: FormGroup;
-   nameModel = nameModel();
-   emailModel =    emailModel();
-   passwordModel = passwordModel();
-   repeatPasswordModel = repeatPasswordModel();
-   phoneModel = phoneModel();
+             nameModel = nameModel;
+            emailModel = emailModel;
+         passwordModel = passwordModel;
+   repeatPasswordModel = repeatPasswordModel;
+            phoneModel = phoneModel;
 
   constructor(
     private service: AuthService,

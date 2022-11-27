@@ -5,28 +5,26 @@
 
         <app-input-element
             [contextName]="form"
-              [inputName]="nameModel.elementName"
-             [inputLabel]="nameModel.elementLabel"
+             [inputModel]="nameModel"
              [inputValue]="user.name"
             [inputErrors]="nameModel.errors">
         </app-input-element>
 
         <app-select-drop-down 
-            [selectDropDown]="form" 
-            [elements]="genderValues"
-            [name]="name">
+         [selectDropDown]="form" 
+               [elements]="genderValues"
+                   [name]="name">
         </app-select-drop-down>
 
-        <app-input-country-code [inputCountryCode]="form" 
-            [countryCodeValue]="user.dialCode">
+        <app-input-country-code 
+       [inputCountryCode]="form" 
+       [countryCodeValue]="user.dialCode">
         </app-input-country-code>
 
         <app-input-element
             [contextName]="form"
-              [inputName]="phoneModel.elementName"
-             [inputLabel]="phoneModel.elementLabel"
-              [inputType]="phoneModel.elementType"
-              [inputValue]="user.phone"
+             [inputModel]="phoneModel"
+             [inputValue]="user.phone"
             [inputErrors]="phoneModel.errors">
         </app-input-element>
 

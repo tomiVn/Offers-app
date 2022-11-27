@@ -9,9 +9,8 @@
 
     <app-input-element 
         [contextName] ="form"
-        [inputName]   ="title"
-        [inputLabel]  ="titleLabel"
-        [inputErrors] ="titleErrors">
+        [inputModel]="titleModel"
+        [inputErrors] ="titleModel.errors">
     </app-input-element>
 
     <app-image-upload [uploadImage]="form"></app-image-upload>

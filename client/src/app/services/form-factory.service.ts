@@ -1,92 +1,56 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { EMAIL_REGEX, NOT_VALID_CHARACTERS } from 'src/app/utils/const';
+import { FormBuilder } from '@angular/forms';
 import { isPasswordsMatch } from '../utils/matchPasswords';
-import { countryCodeValidator } from '../utils/validateCountryCode';
-import { fileSizeValidator, fileTypeValidator } from '../utils/imageValidation';
+import { emailModel, nameModel, passwordModel, repeatPasswordModel, phoneModel, dialCodeModel, genderModel, dateModel, titleModel, imageModel, descriptionModel } from '../models/formElemetsModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormFactoryService {
 
-      nameValidation = ['', [ Validators.required, 
-                              Validators.minLength(3),
-                              Validators.pattern(NOT_VALID_CHARACTERS)]];
-
-     emailValidation = ['', [ Validators.required,
-                              Validators.minLength(6),
-                              Validators.pattern(EMAIL_REGEX) ]];
-
-  passwordValidation = ['', [ Validators.required,
-                              Validators.minLength(4),
-                              Validators.pattern(NOT_VALID_CHARACTERS)]];
-
-repeatPassValidation = ['', []];
-      
-  dialCodeValidation = ['', [ Validators.required, 
-                              countryCodeValidator ]];
-
-     phoneValidation = ['', [ Validators.required,
-                              Validators.minLength(6),
-                              Validators.maxLength(12),
-                              Validators.pattern("^[0-9]*$") ]];
-
-      dateValidation = ['', [ ]];
-
-    genderValidation = ['', []];
-
-       imgValidation = ['', [ fileSizeValidator(), fileTypeValidator() ]];
-
-     titleValidation = ['', [ Validators.required,
-                              Validators.minLength(3),
-                              Validators.pattern(NOT_VALID_CHARACTERS) ]];
-
-descriptionValidation = ['',[ Validators.pattern(NOT_VALID_CHARACTERS) ]];
-
   constructor(private fb: FormBuilder) { }
 
   getRegisterForm() {
     return this.fb.group({      
-      name: this.nameValidation,                                        
-      email: this.emailValidation,
-      password: this.passwordValidation,
-      repeatPass: this.repeatPassValidation,
-      dialCode: this.dialCodeValidation,
-      phone: this.phoneValidation,
+         name: nameModel.validation,                                        
+        email: emailModel.validation,
+     password: passwordModel.validation,
+   repeatPass: repeatPasswordModel.validation,
+     dialCode: dialCodeModel.validation,
+        phone: phoneModel.validation,
     },
     {
-      validators: isPasswordsMatch('password', 'repeatPass')
+   validators: isPasswordsMatch('password', 'repeatPass')
     });
   }
 
   getUpdateUserForm() {
     return this.fb.group({      
-      name: this.nameValidation,
-      gender: this.genderValidation,
-      dialCode: this.dialCodeValidation,
-      phone: this.phoneValidation,
+         name: nameModel.validation,
+       gender: genderModel.validation,
+     dialCode: dialCodeModel.validation,
+        phone: phoneModel.validation
     });
   }
 
   getLogIn(){
     return this.fb.group({
-      email: this.emailValidation,
-      password: this.passwordValidation,
+        email: emailModel.validation,
+     password: passwordModel.validation
     });
   }
 
   getDateArange(){
     return this.fb.group({
-      firstDay: this.dateValidation
+     firstDay: dateModel.validation
     });
   }
 
   createPost(){
     return this.fb.group({
-      title: this.titleValidation,
-      file: this.imgValidation,
-      description: this.descriptionValidation
+        title: titleModel.validation,
+         file: imageModel.validation,
+  description: descriptionModel.validation
     });
   }
 
