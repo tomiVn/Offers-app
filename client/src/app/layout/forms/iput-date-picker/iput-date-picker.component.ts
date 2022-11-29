@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   template: `
   <ng-container [formGroup]="context">
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>{{model.label}}</mat-label>
+      <mat-label>{{model.elementLabel}}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="{{model.elementName}}">
       <mat-hint align="end">MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -31,7 +31,7 @@ export class IputDatePickerComponent implements OnInit {
 
   @Input() context!: FormGroup;
   @Input() model: any;
-  @Input() value: any;
+  @Input() value: Date | undefined;
 
   constructor() {}
 

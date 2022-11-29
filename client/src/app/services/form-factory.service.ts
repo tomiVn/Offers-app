@@ -73,7 +73,7 @@ export class FormFactoryService {
   getDateArange(){
     return{
       form: this.fb.group({
-        firstDay: DateModel.validation
+        date: DateModel.validation
       }),
       DateModel
     } 
