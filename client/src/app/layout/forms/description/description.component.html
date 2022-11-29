@@ -1,17 +1,25 @@
-<ng-container [formGroup]="txtArea">
+<ng-container [formGroup]="context">
     <mat-form-field  class="example-full-width">
+        <mat-label> {{model.elementLabel}} </mat-label>
         <textarea 
             matInput
-            formControlName="description" 
+            #txtArea
+            formControlName="{{model.elementName}}" 
             class="example-full-width">
-        </textarea>      
+        </textarea> 
+        <mat-hint align="end">
+            Min length {{model.minimalLength}} characters {{txtArea.value.length || 0}}
+        </mat-hint>     
     </mat-form-field>
-   
-    <mat-error class="example-full-width" *ngIf="txtArea.get('description')?.errors 
-            && txtArea.get('description')?.touched">
-        <mat-error *ngIf="txtArea.get('description')?.errors?.['pattern']">
-            Special characters <strong>{{symbols}} are not allowed!</strong>
-        </mat-error>   
+
+    <mat-error 
+      class="example-full-width" 
+      *ngIf="context.get(model.elementName)?.errors 
+             && context.get(model.elementName)?.touched">
+        <ng-container *ngFor="let error of model.errors">
+          <mat-error *ngIf="context.get(model.elementName)?.errors?.[error.name]">
+            <strong>{{error.message}}</strong>
+          </mat-error>
+        </ng-container>
     </mat-error>
-   
   </ng-container>

@@ -15,6 +15,9 @@ const routes: Routes = [
 {
   path: 'auth',     loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
 },
+{
+  path: 'user',     loadChildren: () => import('./views/user/user-routing.module').then(u => u.UserRoutingModule )
+},
 { path: 'posts', component: CreatePostComponent}
 ];
 

@@ -20,7 +20,7 @@ const uModel = new Schema({
 
           gender: { 
             type: String, 
-            enum: ['male', 'female', 'undefind'], default : 'undefind', message: 'Not valid gender option'},
+            enum: ['male', 'female', 'undefined'], default : 'undefined', message: 'Not valid gender option'},
 
             born: {
             type: Date,

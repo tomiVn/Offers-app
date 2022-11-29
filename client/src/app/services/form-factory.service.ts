@@ -1,7 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { isPasswordsMatch } from '../utils/matchPasswords';
-import { emailModel, nameModel, passwordModel, repeatPasswordModel, phoneModel, dialCodeModel, genderModel, dateModel, titleModel, imageModel, descriptionModel } from '../models/formElemetsModel';
+import { BornModel } from '../models/formElementsModels.ts/bornModel';
+import { DateModel } from '../models/formElementsModels.ts/dateModel';
+import { DescriptionModel } from '../models/formElementsModels.ts/descriptionModel';
+import { DialCodeModel } from '../models/formElementsModels.ts/dialCountryCodeModel';
+import { EmailModel } from '../models/formElementsModels.ts/emailModel';
+import { GenderModel } from '../models/formElementsModels.ts/genderModel';
+import { ImageModel } from '../models/formElementsModels.ts/imageModel';
+import { NameModel } from '../models/formElementsModels.ts/nameModel';
+import { PasswordModel, RepeatPasswordModel } from '../models/formElementsModels.ts/passwordModel';
+import { PhoneModel } from '../models/formElementsModels.ts/phoneModel';
+import { TitleModel } from '../models/formElementsModels.ts/titleModel';
+
+import { isPasswordsMatch } from '../utils/validations/matchPasswords';
 
 @Injectable({
   providedIn: 'root'
@@ -11,47 +22,74 @@ export class FormFactoryService {
   constructor(private fb: FormBuilder) { }
 
   getRegisterForm() {
-    return this.fb.group({      
-         name: nameModel.validation,                                        
-        email: emailModel.validation,
-     password: passwordModel.validation,
-   repeatPass: repeatPasswordModel.validation,
-     dialCode: dialCodeModel.validation,
-        phone: phoneModel.validation,
-    },
-    {
-   validators: isPasswordsMatch('password', 'repeatPass')
-    });
+    return{
+      form: this.fb.group({      
+        name: NameModel.validation,                                        
+        email: EmailModel.validation,
+        password: PasswordModel.validation,
+        repeatPass: RepeatPasswordModel.validation,
+        dialCode: DialCodeModel.validation,
+        phone: PhoneModel.validation,
+        },
+        { validators: isPasswordsMatch('password', 'repeatPass')
+      }),
+      NameModel,
+      EmailModel,
+      PasswordModel,
+      RepeatPasswordModel,
+      DialCodeModel,
+      PhoneModel
+    } 
   }
 
   getUpdateUserForm() {
-    return this.fb.group({      
-         name: nameModel.validation,
-       gender: genderModel.validation,
-     dialCode: dialCodeModel.validation,
-        phone: phoneModel.validation
-    });
+    return{
+      form: this.fb.group({      
+        name:     NameModel.validation,
+        gender:   GenderModel.validation,
+        born:     BornModel.validation,
+        dialCode: DialCodeModel.validation,
+        phone:    PhoneModel.validation
+      }),
+      NameModel,
+      GenderModel,
+      BornModel,
+      DialCodeModel,
+      PhoneModel
+    } 
   }
 
   getLogIn(){
-    return this.fb.group({
-        email: emailModel.validation,
-     password: passwordModel.validation
-    });
+    return{
+      form: this.fb.group({
+        email:    EmailModel.validation,
+        password: PasswordModel.validation
+      }),
+      EmailModel,
+      PasswordModel
+    } 
   }
 
   getDateArange(){
-    return this.fb.group({
-     firstDay: dateModel.validation
-    });
+    return{
+      form: this.fb.group({
+        firstDay: DateModel.validation
+      }),
+      DateModel
+    } 
   }
 
   createPost(){
-    return this.fb.group({
-        title: titleModel.validation,
-         file: imageModel.validation,
-  description: descriptionModel.validation
-    });
+    return{
+      form: this.fb.group({
+        title:       TitleModel.validation,
+        file:        ImageModel.validation,
+        description: DescriptionModel.validation
+      }),
+      TitleModel,
+      ImageModel,
+      DescriptionModel 
+    } 
   }
 
 }

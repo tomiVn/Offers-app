@@ -9,6 +9,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import { NgOptimizedImage } from '@angular/common';
+import { UserModule } from './user/user.module';
 
 
 
@@ -22,7 +23,8 @@ import { NgOptimizedImage } from '@angular/common';
     AppRoutingModule,
     AuthModule,
     PostsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    UserModule
   ],
 })
 export class ViewsModule { }

@@ -15,11 +15,14 @@ export class SelectDropDownComponent implements OnInit {
 
   constructor() { }
 
-  @Input() selectDropDown!: FormGroup;
-  @Input() elements!: IElents[];
-  @Input() name!: string;
+  @Input() context!: FormGroup;
+  @Input() model: any;
+  @Input() value: string | undefined;
 
   ngOnInit(): void {
+    if (this.value !== undefined) {
+      this.context.controls[this.model.elementName].setValue(this.value);
+    }
   }
 
 }

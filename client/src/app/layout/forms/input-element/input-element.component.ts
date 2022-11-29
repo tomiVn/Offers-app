@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IErrors } from 'src/app/models/formErrorModel';
-import { IInputElement } from 'src/app/models/inputElementModel';
+import { IErrors } from 'src/app/models/interfaces/formErrorModel';
+import { IInputElement } from 'src/app/models/interfaces/inputElementModel';
 
 @Component({
   selector: 'app-input-element',
@@ -10,22 +10,19 @@ import { IInputElement } from 'src/app/models/inputElementModel';
 })
 export class InputElementComponent implements OnInit {
 
-  @Input() contextName!: FormGroup;
-  @Input() inputModel!:  IInputElement;
-  @Input() inputValue:   string | undefined;
-  @Input() inputErrors:  IErrors[] | undefined;
-
-  
+  @Input() context!:     FormGroup;
+  @Input() model:   any;
+  @Input() value:   string | undefined;
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.inputValue !== undefined) {
-      this.contextName.controls[this.inputModel.elementName].setValue(this.inputValue);
+    if (this.value !== undefined) {
+      this.context.controls[this.model.elementName].setValue(this.value);
     }
 
-    if(this.inputModel.elementType == undefined){
-      this.inputModel.elementType = 'text';
+    if(this.model.elementType == undefined){
+      this.model.elementType = 'text';
     }
   }
 }

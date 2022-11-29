@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ImageUploadComponent {
 
-  @Input() uploadImage!: FormGroup;
+  @Input() context!: FormGroup;
   image = '';
 
   constructor() { }
@@ -25,7 +25,7 @@ export class ImageUploadComponent {
       this.image = reader.result as string;
     }
 
-    return this.uploadImage.controls['file'].setValue(file);
+    return this.context.controls['file'].setValue(file);
   }
 
 }

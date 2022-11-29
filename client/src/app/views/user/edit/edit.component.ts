@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
-import { nameModel, phoneModel } from 'src/app/models/formElemetsModel';
-import { User } from 'src/app/models/userModel';
+import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
+import { User } from 'src/app/models/interfaces/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 
@@ -17,24 +17,29 @@ export class EditComponent implements OnInit {
 
   form: FormGroup;
   
-  nameModel = nameModel;
-  phoneModel = phoneModel;
+  nameModel:        IFormModel;
+  genderModel:      IFormModel;
+  bornModel:        IFormModel;
+  countryCodeModel: IFormModel;
+  phoneModel:       IFormModel;
+ 
   
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
-  genderValues = [
-    {value: 'male', viewValue: 'Male'},
-    {value: 'female', viewValue: 'Female'}
-  ]
-
-  name = 'gender'
   
-  constructor( private service: AuthService,
-               private router: Router,
-               private toastr: ToastrService,
-               private formService: FormFactoryService) {  
+  constructor( 
+    private service: AuthService,              
+    private router: Router,
+    private toastr: ToastrService,
+    private formService: FormFactoryService) {  
 
-    this.form = this.formService.getUpdateUserForm();  
+    let formServiceData = this.formService.getUpdateUserForm();
+    this.form = formServiceData.form;
+    this.nameModel = formServiceData.NameModel;
+    this.genderModel = formServiceData.GenderModel; 
+    this.bornModel = formServiceData.BornModel;
+    this.countryCodeModel = formServiceData.DialCodeModel;
+    this.phoneModel = formServiceData.PhoneModel;  
   }
   
   ngOnInit(): void {
@@ -53,7 +58,7 @@ export class EditComponent implements OnInit {
         
         this.toastr.success('You successfully updated your profile!', user.name);
         
-        this.router.navigate(['/auth/' + user._id + '/profile']);
+        this.router.navigate(['/user/' + user._id + '/profile']);
       }, 
       (error: any) => {
         this.toastr.error( error.message, 'ERROR' );

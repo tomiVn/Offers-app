@@ -1,0 +1,25 @@
+<ng-container [formGroup]="context">
+    
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{model.elementLabel}}</mat-label>
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="{{model.elementName}}"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
+                {{option.name}} ({{option.value}})
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-error 
+      class="example-full-width" 
+      *ngIf="context.get(model.elementName)?.errors 
+             && context.get(model.elementName)?.touched">
+        <ng-container *ngFor="let error of model.errors">
+          <mat-error *ngIf="context.get(model.elementName)?.errors?.[error.name]">
+            <strong>{{error.message}}</strong>
+          </mat-error>
+        </ng-container>
+    </mat-error>
+
+</ng-container>

@@ -8,19 +8,20 @@
     <form [formGroup]="form" class="example-form" (ngSubmit)="signIn()">
         
         <app-input-element
-            [contextName]="form"
-             [inputModel]="emailModel"
-            [inputErrors]="emailModel.errors">
+                [context]="form"
+                  [model]="emailModel">
         </app-input-element>
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="passwordModel"
-            [inputErrors]="passwordModel.errors">
+                [context]="form"
+                  [model]="passwordModel">
         </app-input-element>
         
         <mat-card-actions class="form-input-container">
-            <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
+            <button mat-raised-button 
+                color="primary" 
+                [disabled]="form.invalid">Submit
+            </button>
         </mat-card-actions>
 
     </form>

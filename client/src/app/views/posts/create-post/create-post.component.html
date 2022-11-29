@@ -8,16 +8,24 @@
           method="POST">
 
     <app-input-element 
-        [contextName] ="form"
-        [inputModel]="titleModel"
-        [inputErrors] ="titleModel.errors">
+        [context] ="form"
+           [model]="titleModel">
     </app-input-element>
 
-    <app-image-upload [uploadImage]="form"></app-image-upload>
-    <app-description [txtArea]="form"></app-description>
+    <app-image-upload 
+        [context]="form">
+    </app-image-upload>
+    <app-description 
+        [context]="form"
+          [model]="descriptionModel">
+    </app-description>
 
     <mat-card-actions id="button-container">
-        <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
+        <button mat-raised-button 
+            color="primary" 
+            [disabled]="form.invalid">
+            Submit
+        </button>
     </mat-card-actions>
     </form>
 </mat-card>

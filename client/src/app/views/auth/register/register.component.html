@@ -6,42 +6,41 @@
         <form [formGroup]="form" (ngSubmit)="signUp()">
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="nameModel"
-            [inputErrors]="nameModel.errors">
+               [context]="form"
+                 [model]="nameModel">
         </app-input-element>
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="emailModel"
-            [inputErrors]="emailModel.errors">
+               [context]="form"
+                 [model]="emailModel">
         </app-input-element>
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="passwordModel"
-            [inputErrors]="passwordModel.errors">
+              [context]="form"
+                [model]="passwordModel">
         </app-input-element>
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="repeatPasswordModel"
-            [inputErrors]="repeatPasswordModel.errors">
+              [context]="form"
+                [model]="repeatPasswordModel">
         </app-input-element>
 
-        <app-input-country-code 
-            [inputCountryCode]="form">
-        </app-input-country-code> 
+        <app-autocomplete
+            [context]="form"
+            [model]="dialCodeModel">
+        </app-autocomplete> 
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="phoneModel"
-            [inputErrors]="phoneModel.errors">
+            [context]="form"
+              [model]="phoneModel">
         </app-input-element>
             
 
             <mat-card-actions id="button-container">
-                <button mat-raised-button color="primary" [disabled]="form.invalid">Submit</button>
+                <button mat-raised-button color="primary" 
+                    [disabled]="form.invalid">
+                    Submit
+                </button>
             </mat-card-actions>
 
         </form>

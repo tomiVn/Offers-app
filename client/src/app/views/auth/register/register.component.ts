@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 import { take } from 'rxjs';
-import { passwordModel, emailModel, repeatPasswordModel, nameModel, phoneModel } from 'src/app/models/formElemetsModel';
+import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +16,12 @@ import { passwordModel, emailModel, repeatPasswordModel, nameModel, phoneModel }
 export class RegisterComponent implements OnInit {
 
   form!: FormGroup;
-             nameModel = nameModel;
-            emailModel = emailModel;
-         passwordModel = passwordModel;
-   repeatPasswordModel = repeatPasswordModel;
-            phoneModel = phoneModel;
+  nameModel:           IFormModel;
+  emailModel:          IFormModel;
+  passwordModel:       IFormModel;
+  repeatPasswordModel: IFormModel;
+  dialCodeModel:       IFormModel;
+  phoneModel:          IFormModel;
 
   constructor(
     private service: AuthService,
@@ -28,8 +29,15 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private formService: FormFactoryService) {
-    this.form = this.formService.getRegisterForm();
 
+    let formServiceData = this.formService.getRegisterForm();
+    this.form = formServiceData.form;
+    this.nameModel = formServiceData.NameModel;
+    this.emailModel = formServiceData.EmailModel;
+    this.passwordModel = formServiceData.PasswordModel;
+    this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
+    this.dialCodeModel = formServiceData.DialCodeModel;
+    this.phoneModel = formServiceData.RepeatPasswordModel;
   }
 
   ngOnInit(): void { }

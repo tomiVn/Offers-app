@@ -4,28 +4,33 @@
         <form [formGroup]="form" class="example-form" (ngSubmit)="updateProfile()">
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="nameModel"
-             [inputValue]="user.name"
-            [inputErrors]="nameModel.errors">
+                [context]="form"
+                  [model]="nameModel"
+                  [value]="user.name">
         </app-input-element>
 
         <app-select-drop-down 
-         [selectDropDown]="form" 
-               [elements]="genderValues"
-                   [name]="name">
+                [context]="form" 
+                  [model]="genderModel"
+                  [value]="user.gender">
         </app-select-drop-down>
 
-        <app-input-country-code 
-       [inputCountryCode]="form" 
-       [countryCodeValue]="user.dialCode">
-        </app-input-country-code>
+        <app-iput-date-picker 
+               [context]="form"
+                 [model]="bornModel"
+                 [value]="user.born">
+        </app-iput-date-picker>
+
+        <app-autocomplete 
+              [context]="form" 
+                [model]="countryCodeModel"
+                [value]="user.dialCode">
+        </app-autocomplete>
 
         <app-input-element
-            [contextName]="form"
-             [inputModel]="phoneModel"
-             [inputValue]="user.phone"
-            [inputErrors]="phoneModel.errors">
+                [context]="form"
+                  [model]="phoneModel"
+                  [value]="user.phone">
         </app-input-element>
 
         <mat-card-actions class="form-input-container">

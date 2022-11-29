@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { CommonModule } from '@angular/common';
-import { InputCountryCodeComponent } from './input-country-code/input-country-code.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 
 import { MaterialsModule } from 'src/app/materials/materials.module';
@@ -11,18 +10,19 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { DescriptionComponent } from './description/description.component';
 import { SelectDropDownComponent } from './select-drop-down/select-drop-down.component';
 import { InputElementComponent } from './input-element/input-element.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 const formElements = [ 
-                       InputCountryCodeComponent,
                        IputDatePickerComponent,
                        ImageUploadComponent,
                        DescriptionComponent,
                        SelectDropDownComponent,
-                       InputElementComponent
+                       InputElementComponent, 
+                       AutocompleteComponent
                       ]
 
 @NgModule({
-  declarations: [ formElements ],
+  declarations: [ formElements],
 
     imports: [ CommonModule,
                AppRoutingModule,

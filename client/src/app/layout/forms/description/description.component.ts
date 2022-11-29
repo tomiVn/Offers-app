@@ -8,7 +8,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class DescriptionComponent implements OnInit {
 
-  @Input() txtArea!: FormGroup;
+  @Input() context!: FormGroup;
+  @Input()    model: any;
+  @Input()    value: any;
   symbols: string = '< >';
   constructor() { }
   

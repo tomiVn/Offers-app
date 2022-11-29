@@ -39,7 +39,12 @@
           <table>
             <tr>
               <td>
-                <app-iput-date-picker [inputDate]="formOffers"></app-iput-date-picker>
+                <div class="date-picker">
+                  <app-iput-date-picker 
+                    [context]="formOffers"
+                    [model]="offersModel">
+                  </app-iput-date-picker>
+                </div>               
               </td>
               <td>
                 <button mat-raised-button color="primary">Submit</button>

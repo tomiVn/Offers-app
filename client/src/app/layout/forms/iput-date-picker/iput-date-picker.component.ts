@@ -4,29 +4,41 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-iput-date-picker',
   template: `
-  <ng-container [formGroup]="inputDate">
+  <ng-container [formGroup]="context">
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+      <mat-label>{{model.label}}</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="{{model.elementName}}">
       <mat-hint align="end">MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <mat-error 
+      class="example-full-width" 
+      *ngIf="context.get(model.elementName)?.errors 
+      && context.get(model.elementName)?.touched">
+
+        <ng-container *ngFor="let error of model.errors">
+          <mat-error *ngIf="context.get(model.elementName)?.errors?.[error.name]">
+            <strong>{{error.message}}</strong>
+          </mat-error>
+        </ng-container>
+
+    </mat-error>
   </ng-container>`,
-  styles: ['.example-full-width{display:block; max-width: 200px; background-color: #FFFFFF;}', 'matInput{background-color: #FFFFFF;}']
+  styles: ['.example-full-width{ width: 100%; background-color: #FFFFFF;}', 'matInput{background-color: #FFFFFF;}']
 })
 export class IputDatePickerComponent implements OnInit {
 
-  @Input() inputDate!: FormGroup;
-  minDate: Date;
-  maxDate: Date;
+  @Input() context!: FormGroup;
+  @Input() model: any;
+  @Input() value: any;
 
-  constructor() {
-    const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 22, 11, 1);
-    this.maxDate = new Date(currentYear + 1, 4, 11);
+  constructor() {}
+
+  ngOnInit(): void {
+    if (this.value !== undefined) {
+      this.context.controls[this.model.elementName].setValue(this.value);
+    }
    }
-
-  ngOnInit(): void { }
 
 }

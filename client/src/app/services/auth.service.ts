@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IToken } from '../models/tokenModel';
-import { IUserLogIn } from '../models/userLogin';
-import { User } from '../models/userModel';
+import { IToken } from '../models/interfaces/tokenModel';
+import { IUserLogIn } from '../models/interfaces/userLogin';
+import { User } from '../models/interfaces/userModel';
 
 @Injectable({
   providedIn: 'root'

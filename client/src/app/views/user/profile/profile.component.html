@@ -1,0 +1,52 @@
+<mat-card class="card-decoration">
+
+    <div *ngIf="(responseData$ | async) as user; else loading">
+
+        <mat-card-header class="header">
+            <figure class="image-container">
+                <img ngSrc="{{user.avatar || 
+                    'https://res.cloudinary.com/duyubdgsj/image/upload/v1669413105/assets/DSC_08681_owbgde.png'}}"
+                    width="120" height="120" id="avatar">
+
+                <div class="row">
+                    <div class="column">
+                        <button mat-button class="menu-button" routerLink="/user/{{user._id}}/edit">
+                            Edit
+                            <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                                edit
+                            </mat-icon>
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button mat-button class="menu-button" routerLink="/user/{{user._id}}/edit">
+                            upload
+                            <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                                upload
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </figure>
+            <div>
+                <h1>{{user.name}}</h1>
+            </div>
+        </mat-card-header>
+
+        <mat-card-content>
+            <section class="profile-details">
+                <h3>Basic information:</h3>
+                <p>gender: {{user.gender}}</p>
+                <p>born: {{user.born | date}}</p>
+                <p>email: {{user.email}}</p>
+                <p>phone: {{user.dialCode}} {{user.phone}}</p>
+            </section>
+            <section class="profile-details">
+                <h3>posts: {{user.posts.length || 'Not posts yet!'}}</h3>
+            </section>
+        </mat-card-content>
+    </div>
+
+    <ng-template #loading>
+        <h3>Loading...</h3>
+    </ng-template>
+</mat-card>

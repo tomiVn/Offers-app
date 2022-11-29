@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
-import { User } from 'src/app/models/userModel';
+import { User } from 'src/app/models/interfaces/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormFactoryService } from 'src/app/services/form-factory.service';
 
@@ -22,8 +22,8 @@ export class ProfileComponent implements OnInit {
                private router: Router,
                private toastr: ToastrService,
                private formService: FormFactoryService) {  
-
-    this.form = this.formService.getRegisterForm();  
+    let formServiceData = this.formService.getRegisterForm();
+    this.form = formServiceData.form;  
   }
   
   ngOnInit(): void {
