@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { IErrors } from 'src/app/models/interfaces/formErrorModel';
 import { IInputElement } from 'src/app/models/interfaces/inputElementModel';
 
@@ -10,8 +11,8 @@ import { IInputElement } from 'src/app/models/interfaces/inputElementModel';
 })
 export class InputElementComponent implements OnInit {
 
-  @Input() context!:     FormGroup;
-  @Input() model:   any;
+  @Input() context!:  FormGroup;
+  @Input() model!:   IFormModel;
   @Input() value:   string | undefined;
 
   constructor() { }

@@ -16,9 +16,10 @@ export class ImageUploadComponent {
   upload($event: any) {
 
     const reader = new FileReader();
-
+    
+    
     const file: File = $event.target.files[0];
-
+     
     reader.readAsDataURL(file);
 
     reader.onload = () => {

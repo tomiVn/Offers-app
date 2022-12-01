@@ -77,6 +77,31 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
         }
     })
 
+    .put( AUTH_PATH + '/avatar', userOnly, trimForm, async(req, res) => {
+
+        uploadFile(req, res, async (error) => {
+
+            if (error) {
+                
+                return res.status(400).json({ message: error.message });
+            }
+    
+            try {
+                let userId = req?.user?.id;
+
+                const upload = await cloudinary.uploader.upload(req.file.path, { folder: req.user.id });
+                                            
+                let user = await updateProfile(userId, {avatar: upload.url});
+    
+                return res.status(201).json({ message: 'Successfully created' });
+    
+            } catch (err) {
+                const errors = parseErrors(err);
+                return res.status(400).json({ message: errors });
+            }
+        })
+    })
+
     .get( AUTH_PATH + '/logout', userOnly, async (req, res) => {
 
         try {

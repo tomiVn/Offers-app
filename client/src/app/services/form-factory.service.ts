@@ -7,6 +7,7 @@ import { DialCodeModel } from '../models/formElementsModels.ts/dialCountryCodeMo
 import { EmailModel } from '../models/formElementsModels.ts/emailModel';
 import { GenderModel } from '../models/formElementsModels.ts/genderModel';
 import { ImageModel } from '../models/formElementsModels.ts/imageModel';
+import { ImgModel } from '../models/formElementsModels.ts/imgModel';
 import { NameModel } from '../models/formElementsModels.ts/nameModel';
 import { PasswordModel, RepeatPasswordModel } from '../models/formElementsModels.ts/passwordModel';
 import { PhoneModel } from '../models/formElementsModels.ts/phoneModel';
@@ -90,6 +91,15 @@ export class FormFactoryService {
       ImageModel,
       DescriptionModel 
     } 
+  }
+
+  updateProfileImage(){
+    return{
+      form: this.fb.group({
+        image: ImgModel.validation
+      }),
+      ImgModel
+    }
   }
 
 }

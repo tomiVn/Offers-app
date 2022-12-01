@@ -1,3 +1,4 @@
+<!-- {{ form.valid | json}} -->
 <mat-card class="card-decoration">
 
     <div *ngIf="(responseData$ | async) as user; else loading">
@@ -6,7 +7,10 @@
             <figure class="image-container">
                 <img ngSrc="{{user.avatar || 
                     'https://res.cloudinary.com/duyubdgsj/image/upload/v1669413105/assets/DSC_08681_owbgde.png'}}"
-                    width="120" height="120" id="avatar">
+                    width="120" height="120" id="avatar" *ngIf="uploadVisibility; else uploadImageView">
+                <ng-template #uploadImageView>
+                    <img [src]="uploadImage" width="120" height="120" id="avatar" />
+                </ng-template>
 
                 <div class="row">
                     <div class="column">
@@ -18,12 +22,36 @@
                         </button>
                     </div>
                     <div class="column">
-                        <button mat-button class="menu-button" routerLink="/user/{{user._id}}/edit">
-                            upload
-                            <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
-                                upload
-                            </mat-icon>
-                        </button>
+                        <form [formGroup]="form" 
+                              class="example-form" 
+                              (ngSubmit)="updateProfile()">
+                            <ng-container *ngIf="uploadVisibility; else updateButton">
+                            <app-img-upload
+                                [context]="form"
+                                [model]="imgModel"
+                                (image)="onImageSelected($event)">                              
+                            </app-img-upload>
+                                <button mat-button class="menu-button" (click)="upload()">
+                                    upload
+                                    <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                                        upload
+                                    </mat-icon>
+                                </button>
+                            </ng-container>
+                            <ng-template #updateButton>
+                                <button mat-button class="menu-button green">
+                                    update
+                                    <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                                        update
+                                    </mat-icon>
+                                </button>
+                                <button mat-button class="menu-button red" (click)="cancel()">
+                                    <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+                                        cancel
+                                    </mat-icon>
+                                </button>
+                            </ng-template>
+                        </form>
                     </div>
                 </div>
             </figure>

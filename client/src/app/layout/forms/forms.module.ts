@@ -11,6 +11,7 @@ import { DescriptionComponent } from './description/description.component';
 import { SelectDropDownComponent } from './select-drop-down/select-drop-down.component';
 import { InputElementComponent } from './input-element/input-element.component';
 import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { ImgUploadComponent } from './img-upload/img-upload.component';
 
 const formElements = [ 
                        IputDatePickerComponent,
@@ -18,11 +19,12 @@ const formElements = [
                        DescriptionComponent,
                        SelectDropDownComponent,
                        InputElementComponent, 
-                       AutocompleteComponent
+                       AutocompleteComponent,
+                       ImgUploadComponent
                       ]
 
 @NgModule({
-  declarations: [ formElements],
+  declarations: [ formElements ],
 
     imports: [ CommonModule,
                AppRoutingModule,

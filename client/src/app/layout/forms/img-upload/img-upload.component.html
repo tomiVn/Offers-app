@@ -1,0 +1,30 @@
+
+<ng-container [formGroup]="context"> 
+  <mat-form-field>
+    
+    <input 
+      hidden 
+      matInput 
+      id="file-input" 
+      formControlName="{{model.elementName}}" 
+      accept="{{model.values}}" >
+  
+      <input 
+        hidden
+        id="upload"
+        type="file"        
+        accept="{{model.values}}"
+        (change)="upload($event)" > 
+
+    </mat-form-field>          
+    <mat-error 
+      class="example-full-width" 
+      *ngIf="context.get(model.elementName)?.errors">
+        <ng-container *ngFor="let error of model.errors">
+          <mat-error *ngIf="context.get(model.elementName)?.errors?.[error.name]">
+            <strong>{{error.message}}</strong>
+          </mat-error>
+        </ng-container>
+
+    </mat-error>
+  </ng-container>

@@ -12,8 +12,7 @@ export const DialCodeModel = {
      validation: ['', [ Validators.required, countryCodeValidator ]],
          errors: [ requiredField('Country code'), dialCodeError()] 
   }
-
-
+  
   export function countryCodeValidator(control: AbstractControl) {
     
     let value = control.value;

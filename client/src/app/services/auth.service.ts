@@ -35,4 +35,13 @@ export class AuthService {
   updateUserService(form: NgForm): Observable<User> {
     return this.http.put<User>(this.userPathString, form);
   }
+
+  updateUserAvatar(form: any): Observable<User>{
+    let formData = new FormData();
+    console.log(form.image.name);
+    
+    formData.append('file', form.image, form.image.name);
+    return this.http.put<User>(this.userPathString + '/avatar', formData);
+  }
+  
 }
