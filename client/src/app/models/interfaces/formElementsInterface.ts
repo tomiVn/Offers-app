@@ -3,7 +3,7 @@ export interface IFormModel{
    elementLabel:  string,
     elementType:  string,
   minimalLength:  number,
-         values:  any,
+           data:  any,
      validation:  any,
          errors:  any
 }

@@ -29,4 +29,13 @@ export class TokenService {
     return JSON.parse(atob(payload));
   }
 
+  currentUser(){
+    let token = this.cookie.get(COOKIE_NAME);
+    if(token){
+      let payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    }
+    return null;
+  }
+
 }

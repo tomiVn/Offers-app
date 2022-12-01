@@ -12,16 +12,14 @@ import { TokenService } from 'src/app/services/token.service';
 export class HeaderComponent implements OnInit, DoCheck {
 
   @Input() sideNav!: MatSidenav;
-
+  userId: string | undefined;
   isUser: boolean = false;
 
-  userName!: string;
-  userId = '';
-
-  constructor( private service: TokenService, 
-               private observer: BreakpointObserver, 
-               private cdr: ChangeDetectorRef, 
-               private router: Router) { }
+  constructor( 
+    private service: TokenService,                
+    private observer: BreakpointObserver, 
+    private cdr: ChangeDetectorRef, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
@@ -36,21 +34,22 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     
-    let token = this.service.getToken();
+    let payload = this.service.currentUser();
 
-    if (token) {
+    if (payload) {
 
-      let decodeTokent = this.service.decodeToken(token);
+        let userName = payload?.name;
+        this.userId = payload?.id;
 
-      if (decodeTokent.name && decodeTokent.exp * 1000 > new Date().getTime()) {
-        this.isUser = true;
-        this.userName = decodeTokent.name;
-        this.userId = decodeTokent.id;
+      if (userName && this.userId && payload.exp * 1000 > new Date().getTime()) {
+
+        this.isUser = true;       
         return;
       }
     }
 
     this.isUser = false;
+    return;
   }
 
   sideNavInit(){

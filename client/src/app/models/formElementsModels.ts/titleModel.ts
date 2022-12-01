@@ -7,7 +7,7 @@ export const TitleModel = {
    elementLabel: 'Title',
     elementType: 'string', 
   minimalLength:  3,
-         values: '', 
+           data: '', 
      validation:  ['', [ 
                     Validators.required,
                     Validators.minLength(3),

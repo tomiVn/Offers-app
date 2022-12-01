@@ -33,7 +33,7 @@ export class EditComponent implements OnInit {
     private toastr: ToastrService,
     private formService: FormFactoryService) {  
 
-    let formServiceData = this.formService.getUpdateUserForm();
+    let formServiceData = this.formService.getUserForm();
     this.form = formServiceData.form;
     this.nameModel = formServiceData.NameModel;
     this.genderModel = formServiceData.GenderModel; 

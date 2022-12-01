@@ -44,7 +44,7 @@ export class LoginComponent {
         let user = this.tokenService.decodeToken(token);
         this.tokenService.setToken(token);
         this.form.reset();
-        this.router.navigate(['']);
+        this.router.navigate(['/user/' + user.id + '/profile']);
 
         this.toastr.success('Successfully logged in', 'Hello ' + user.name);
 

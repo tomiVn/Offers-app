@@ -32,7 +32,7 @@ export class AutocompleteComponent implements OnInit {
 
     const filterValue = value.toLowerCase();
 
-    return this.model.values.filter((c: IAutoComplete) => c.name.toLowerCase().includes(filterValue));
+    return this.model.data.filter((c: IAutoComplete) => c.name.toLowerCase().includes(filterValue));
   }
 }
 

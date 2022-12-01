@@ -7,7 +7,7 @@ export const DescriptionModel = {
    elementLabel: 'Description',
     elementType: '',
   minimalLength:  0,
-         values: '', 
+           data: '', 
      validation: ['',[ Validators.pattern(NOT_VALID_CHARACTERS) ]],
          errors: [specialCharactersPattern('< >')]
  }

@@ -10,11 +10,12 @@ import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import { NgOptimizedImage } from '@angular/common';
 import { UserModule } from './user/user.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
 @NgModule({
-  declarations: [ HomeComponent, ContactsComponent, AboutusComponent ],
+  declarations: [ HomeComponent, ContactsComponent, AboutusComponent, NotFoundComponent ],
 
   imports: [
     CommonModule,

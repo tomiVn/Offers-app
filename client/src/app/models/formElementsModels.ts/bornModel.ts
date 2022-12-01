@@ -5,7 +5,7 @@ export const BornModel = {
    elementLabel: 'Born date',
     elementType: '',
   minimalLength:  0, 
-         values: null,
+           data: null,
      validation: ['', [bornValidationDate ]],
          errors: [errorBornDate(), errorLimitBornDate()] 
 }

@@ -29,21 +29,17 @@ export class FormFactoryService {
         email: EmailModel.validation,
         password: PasswordModel.validation,
         repeatPass: RepeatPasswordModel.validation,
-        dialCode: DialCodeModel.validation,
-        phone: PhoneModel.validation,
         },
         { validators: isPasswordsMatch('password', 'repeatPass')
       }),
       NameModel,
       EmailModel,
       PasswordModel,
-      RepeatPasswordModel,
-      DialCodeModel,
-      PhoneModel
+      RepeatPasswordModel
     } 
   }
 
-  getUpdateUserForm() {
+  getUserForm() {
     return{
       form: this.fb.group({      
         name:     NameModel.validation,

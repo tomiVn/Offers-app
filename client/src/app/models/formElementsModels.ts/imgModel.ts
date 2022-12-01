@@ -5,7 +5,7 @@ export const ImgModel = {
     elementLabel: 'Image',
     elementType:  '',
     minimalLength: 0,
-    values:       '.jpeg,.jpg,.png',
+    data:       '.jpeg,.jpg,.png',
     validation:   ['', [fileTypeValidator(), fileSizeValidator()]],
     errors:       [fileTypeError(), fileSizeError()]
 }

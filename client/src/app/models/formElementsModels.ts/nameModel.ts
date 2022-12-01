@@ -8,7 +8,7 @@ export const NameModel = {
    elementLabel: 'Names',
     elementType: 'text',
   minimalLength:  3, 
-         values:  null,
+           data:  null,
      validation:  ['', [ 
                     Validators.required, 
                     Validators.minLength(3), 

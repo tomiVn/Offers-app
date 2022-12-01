@@ -3,7 +3,7 @@
     <mat-label>{{model.label}}</mat-label>
     <mat-select formControlName="{{model.elementName}}">
       <mat-option 
-          *ngFor="let element of model.values" 
+          *ngFor="let element of model.data" 
           [value]= "element.value"
           >
         {{element.viewValue}}

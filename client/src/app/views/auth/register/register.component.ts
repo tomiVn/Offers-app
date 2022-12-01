@@ -20,8 +20,6 @@ export class RegisterComponent implements OnInit {
   emailModel:          IFormModel;
   passwordModel:       IFormModel;
   repeatPasswordModel: IFormModel;
-  dialCodeModel:       IFormModel;
-  phoneModel:          IFormModel;
 
   constructor(
     private service: AuthService,
@@ -36,8 +34,6 @@ export class RegisterComponent implements OnInit {
     this.emailModel = formServiceData.EmailModel;
     this.passwordModel = formServiceData.PasswordModel;
     this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
-    this.dialCodeModel = formServiceData.DialCodeModel;
-    this.phoneModel = formServiceData.RepeatPasswordModel;
   }
 
   ngOnInit(): void { }
@@ -48,15 +44,19 @@ export class RegisterComponent implements OnInit {
        
       this.service.signUpService(this.form.value)
       .pipe(take(1))
-      .subscribe(user => {
-        console.log(user);
+      .subscribe(res => {
         
-        this.tokenService.setToken(user.accessToken);
-        this.toastr.success('Successfully register.', 'Hello ' + this.form.value.name);
-        this.router.navigate(['']);
+        let token = res.accessToken;
+        let user = this.tokenService.decodeToken(token);
+        this.tokenService.setToken(token);
+        console.log(res);
+        
+        this.toastr.success('Successfully register.', 'Hello ' + user.name);
+        this.router.navigate(['/user/' + user.id + '/profile']);
         return;
       }, error => {
         this.toastr.error( error.message, 'ERROR');
+        return;
       });
     }
   }

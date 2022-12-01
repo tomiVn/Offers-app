@@ -15,7 +15,8 @@ import { take } from 'rxjs';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private service: AuthService,
+  constructor(
+    private service: AuthService,
     private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService) { }
@@ -26,8 +27,7 @@ export class LogoutComponent implements OnInit {
   }
 
   actionLogOut() {
-     console.log('123');
-     
+
     this.service.signOutService()
       .pipe(take(1))
       .subscribe((res) => {

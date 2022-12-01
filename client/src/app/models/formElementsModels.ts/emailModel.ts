@@ -8,7 +8,7 @@ export const EmailModel = {
    elementLabel: '@Email',
     elementType: 'email',
   minimalLength:  6,
-         values: '', 
+           data: '', 
      validation:  ['', [ 
                     Validators.required, 
                     Validators.minLength(6),

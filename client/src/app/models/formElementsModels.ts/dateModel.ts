@@ -4,7 +4,7 @@ export const DateModel = {
    elementLabel: 'Date',
     elementType: '',
   minimalLength:  0, 
-         values: null,
+           data: null,
      validation: ['', []],
          errors: [] 
 }

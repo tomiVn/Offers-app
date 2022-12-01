@@ -5,7 +5,7 @@ export const GenderModel = {
     elementLabel: 'Gender',
     elementType:  '',
     minimalLength: 0,
-    values:       genderData(),
+    data:       genderData(),
     validation:   ['', [genderValidator]],
     errors:       [genderValidatorError()]
 }

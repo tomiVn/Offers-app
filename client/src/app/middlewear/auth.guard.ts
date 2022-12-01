@@ -9,9 +9,10 @@ import { TokenService } from '../services/token.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor( private router: Router, 
-               private tokenService: TokenService,
-               private toastr: ToastrService) { }
+  constructor( 
+    private router: Router, 
+    private tokenService: TokenService,
+    private toastr: ToastrService) { }
 
   canActivate() {
 
@@ -26,7 +27,7 @@ export class AuthGuard implements CanActivate {
            || !decodeTokenPayload.name ) {
 
         this.tokenService.deleteToken();
-        this.router.navigate(['login']);
+        this.router.navigate(['/auth/login']);
         this.toastr.info('You session expire.', 'Please login again!');
         return false;
       }
@@ -34,7 +35,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['login']);
+    this.router.navigate(['/auth/login']);
     return false;
   }
 }

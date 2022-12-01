@@ -39,10 +39,9 @@ const uModel = new Schema({
        minLength: [4, 'Password min length 4!'] },
 
         dialCode: { 
-            type: String, 
-         require: [true, 'Countrie code is required'] },
-           phone: { type: String, 
-        required: [ true, 'Phone number is required'] },
+            type: String, },
+
+           phone: { type: String },
 
            posts: [{
             type: mongoose.Types.ObjectId,

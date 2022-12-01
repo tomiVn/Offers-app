@@ -7,13 +7,13 @@
       matInput 
       id="file-input" 
       formControlName="{{model.elementName}}" 
-      accept="{{model.values}}" >
+      accept="{{model.data}}" >
   
       <input 
         hidden
         id="upload"
         type="file"        
-        accept="{{model.values}}"
+        accept="{{model.data}}"
         (change)="upload($event)" > 
 
     </mat-form-field>          

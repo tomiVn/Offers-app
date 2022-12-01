@@ -7,7 +7,7 @@ export const PhoneModel = {
    elementLabel: 'Phone',
     elementType: 'number', 
   minimalLength:  6,
-         values: '', 
+           data: '', 
      validation:  ['', [ 
                     Validators.required,
                     Validators.minLength(6),

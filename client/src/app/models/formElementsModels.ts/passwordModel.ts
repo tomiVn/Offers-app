@@ -8,7 +8,7 @@ export const PasswordModel = {
    elementLabel: 'Password',
     elementType: 'password',
   minimalLength:  4,
-         values: '', 
+           data: '', 
      validation: ['', [ 
                    Validators.required,
                    Validators.minLength(4),
@@ -24,7 +24,7 @@ export const PasswordModel = {
  elementLabel: 'Repeat password',
   elementType: 'password',
 minimalLength:  4,
-       values: '',
+         data: '',
    validation: ['', [
                   Validators.required,
                   Validators.minLength(4),]],

@@ -28,12 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {
-
           if (err.status == 401) {
-
+                       
             this.toastr.error(err.message, 'ERROR!');
             this.tokenService.deleteToken();
-            this.router.navigate(['login']);
+            this.router.navigate(['/auth/login']);
           }
         }
         return throwError(err);

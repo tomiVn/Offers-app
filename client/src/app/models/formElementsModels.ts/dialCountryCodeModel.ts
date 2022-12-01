@@ -7,8 +7,8 @@ export const DialCodeModel = {
     elementName:  'dialCode',
     elementLabel: 'Country code',
     elementType:  '',
-    minimalLength:  0,
-         values: countries,
+  minimalLength:  0,
+           data: countries,
      validation: ['', [ Validators.required, countryCodeValidator ]],
          errors: [ requiredField('Country code'), dialCodeError()] 
   }
