@@ -36,16 +36,10 @@ export class HeaderComponent implements OnInit, DoCheck {
     
     let payload = this.service.currentUser();
 
-    if (payload) {
-
-        let userName = payload?.name;
-        this.userId = payload?.id;
-
-      if (userName && this.userId && payload.exp * 1000 > new Date().getTime()) {
-
+    if ( payload ) {
+        this.userId = payload.id;
         this.isUser = true;       
-        return;
-      }
+        return;     
     }
 
     this.isUser = false;

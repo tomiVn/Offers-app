@@ -11,21 +11,22 @@ import { PostsModule } from './posts/posts.module';
 import { NgOptimizedImage } from '@angular/common';
 import { UserModule } from './user/user.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-
-
+import { OffersModule } from './offers/offers.module';
 
 @NgModule({
   declarations: [ HomeComponent, ContactsComponent, AboutusComponent, NotFoundComponent ],
 
   imports: [
     CommonModule,
+    AuthModule,
+    UserModule,
+    OffersModule,
+
     MatCardModule,
     BrowserModule,
     AppRoutingModule,
-    AuthModule,
     PostsModule,
-    NgOptimizedImage,
-    UserModule
+    NgOptimizedImage, 
   ],
 })
 export class ViewsModule { }

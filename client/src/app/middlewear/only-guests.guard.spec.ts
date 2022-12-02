@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GuestOnlyGuard } from './guest-only.guard';
+import { OnlyGuestsGuard } from './only-guests.guard';
 
-describe('GuestOnlyGuard', () => {
-  let guard: GuestOnlyGuard;
+describe('OnlyGuestsGuard', () => {
+  let guard: OnlyGuestsGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(GuestOnlyGuard);
+    guard = TestBed.inject(OnlyGuestsGuard);
   });
 
   it('should be created', () => {

@@ -21,14 +21,15 @@ export class AuthGuard implements CanActivate {
     if (token) {
 
       let decodeTokenPayload = this.tokenService.decodeToken(token);
-        
+      
       if ( !decodeTokenPayload.exp 
            || decodeTokenPayload.exp * 1000 < new Date().getTime()
            || !decodeTokenPayload.name ) {
-
+            
         this.tokenService.deleteToken();
-        this.router.navigate(['/auth/login']);
         this.toastr.info('You session expire.', 'Please login again!');
+        this.router.navigate(['/auth/login']);
+        
         return false;
       }
 

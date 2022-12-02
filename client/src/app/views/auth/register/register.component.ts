@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.less']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   form!: FormGroup;
   nameModel:           IFormModel;
@@ -36,8 +36,6 @@ export class RegisterComponent implements OnInit {
     this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
   }
 
-  ngOnInit(): void { }
-
   signUp() {
 
     if (this.form.valid) {
@@ -47,12 +45,10 @@ export class RegisterComponent implements OnInit {
       .subscribe(res => {
         
         let token = res.accessToken;
-        let user = this.tokenService.decodeToken(token);
-        this.tokenService.setToken(token);
-        console.log(res);
+        let user = this.tokenService.setToken(token);
         
-        this.toastr.success('Successfully register.', 'Hello ' + user.name);
-        this.router.navigate(['/user/' + user.id + '/profile']);
+        this.toastr.success('Successfully register.', 'Hello ' + user?.name);
+        this.router.navigate(['/user/' + user?.id + '/profile']);
         return;
       }, error => {
         this.toastr.error( error.message, 'ERROR');

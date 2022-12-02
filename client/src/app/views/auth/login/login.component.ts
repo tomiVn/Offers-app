@@ -31,7 +31,7 @@ export class LoginComponent {
     this.emailModel = formServiceData.EmailModel;
     this.passwordModel = formServiceData.PasswordModel;
   }
-
+  
   signIn() {
 
     if (this.form.valid) {
@@ -39,15 +39,11 @@ export class LoginComponent {
       this.service.signInService(this.form.value)
       .pipe(take(1))
       .subscribe(res => {
-        
-        let token = res.accessToken;
-        let user = this.tokenService.decodeToken(token);
-        this.tokenService.setToken(token);
         this.form.reset();
+        let token = res.accessToken;
+        let user = this.tokenService.setToken(token);
+        this.toastr.success('Successfully logged in', 'Hello ' + user?.name);
         this.router.navigate(['/user/' + user.id + '/profile']);
-
-        this.toastr.success('Successfully logged in', 'Hello ' + user.name);
-
       },  error => {
          error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));
          this.form.controls['password'].setValue(null);

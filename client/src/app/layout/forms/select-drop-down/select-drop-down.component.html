@@ -1,6 +1,6 @@
 <ng-container [formGroup] ="context">
   <mat-form-field appearance="fill"  class="example-full-width">
-    <mat-label>{{model.label}}</mat-label>
+    <mat-label>{{model.elementLabel}}</mat-label>
     <mat-select formControlName="{{model.elementName}}">
       <mat-option 
           *ngFor="let element of model.data" 
