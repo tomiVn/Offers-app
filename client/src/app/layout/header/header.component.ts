@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   @Input() sideNav!: MatSidenav;
   userId: string | undefined;
-  isUser: boolean = false;
+  isUser: boolean | undefined;
 
   constructor( 
     private service: TokenService,                
@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
-      this.sideNavInit();     
-    })
+      this.sideNavInit();  
+    });
   }
 
   ngAfterViewInit(): void {
@@ -40,10 +40,10 @@ export class HeaderComponent implements OnInit, DoCheck {
         this.userId = payload.id;
         this.isUser = true;       
         return;     
+    }else{
+      this.isUser = false;
+      return;
     }
-
-    this.isUser = false;
-    return;
   }
 
   sideNavInit(){

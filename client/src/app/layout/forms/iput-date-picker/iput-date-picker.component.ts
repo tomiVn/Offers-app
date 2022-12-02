@@ -25,7 +25,7 @@ import { FormGroup } from '@angular/forms';
 
     </mat-error>
   </ng-container>`,
-  styles: ['.example-full-width{ width: 100%; background-color: #FFFFFF;}', 'matInput{background-color: #FFFFFF;}']
+  styles: ['.example-full-width{ width: 100%; background-color: #FFFFFF;}']
 })
 export class IputDatePickerComponent implements OnInit {
 
