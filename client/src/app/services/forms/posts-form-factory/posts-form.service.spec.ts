@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { PostsFormService } from './posts-form.service';
 
-import { PostsService } from './posts.service';
 
-describe('PostsService', () => {
-  let service: PostsService;
+
+describe('PostsFormService', () => {
+  let service: PostsFormService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PostsService);
+    service = TestBed.inject(PostsFormService);
   });
 
   it('should be created', () => {

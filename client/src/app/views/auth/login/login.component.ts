@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
-import { TokenService } from 'src/app/services/token.service';
+import { AuthService } from 'src/app/services/api/auth/auth.service';
+import { AuthFormService } from 'src/app/services/forms/auth-form-factory/auth-form.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +20,11 @@ export class LoginComponent {
   passwordModel: IFormModel;
 
   constructor( 
-    private service: AuthService,
+    private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService,
-    private formService: FormFactoryService) {
+    private formService: AuthFormService) {
       
     let formServiceData = this.formService.getLogIn();
     this.form = formServiceData.form;
@@ -36,7 +36,7 @@ export class LoginComponent {
 
     if (this.form.valid) {
       
-      this.service.signInService(this.form.value)
+      this.authService.signIn(this.form.value)
       .pipe(take(1))
       .subscribe(res => {
         this.form.reset();

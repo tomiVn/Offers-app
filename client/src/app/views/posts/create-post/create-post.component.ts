@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
-import { PostsService } from 'src/app/services/posts.service';
+import { PostsFormService } from 'src/app/services/forms/posts-form-factory/posts-form.service';
 
 @Component({
   selector: 'app-create-post',
@@ -16,12 +14,12 @@ export class CreatePostComponent implements OnInit {
   titleModel:       IFormModel;
   descriptionModel: IFormModel;
 
-  constructor( private createFormService: FormFactoryService,
-               private postsService: PostsService) {
-    let formServiceData = this.createFormService.createPost();            
-    this.form = formServiceData.form;
-    this.titleModel = formServiceData.TitleModel;
-    this.descriptionModel = formServiceData.DescriptionModel;
+  constructor( 
+    private postFormFactory: PostsFormService) {
+      let formServiceData = this.postFormFactory.formCreatePost();            
+      this.form = formServiceData.form;
+      this.titleModel = formServiceData.TitleModel;
+      this.descriptionModel = formServiceData.DescriptionModel;
    }
 
   ngOnInit(): void {
@@ -29,10 +27,6 @@ export class CreatePostComponent implements OnInit {
 
   actionForm(){
    
-  //   this.postsService.createPost(this.form.value).pipe(
-  //   take(1))
-  //   .subscribe((res)=> console.log(res)
-  //   )
   }
 
 }

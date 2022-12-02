@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { User } from 'src/app/models/interfaces/userModel';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
+import { UserService } from 'src/app/services/api/user/user.service';
+import { UserFormService } from 'src/app/services/forms/user-form-factory/user-form.service';
 
 @Component({
   selector: 'app-edit',
@@ -28,12 +28,12 @@ export class EditComponent implements OnInit {
   responseData$: Observable<User> | undefined;
   
   constructor( 
-    private service: AuthService,              
+    private userService: UserService,              
     private router: Router,
     private toastr: ToastrService,
-    private formService: FormFactoryService) {  
+    private formFactoryService: UserFormService) {  
 
-    let formServiceData = this.formService.getUserForm();
+    let formServiceData = this.formFactoryService.formUserDetails();
     this.form = formServiceData.form;
     this.nameModel = formServiceData.NameModel;
     this.genderModel = formServiceData.GenderModel; 
@@ -44,7 +44,7 @@ export class EditComponent implements OnInit {
   
   ngOnInit(): void {
     
-    this.responseData$ = this.service.getUserService()
+    this.responseData$ = this.userService.getUserDetails()
     .pipe(delay(600),take(1)); 
   }
 
@@ -52,7 +52,7 @@ export class EditComponent implements OnInit {
     
     if (this.form.valid) {
       
-      this.service.updateUserService(this.form.value)
+      this.userService.updateUserDetails(this.form.value)
       .pipe(take(1))
       .subscribe(( user ) => {
         

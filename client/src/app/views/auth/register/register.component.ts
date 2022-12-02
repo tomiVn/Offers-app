@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
-import { TokenService } from 'src/app/services/token.service';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
+import { TokenService } from 'src/app/services/token/token.service';
 import { take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
+import { AuthFormService } from 'src/app/services/forms/auth-form-factory/auth-form.service';
+import { AuthService } from 'src/app/services/api/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -22,11 +22,11 @@ export class RegisterComponent {
   repeatPasswordModel: IFormModel;
 
   constructor(
-    private service: AuthService,
+    private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService,
-    private formService: FormFactoryService) {
+    private formService: AuthFormService) {
 
     let formServiceData = this.formService.getRegisterForm();
     this.form = formServiceData.form;
@@ -40,7 +40,7 @@ export class RegisterComponent {
 
     if (this.form.valid) {
        
-      this.service.signUpService(this.form.value)
+      this.authService.signUp(this.form.value)
       .pipe(take(1))
       .subscribe(res => {
         

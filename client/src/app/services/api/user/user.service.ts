@@ -2,37 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/models/interfaces/userModel';
 import { environment } from 'src/environments/environment';
-import { IToken } from '../models/interfaces/tokenModel';
-import { IUserLogIn } from '../models/interfaces/userLogin';
-import { User } from '../models/interfaces/userModel';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UserService {
 
   userPathString: string = environment.path + '/user';
  
   constructor(private http: HttpClient) { }
 
-  signUpService(formData: NgForm): Observable<IToken> {
-    return this.http.post<IToken>(this.userPathString, formData);
-  }
-
-  signInService(formData: IUserLogIn): Observable<IToken> {
-    return this.http.post<IToken>(this.userPathString + '/login', formData);
-  }
-
-  signOutService(): Observable<{name: string}>{
-    return this.http.get<{name: string}>(this.userPathString + '/logout');
-  }
-
-  getUserService(): Observable<User>{
+  getUserDetails(): Observable<User>{
     return this.http.get<User>(this.userPathString); 
   }
 
-  updateUserService(form: NgForm): Observable<User> {
+  updateUserDetails(form: NgForm): Observable<User> {
     return this.http.put<User>(this.userPathString, form);
   }
 

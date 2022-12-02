@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TokenService } from 'src/app/services/token.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { AuthService } from 'src/app/services/api/auth/auth.service';
 
 @Component({
   selector: 'app-logout',
@@ -16,7 +16,7 @@ import { take } from 'rxjs';
 export class LogoutComponent implements OnInit {
 
   constructor(
-    private service: AuthService,
+    private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService) { }
@@ -28,7 +28,7 @@ export class LogoutComponent implements OnInit {
 
   actionLogOut() {
 
-    this.service.signOutService()
+    this.authService.signOut()
       .pipe(take(1))
       .subscribe((res) => {
         if (!res.name) {

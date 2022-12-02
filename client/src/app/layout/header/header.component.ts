@@ -2,7 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { TokenService } from 'src/app/services/token.service';
+import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
   selector: 'app-header',
@@ -15,16 +15,17 @@ export class HeaderComponent implements OnInit, DoCheck {
   userId: string | undefined;
   isUser: boolean | undefined;
 
-  constructor( 
-    private service: TokenService,                
-    private observer: BreakpointObserver, 
-    private cdr: ChangeDetectorRef, 
+  constructor(
+    private service: TokenService,
+    private observer: BreakpointObserver,
+    private cdr: ChangeDetectorRef,
     private router: Router) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
-      this.sideNavInit();  
+      this.sideNavInit();
     });
+    this.ngDoCheck();
   }
 
   ngAfterViewInit(): void {
@@ -32,33 +33,32 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.sideNavInit();
   }
 
-  ngDoCheck(): void {
+  ngDoCheck() {
     
     let payload = this.service.currentUser();
-
-    if ( payload ) {
-        this.userId = payload.id;
-        this.isUser = true;       
-        return;     
-    }else{
+    if (payload) {
+      this.userId = payload.id;
+      this.isUser = true;
+      return;
+    } else {
       this.isUser = false;
       return;
     }
   }
 
-  sideNavInit(){
+  sideNavInit() {
     this.observer
-        .observe(['(max-width:787px)'])
-          .subscribe((res) => {
-            if(res?.matches){
-              this.sideNav.mode = 'over';
-              this.sideNav.close();
-            }else{
-                this.sideNav.mode = 'side';
-                this.sideNav.open();
-              }
-          });
-      this.cdr.detectChanges();
+      .observe(['(max-width:787px)'])
+      .subscribe((res) => {
+        if (res?.matches) {
+          this.sideNav.mode = 'over';
+          this.sideNav.close();
+        } else {
+          this.sideNav.mode = 'side';
+          this.sideNav.open();
+        }
+      });
+    this.cdr.detectChanges();
   }
 
 }

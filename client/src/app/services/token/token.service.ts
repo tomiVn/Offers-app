@@ -27,7 +27,7 @@ export class TokenService {
   }
 
   currentUser(){
-
+   
     let token = this.cookie.get(COOKIE_NAME);
     if(token){
       return getPayload(token);

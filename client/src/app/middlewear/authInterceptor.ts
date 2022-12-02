@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { catchError, Observable, throwError } from "rxjs";
-import { TokenService } from "../services/token.service";
+import { TokenService } from "../services/token/token.service";
 
 @Injectable({
   providedIn: 'root'

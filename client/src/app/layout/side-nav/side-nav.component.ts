@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
+import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -13,8 +13,8 @@ export class SideNavComponent implements OnInit {
   formOffers!: FormGroup;
   offersModel: IFormModel;
   curentDate = new Date();
-  constructor(private formService: FormFactoryService) {
-    let formServiceData = this.formService.getDateArange();
+  constructor(private offersFormFactory: OffersFormService) {
+    let formServiceData = this.offersFormFactory.getOffers();
     this.formOffers  = formServiceData.form;
     this.offersModel = formServiceData.DateModel;
    }

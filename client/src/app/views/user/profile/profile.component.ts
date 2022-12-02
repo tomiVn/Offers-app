@@ -5,8 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { User } from 'src/app/models/interfaces/userModel';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormFactoryService } from 'src/app/services/form-factory.service';
+import { AuthService } from 'src/app/services/api/auth/auth.service';
+import { UserService } from 'src/app/services/api/user/user.service';
+import { UserFormService } from 'src/app/services/forms/user-form-factory/user-form.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,27 +25,27 @@ export class ProfileComponent implements OnInit {
   fileInput: HTMLElement | undefined;
 
   constructor(
-    private service: AuthService,
+    private userService: UserService,
     private router: Router,
     private toastr: ToastrService,
-    private formService: FormFactoryService,
+    private formFactoryService: UserFormService,
     private ref: ElementRef) {
 
-    let formServiceData = this.formService.updateProfileImage();
+    let formServiceData = this.formFactoryService.formProfileImage();
     this.form = formServiceData.form;
     this.imgModel = formServiceData.ImgModel;
   }
 
   ngOnInit(): void {
 
-    this.responseData$ = this.service.getUserService()
+    this.responseData$ = this.userService.getUserDetails()
       .pipe(delay(600), take(1));
   }
 
   updateProfile() {
       
     if (this.form.valid && this.form.value) {
-      this.service.updateUserAvatar(this.form.value)
+      this.userService.updateUserAvatar(this.form.value)
       .pipe(take(1))
       .subscribe(() => {
         this.toastr.success('You successfully updated your profile!', 
