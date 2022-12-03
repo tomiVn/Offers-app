@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { User } from 'src/app/models/interfaces/userModel';
-import { AuthService } from 'src/app/services/api/auth/auth.service';
 import { UserService } from 'src/app/services/api/user/user.service';
 import { UserFormService } from 'src/app/services/forms/user-form-factory/user-form.service';
 
@@ -20,7 +19,7 @@ export class ProfileComponent implements OnInit {
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
   imgModel!: IFormModel;
-  uploadVisibility = true;
+  uploadVisibility: boolean = false;
   uploadImage: string | undefined;
   fileInput: HTMLElement | undefined;
 
@@ -51,9 +50,10 @@ export class ProfileComponent implements OnInit {
         this.toastr.success('You successfully updated your profile!', 
         this.form.get('name')?.value);
         this.router.navigate(['']);
+        return;
       }, 
       (error: any) => {
-        this.toastr.error( error.message, 'ERROR' );
+       return this.toastr.error( error.message, 'ERROR' );
       });     
     }else{
 
@@ -63,16 +63,21 @@ export class ProfileComponent implements OnInit {
 
   cancel() {
     this.uploadVisibility = !this.uploadVisibility;
+    return;
   }
 
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');
     filebutton.click(); 
     this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image in quadratic form!');
+    return;
   }
 
   onImageSelected(img: string){
-    this.uploadVisibility = !this.uploadVisibility; 
-    this.uploadImage = img;    
+    this.uploadVisibility = this.form.valid && this.form.controls[this.imgModel.elementName].value; 
+    if(this.uploadVisibility){
+      this.uploadImage = img;
+    }      
   }
 }
+

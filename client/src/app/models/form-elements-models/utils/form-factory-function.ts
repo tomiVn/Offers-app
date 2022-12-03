@@ -1,13 +1,13 @@
 
 export function FormFactoryFunction(
-    elementName: string, 
-    elementLabel: string, 
-    elementType: string,
+    elementName:   string, 
+    elementLabel:  string, 
+    elementType:   string,
     minimalLength: number,
-    data: any,
-    validation: any,
-    errors: any){ 
-    
+    data:          any,
+    validation:    any,
+    errors:        any
+    ){    
     return {
         elementName,
         elementLabel,
