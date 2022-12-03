@@ -23,8 +23,6 @@ export const PhoneModel = FormFactoryFunction
     ] 
   );
 
-
-
 export const DialCodeModel = FormFactoryFunction
   ('dialCode', 'Country code', '', 0, countries,    
     ['', 
@@ -38,7 +36,6 @@ export const DialCodeModel = FormFactoryFunction
       dialCodeError()
     ]
   )
-
 
 export function countryCodeValidator(control: AbstractControl) {
   

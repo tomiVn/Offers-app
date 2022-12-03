@@ -8,33 +8,50 @@
 
     <app-input-element 
         [context]="form"
-           [model]="titleModel">
+          [model]="titleModel">
     </app-input-element>
 
     <app-img-upload 
         [context]="form"
         [model]="imgModel"
         (image)="onImageSelected($event)">
-
     </app-img-upload>
-<ng-container *ngIf="uploadVisibility; else updateButton">
-    <button mat-button class="menu-button" (click)="upload()">
+    
+    <ng-container *ngIf="uploadVisibility; else updateButton">
+
+    <button mat-button 
+        class="menu-button" 
+        (click)="upload()">
         Upload image
-        <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+
+        <mat-icon 
+            class="example-icon" 
+            aria-label="Example icon-button with menu icon">
             upload
-        </mat-icon>
+        </mat-icon>       
     </button>
-</ng-container>
+
+    </ng-container>
+
 <ng-template #updateButton>
+
     <figure class="image-container">
-        <img [src]="uploadImage" width="120" height="120" id="avatar" />
+        <img [src]="uploadImage" id="upload-image" />
     </figure>
-    <button mat-button class="menu-button red" (click)="cancel()">
-        <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+    
+    <button mat-button 
+        class="menu-button red" 
+        (click)="cancel()">
+
+        <mat-icon class="example-icon" 
+            aria-label="Example icon-button with menu icon">
             cancel
         </mat-icon>
+
     </button>
+
 </ng-template>
+
     <app-description 
         [context]="form"
           [model]="descriptionModel">

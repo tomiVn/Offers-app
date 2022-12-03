@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
+import { OfferService } from 'src/app/services/api/offers/offer.service';
 import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 
 @Component({
@@ -26,6 +28,7 @@ export class CreateOfferComponent implements OnInit {
 
   constructor (
     private formFactoryService: OffersFormService,
+    private offerApiService: OfferService,
     private ref: ElementRef,
     private toastr: ToastrService ) 
     {
@@ -43,7 +46,15 @@ export class CreateOfferComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  actionForm(){ }
+  actionForm(){
+
+    if(this.form.valid){
+      this.offerApiService.createOffer(this.form.value)
+      .subscribe((res) => console.log(res)
+      );
+    }
+    
+   }
 
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');
