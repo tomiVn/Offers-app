@@ -1,5 +1,6 @@
+<!-- {{form.get('email')?.errors | json}} -->
 <mat-card class="card-decoration">
-    <div *ngIf="(responseData$ | async) as user"> 
+    <div *ngIf="(responseData$ | async) as user; else loading"> 
         <!-- else loading" -->
         <form [formGroup]="form" class="example-form" (ngSubmit)="updateProfile()">
 
@@ -38,10 +39,9 @@
                 Submit
             </button>
         </mat-card-actions>
-
-        </form>
-        <ng-template #loading>
-            <h3>Loading...</h3>
-        </ng-template>
+        </form>       
     </div>
+    <ng-template #loading>
+      <h3>Loading...</h3>
+  </ng-template>
 </mat-card>

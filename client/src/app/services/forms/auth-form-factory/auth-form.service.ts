@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EmailModel } from 'src/app/models/formElementsModels.ts/emailModel';
-import { NameModel } from 'src/app/models/formElementsModels.ts/nameModel';
-import { PasswordModel, RepeatPasswordModel } from 'src/app/models/formElementsModels.ts/passwordModel';
-import { isPasswordsMatch } from 'src/app/utils/validations/matchPasswords';
+import { EmailModel } from 'src/app/models/form-elements-models/emailModel';
+import { NameModel } from 'src/app/models/form-elements-models/nameModel';
+import { isPasswordsMatch, PasswordModel, RepeatPasswordModel } from 'src/app/models/form-elements-models/passwordModel';
+
 
 
 @Injectable({
@@ -15,6 +15,11 @@ export class AuthFormService {
 
   getRegisterForm() {
     return{
+      NameModel,
+      EmailModel,
+      PasswordModel,
+      RepeatPasswordModel,
+      
       form: this.fb.group({      
         name: NameModel.validation,                                        
         email: EmailModel.validation,
@@ -22,11 +27,7 @@ export class AuthFormService {
         repeatPass: RepeatPasswordModel.validation,
         },
         { validators: isPasswordsMatch('password', 'repeatPass')
-      }),
-      NameModel,
-      EmailModel,
-      PasswordModel,
-      RepeatPasswordModel
+      })
     } 
   }
 

@@ -1,23 +1,61 @@
 <mat-card class="card-decoration">
 
-    <!-- <form [formGroup]="form" 
+    <form [formGroup]="form" 
           class="example-form" 
           (ngSubmit)="actionForm()" 
           enctype="multipart/form-data" 
           method="POST">
 
     <app-input-element 
-        [context] ="form"
+        [context]="form"
            [model]="titleModel">
     </app-input-element>
 
-    <app-image-upload 
-        [context]="form">
-    </app-image-upload>
+    <app-img-upload 
+        [context]="form"
+        [model]="imgModel"
+        (image)="onImageSelected($event)">
+
+    </app-img-upload>
+<ng-container *ngIf="uploadVisibility; else updateButton">
+    <button mat-button class="menu-button" (click)="upload()">
+        Upload image
+        <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+            upload
+        </mat-icon>
+    </button>
+</ng-container>
+<ng-template #updateButton>
+    <figure class="image-container">
+        <img [src]="uploadImage" width="120" height="120" id="avatar" />
+    </figure>
+    <button mat-button class="menu-button red" (click)="cancel()">
+        <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
+            cancel
+        </mat-icon>
+    </button>
+</ng-template>
     <app-description 
         [context]="form"
           [model]="descriptionModel">
     </app-description>
+
+    <app-input-element
+          [context]="form"
+          [model]="priceModel">
+    </app-input-element>
+
+    <app-iput-date-picker
+          [context]="form"
+          [model]="fromDateModel">
+
+    </app-iput-date-picker>
+    
+    <app-iput-date-picker
+          [context]="form"
+          [model]="fromDateModel">
+
+    </app-iput-date-picker>
 
     <mat-card-actions id="button-container">
         <button mat-raised-button 
@@ -26,5 +64,5 @@
             Submit
         </button>
     </mat-card-actions>
-    </form> -->
+    </form>
 </mat-card>

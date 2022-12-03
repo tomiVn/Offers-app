@@ -12,7 +12,7 @@ import { IInputElement } from 'src/app/models/interfaces/inputElementModel';
 export class InputElementComponent implements OnInit {
 
   @Input() context!:  FormGroup;
-  @Input() model!:   IFormModel;
+  @Input() model!:   any;
   @Input() value:   string | undefined;
 
   constructor() { }

@@ -1,4 +1,4 @@
-<!-- {{ form.valid | json}} -->
+{{ form.get(imgModel.elementName)?.valid| json}}
 <mat-card class="card-decoration">
 
     <div *ngIf="(responseData$ | async) as user; else loading">
@@ -22,22 +22,28 @@
                         </button>
                     </div>
                     <div class="column">
+
                         <form [formGroup]="form" 
                               class="example-form" 
                               (ngSubmit)="updateProfile()">
-                            <ng-container *ngIf="uploadVisibility; else updateButton">
+
+                            <ng-container *ngIf="(uploadVisibility || form.get(imgModel.elementName)?.valid); else updateButton">
+
                             <app-img-upload
                                 [context]="form"
                                 [model]="imgModel"
                                 (image)="onImageSelected($event)">                              
                             </app-img-upload>
+
                                 <button mat-button class="menu-button" (click)="upload()">
                                     upload
                                     <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
                                         upload
                                     </mat-icon>
                                 </button>
+
                             </ng-container>
+
                             <ng-template #updateButton>
                                 <button mat-button class="menu-button green">
                                     update
@@ -51,6 +57,7 @@
                                     </mat-icon>
                                 </button>
                             </ng-template>
+
                         </form>
                     </div>
                 </div>

@@ -1,14 +1,14 @@
 import { AbstractControl } from '@angular/forms';
+import { customError } from './utils/errorsMessages';
+import { FormFactoryFunction } from './utils/form-factory-function';
 
-export const GenderModel = {
-    elementName:  'gender',
-    elementLabel: 'Gender',
-    elementType:  '',
-    minimalLength: 0,
-    data:       genderData(),
-    validation:   ['', [genderValidator]],
-    errors:       [genderValidatorError()]
-}
+export const GenderModel = FormFactoryFunction
+    ('gender', 'Gender', '', 0, genderData(), 
+
+        ['', [ genderValidator ] ], 
+
+        [ customError('genderError', 'This value is not in the selection!') ]
+    );
 
 function genderValidator(control: AbstractControl) {
 
@@ -43,11 +43,4 @@ function genderData() {
             viewValue: 'female'
         }
     ]
-}
-
-export function genderValidatorError(){
-    return{
-        name: 'genderError',
-        message: `This value is not in the selection!`
-    }
 }
