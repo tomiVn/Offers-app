@@ -15,26 +15,30 @@ import { UserFormService } from 'src/app/services/forms/user-form-factory/user-f
 export class ProfileComponent implements OnInit {
 
   form: FormGroup;
+
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
+
   imgModel!: IFormModel;
+
   uploadVisibility: boolean = false;
   uploadImage: string | undefined;
-  fileInput: HTMLElement | undefined;
 
-  constructor(
-    private userService: UserService,
-    private toastr: ToastrService,
+  constructor (
+    private userService:        UserService,
+    private toastr:             ToastrService,
     private formFactoryService: UserFormService,
-    private ref: ElementRef) {
+    private ref:                ElementRef ) 
+    {
+      let formServiceData = this.formFactoryService.formProfileImage();
 
-    let formServiceData = this.formFactoryService.formProfileImage();
-    this.form = formServiceData.form;
-    this.imgModel = formServiceData.ImgModel;
-  }
+      this.form = formServiceData.form;
 
-  ngOnInit(): void {
+      this.imgModel = formServiceData.ImgModel;
+    }
 
+  ngOnInit(): void 
+  {
     this.responseData$ = this.userService.getUserDetails()
       .pipe(delay(600), take(1));
   }
@@ -44,17 +48,19 @@ export class ProfileComponent implements OnInit {
     if (this.form.valid && this.form.value) {
       
       this.userService.updateUserAvatar(this.form.value)
-      .pipe(take(1))
-      .subscribe(() => {       
-        this.toastr.success('You successfully updated your profile!'); 
-        this.uploadVisibility = false;      
-        return;
-      }, 
-      (error: any) => {
-       return this.toastr.error( error.message, 'ERROR' );
-      });     
+        .pipe(take(1))
+        .subscribe(() => 
+          {       
+            this.toastr.success('You successfully updated your profile!'); 
+            this.uploadVisibility = false;      
+            return;
+          }, 
+          (error: any) => 
+          {
+            return this.toastr.error( error.message, 'ERROR' );
+          }
+        );     
     }else{
-
       this.toastr.error('Your profile is not updated!', 'Error');
     }
   }
@@ -73,6 +79,7 @@ export class ProfileComponent implements OnInit {
 
   onImageSelected(img: string){
     this.uploadVisibility = this.form.valid && this.form.controls[this.imgModel.elementName].value; 
+    
     if(this.uploadVisibility){
       this.uploadImage = img;
     }      

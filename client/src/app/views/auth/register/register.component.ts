@@ -22,42 +22,47 @@ export class RegisterComponent {
   repeatPasswordModel: IFormModel;
 
   constructor(
-    private authService: AuthService,
+    private authService:  AuthService,
     private tokenService: TokenService,
-    private router: Router,
-    private toastr: ToastrService,
-    private formService: AuthFormService) {
+    private router:       Router,
+    private toastr:       ToastrService,
+    private formService:  AuthFormService) 
+    {
+      let formServiceData = this.formService.getRegisterForm();
 
-    let formServiceData = this.formService.getRegisterForm();
-    this.form = formServiceData.form;
-    this.nameModel = formServiceData.NameModel;
-    this.emailModel = formServiceData.EmailModel;
-    this.passwordModel = formServiceData.PasswordModel;
-    this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
-  }
+      this.form = formServiceData.form;
+
+      this.nameModel           = formServiceData.NameModel;
+      this.emailModel          = formServiceData.EmailModel;
+      this.passwordModel       = formServiceData.PasswordModel;
+      this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
+    }
 
   signUp() {
 
     if (this.form.valid) {
        
       this.authService.signUp(this.form.value)
-      .pipe(take(1))
-      .subscribe(res => {
+        .pipe(take(1))
+        .subscribe(res => 
+          {
+            let token = res.accessToken;
+            let user = this.tokenService.setToken(token);
         
-        let token = res.accessToken;
-        let user = this.tokenService.setToken(token);
-        
-        this.toastr.success('Successfully register.', 'Hello ' + user?.name);
-        this.router.navigate(['/user/' + user?.id + '/profile']);
-        return;
-      }, error => {
-        this.toastr.error( error.message, 'ERROR');
-        return;
-      });
+            this.toastr.success('Successfully register.', 'Hello ' + user?.name);
+            this.router.navigate(['/user/' + user?.id + '/profile']);
+            return;
+          }, 
+          error => {
+            this.toastr.error( error.message, 'ERROR');
+            return;
+          }
+        );
     }
   }
 
   goTo() {
     this.router.navigate(['/auth/login']);
   }
+  
 }      

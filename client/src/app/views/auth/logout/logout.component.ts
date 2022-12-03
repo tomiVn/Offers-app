@@ -16,13 +16,12 @@ import { AuthService } from 'src/app/services/api/auth/auth.service';
 export class LogoutComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
+    private authService:  AuthService,
     private tokenService: TokenService,
-    private router: Router,
-    private toastr: ToastrService) { }
+    private router:       Router,
+    private toastr:       ToastrService) { }
 
   ngOnInit() {
-
     this.actionLogOut();
   }
 
@@ -30,16 +29,19 @@ export class LogoutComponent implements OnInit {
 
     this.authService.signOut()
       .pipe(take(1))
-      .subscribe((res) => {
-        if (!res.name) {
-          this.toastr.error('We can\'t recognize you!!!', 'Error');
-          this.router.navigate(['/notfound']);
-          throw ({ message: 'We can\'t recognize you!' })
+      .subscribe((res) => 
+        {
+          if (!res.name) {
+              this.toastr.error('We can\'t recognize you!!!', 'Error');
+              this.router.navigate(['/notfound']);
+              throw ({ message: 'We can\'t recognize you!' })
+          }
+
+          this.tokenService.deleteToken();
+          this.router.navigate(['/auth/login']);
+          this.toastr.success('You successfully sign out.', res.name + ' hope to see you again ');
+          return;
         }
-        this.tokenService.deleteToken();
-        this.router.navigate(['/auth/login']);
-        this.toastr.success('You successfully sign out.', res.name + ' hope to see you again ');
-        return;
-      });
+      );
   }
 }

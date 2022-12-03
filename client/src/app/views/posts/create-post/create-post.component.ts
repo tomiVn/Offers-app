@@ -10,23 +10,22 @@ import { PostsFormService } from 'src/app/services/forms/posts-form-factory/post
 })
 export class CreatePostComponent implements OnInit {
   
-  form!: FormGroup; 
+  form!:            FormGroup; 
+  
   titleModel:       IFormModel;
   descriptionModel: IFormModel;
 
   constructor( 
-    private postFormFactory: PostsFormService) {
+    private postFormFactory: PostsFormService) 
+    {
       let formServiceData = this.postFormFactory.formCreatePost();            
       this.form = formServiceData.form;
       this.titleModel = formServiceData.TitleModel;
       this.descriptionModel = formServiceData.DescriptionModel;
-   }
+    }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  actionForm(){
-   
-  }
+  actionForm(){ }
 
 }

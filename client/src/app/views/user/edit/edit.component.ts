@@ -23,24 +23,25 @@ export class EditComponent implements OnInit {
   countryCodeModel: IFormModel;
   phoneModel:       IFormModel;
  
-  
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
   
-  constructor( 
-    private userService: UserService,              
-    private router: Router,
-    private toastr: ToastrService,
-    private formFactoryService: UserFormService) {  
+  constructor ( 
+    private userService:        UserService,              
+    private router:             Router,
+    private toastr:             ToastrService,
+    private formFactoryService: UserFormService) 
+    {  
+      let formServiceData = this.formFactoryService.formUserDetails();
 
-    let formServiceData = this.formFactoryService.formUserDetails();
-    this.form = formServiceData.form;
-    this.nameModel = formServiceData.NameModel;
-    this.genderModel = formServiceData.GenderModel; 
-    this.bornModel = formServiceData.BornModel;
-    this.countryCodeModel = formServiceData.DialCodeModel;
-    this.phoneModel = formServiceData.PhoneModel;  
-  }
+      this.form = formServiceData.form;
+
+      this.nameModel        = formServiceData.NameModel;
+      this.genderModel      = formServiceData.GenderModel; 
+      this.bornModel        = formServiceData.BornModel;
+      this.countryCodeModel = formServiceData.DialCodeModel;
+      this.phoneModel       = formServiceData.PhoneModel;  
+    }
   
   ngOnInit(): void {
     
@@ -53,18 +54,19 @@ export class EditComponent implements OnInit {
     if (this.form.valid) {
       
       this.userService.updateUserDetails(this.form.value)
-      .pipe(take(1))
-      .subscribe(( user ) => {
-        
-        this.toastr.success('You successfully updated your profile!', user.name);
-        
-        this.router.navigate(['/user/' + user._id + '/profile']);
-      }, 
-      (error: any) => {
-        this.toastr.error( error.message, 'ERROR' );
-      });     
-    }else{
-
+        .pipe(take(1))
+        .subscribe(( user ) => 
+          {       
+            this.toastr.success('You successfully updated your profile!', user.name);       
+            this.router.navigate(['/user/' + user._id + '/profile']);
+          }, 
+          (error: any) => 
+            {
+              this.toastr.error( error.message, 'ERROR' );
+            }
+        );     
+    }
+    else{
       this.toastr.error('Your profile is updated!', 'Error');
     }
   }

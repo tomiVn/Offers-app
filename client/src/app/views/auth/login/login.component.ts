@@ -15,22 +15,23 @@ import { TokenService } from 'src/app/services/token/token.service';
 })
 export class LoginComponent {
 
-  form!: FormGroup;
+  form!:         FormGroup;
+
   emailModel:    IFormModel;
   passwordModel: IFormModel;
 
-  constructor( 
+  constructor ( 
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService,
-    private formService: AuthFormService) {
-      
-    let formServiceData = this.formService.getLogIn();
-    this.form = formServiceData.form;
-    this.emailModel = formServiceData.EmailModel;
-    this.passwordModel = formServiceData.PasswordModel;
-  }
+    private formService: AuthFormService ) 
+    {
+      let formServiceData = this.formService.getLogIn();
+      this.form = formServiceData.form;
+      this.emailModel = formServiceData.EmailModel;
+      this.passwordModel = formServiceData.PasswordModel;
+    }
   
   signIn() {
 
@@ -38,16 +39,20 @@ export class LoginComponent {
       
       this.authService.signIn(this.form.value)
       .pipe(take(1))
-      .subscribe(res => {
-        this.form.reset();
-        let token = res.accessToken;
-        let user = this.tokenService.setToken(token);
-        this.toastr.success('Successfully logged in', 'Hello ' + user?.name);
-        this.router.navigate(['/user/' + user.id + '/profile']);
-      },  error => {
-         error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));
-         this.form.controls['password'].setValue(null);
-      })
+      .subscribe(res => 
+        {          
+          let token = res.accessToken;
+          let user  = this.tokenService.setToken(token);
+          this.form.reset();
+          this.toastr.success('Successfully logged in', 'Hello ' + user?.name);
+          this.router.navigate(['/user/' + user.id + '/profile']);
+        },  
+        error => 
+          {
+            error.error.forEach((er: string | undefined) => this.toastr.error('ERROR', er));
+            this.form.controls['password'].setValue(null);
+          }
+      )
     }
   }
 

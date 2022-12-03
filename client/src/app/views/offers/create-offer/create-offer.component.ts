@@ -13,22 +13,22 @@ export class CreateOfferComponent implements OnInit {
 
   form!: FormGroup;
 
-  titleModel!: IFormModel;
-  imgModel!: IFormModel;
+  titleModel!:       IFormModel;
+  imgModel!:         IFormModel;
   descriptionModel!: IFormModel;
-  priceModel!: IFormModel;
-  fromDateModel!: IFormModel;
-  untilDateModel!: IFormModel;
+  priceModel!:       IFormModel;
+  fromDateModel!:    IFormModel;
+  untilDateModel!:   IFormModel;
 
   uploadVisibility = true;
   uploadImage: string | undefined;
   dateNow = new Date();
 
-  constructor(
+  constructor (
     private formFactoryService: OffersFormService,
     private ref: ElementRef,
-    private toastr: ToastrService,) {
-
+    private toastr: ToastrService ) 
+    {
       let formFactoryServiceData = this.formFactoryService.createOffer();
 
       this.form = formFactoryServiceData.form;
@@ -39,14 +39,11 @@ export class CreateOfferComponent implements OnInit {
       this.priceModel       = formFactoryServiceData.PricenModel;
       this.fromDateModel    = formFactoryServiceData.DateModel;
       this.untilDateModel   = formFactoryServiceData.UntilDateModel;
-     }
+    }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  actionForm(){
-
-  }
+  actionForm(){ }
 
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');
