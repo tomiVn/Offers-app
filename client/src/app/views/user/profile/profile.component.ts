@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay, Observable, take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
@@ -25,7 +24,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router,
     private toastr: ToastrService,
     private formFactoryService: UserFormService,
     private ref: ElementRef) {
@@ -44,12 +42,12 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
       
     if (this.form.valid && this.form.value) {
+      
       this.userService.updateUserAvatar(this.form.value)
       .pipe(take(1))
-      .subscribe(() => {
-        this.toastr.success('You successfully updated your profile!', 
-        this.form.get('name')?.value);
-        this.router.navigate(['']);
+      .subscribe(() => {       
+        this.toastr.success('You successfully updated your profile!'); 
+        this.uploadVisibility = false;      
         return;
       }, 
       (error: any) => {

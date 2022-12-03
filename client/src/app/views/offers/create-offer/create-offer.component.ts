@@ -18,10 +18,11 @@ export class CreateOfferComponent implements OnInit {
   descriptionModel!: IFormModel;
   priceModel!: IFormModel;
   fromDateModel!: IFormModel;
+  untilDateModel!: IFormModel;
 
   uploadVisibility = true;
   uploadImage: string | undefined;
-  fileInput: HTMLElement | undefined;
+  dateNow = new Date();
 
   constructor(
     private formFactoryService: OffersFormService,
@@ -32,11 +33,12 @@ export class CreateOfferComponent implements OnInit {
 
       this.form = formFactoryServiceData.form;
 
-      this.titleModel = formFactoryServiceData.TitleModel;
-      this.imgModel = formFactoryServiceData.ImgModel;
+      this.titleModel       = formFactoryServiceData.TitleModel;
+      this.imgModel         = formFactoryServiceData.ImgModel;
       this.descriptionModel = formFactoryServiceData.DescriptionModel;
-      this.priceModel = formFactoryServiceData.PricenModel;
-      this.fromDateModel = formFactoryServiceData.FromDateModel;
+      this.priceModel       = formFactoryServiceData.PricenModel;
+      this.fromDateModel    = formFactoryServiceData.DateModel;
+      this.untilDateModel   = formFactoryServiceData.UntilDateModel;
      }
 
   ngOnInit(): void {

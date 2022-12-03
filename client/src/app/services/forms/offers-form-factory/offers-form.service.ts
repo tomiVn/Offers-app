@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { DateModel } from 'src/app/models/form-elements-models/date-picker/dateModel';
-import { FromDateModel, UntilDateModel } from 'src/app/models/form-elements-models/date-picker/form-date-factory-function';
+import { FormBuilder } from '@angular/forms';
+import { DateModel } from 'src/app/models/form-elements-models/dateModel';
 import { DescriptionModel } from 'src/app/models/form-elements-models/descriptionModel';
 import { ImgModel } from 'src/app/models/form-elements-models/imgModel';
 import { PricenModel } from 'src/app/models/form-elements-models/priceModel';
@@ -26,22 +25,29 @@ export class OffersFormService {
   }
 
   createOffer(){  
-   return{ 
+    
+    const UntilDateModel = Object.assign(() => {}, DateModel);
+      UntilDateModel.setElementName('untilDate');
+      UntilDateModel.setElementLabel('Until date');
+
+    return { 
       TitleModel,
       ImgModel,
       DescriptionModel,
       PricenModel,
-      FromDateModel,
+      DateModel,
       UntilDateModel,
-      
-    form: this.fb.group({
-      title: TitleModel.validation,
-      image: ImgModel.validation,
-      description: DescriptionModel.validation,
-      price: PricenModel.validation,
-      fromDate: DateModel.validation,
-      untilDate: UntilDateModel.validation
-      })
+       
+      form: this.fb.group (
+       {
+        title:       TitleModel.validation,
+        image:       ImgModel.validation,
+        description: DescriptionModel.validation,
+        price:       PricenModel.validation,
+        date:        DateModel.validation,
+        untilDate:   UntilDateModel.validation
+        }
+      )
     }
   }
 }

@@ -16,5 +16,11 @@ export function FormFactoryFunction(
         data,
         validation,
         errors,
+        setElementName: function (elementName : string) {
+        return this.elementName = elementName;
+        },
+        setElementLabel (elementLabel : string) {
+        return this.elementLabel = elementLabel;
+        }
     }
 }

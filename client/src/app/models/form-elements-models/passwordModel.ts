@@ -18,23 +18,9 @@ export const PasswordModel = FormFactoryFunction
     [  
       requiredField('Password'), 
       minLength(4), 
-      patternError( SPECIAL_CHARACTERS_ARE_NOT_ALLOOWED ) 
-    ]   
-  )
-
-export const RepeatPasswordModel = FormFactoryFunction
-  ('repeatPass', 'Repeat password', 'password', 4, '',  
-    ['', 
-      [
-        Validators.required,
-        Validators.minLength(4)
-      ]
-    ],
-    [ 
-      requiredField('Repeat-password'), 
-      minLength(4), 
+      patternError( SPECIAL_CHARACTERS_ARE_NOT_ALLOOWED ),
       customError('isPasswordsNotMatch', 'Passwords not match!') 
-    ]
+    ]   
   )
 
 export function isPasswordsMatch(password: string, repeatPass: string) {

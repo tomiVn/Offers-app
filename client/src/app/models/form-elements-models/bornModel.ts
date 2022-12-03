@@ -6,7 +6,7 @@ export const BornModel = FormFactoryFunction
   ('born', 'Born date', '', 0, null, 
     ['', 
       [
-        bornValidationDate 
+        bornValidationDate
       ]
     ], 
     [
