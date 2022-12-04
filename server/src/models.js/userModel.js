@@ -46,7 +46,14 @@ const uModel = new Schema({
            posts: [{
             type: mongoose.Types.ObjectId,
              ref: 'Post'
+           }],
+
+   createdOffers: [{
+            type: mongoose.Types.ObjectId,
+             ref: 'Offer'
            }]
+
+
 });
 
 uModel.virtual('repeatPass')

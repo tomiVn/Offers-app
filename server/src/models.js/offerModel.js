@@ -16,6 +16,12 @@ const offerModel = new Schema({
             type: String
     },
 
+     contactInfo: {
+            type: String,
+        required: [ true, 'Contact information is required'],
+       minLength: [ 6, 'Contact information must be min 6 characters!']
+    },
+
            price: { 
             type: Number,
              min: [0, 'Minimal price 0!']
@@ -34,11 +40,6 @@ const offerModel = new Schema({
            type: mongoose.Types.ObjectId,
             ref: 'User'
     },
-
-          likes: [{
-           type: mongoose.Types.ObjectId,
-            ref: 'User'
-        }]
 });
 
 offerModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {

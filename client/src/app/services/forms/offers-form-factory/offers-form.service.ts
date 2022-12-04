@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder  } from '@angular/forms';
 import { DateModel } from 'src/app/models/form-elements-models/dateModel';
-import { DescriptionModel } from 'src/app/models/form-elements-models/descriptionModel';
 import { ImgModel } from 'src/app/models/form-elements-models/imgModel';
+import { DescriptionModel } from 'src/app/models/form-elements-models/new-model/newFormModel';
+import { OfferContactModel } from 'src/app/models/form-elements-models/offerContactsModel';
 import { PricenModel } from 'src/app/models/form-elements-models/priceModel';
 import { TitleModel } from 'src/app/models/form-elements-models/titleModel';
-import { requiredField } from 'src/app/models/form-elements-models/utils/errorsMessages';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +30,12 @@ export class OffersFormService {
       UntilDateModel.setElementLabel('Until date');
       DateModel.setElementName('fromDate');
       DateModel.setElementLabel('Valid from Date');
+  
     return { 
       TitleModel,
       ImgModel,
       DescriptionModel,
+      OfferContactModel,
       PricenModel,
       DateModel,
       UntilDateModel,
@@ -45,6 +45,7 @@ export class OffersFormService {
         title:       TitleModel.validation,
         image:       ImgModel.validation,
         description: DescriptionModel.validation,
+        contactInfo: OfferContactModel.validation,
         price:       PricenModel.validation,
         fromDate:    DateModel.validation,
         untilDate:   UntilDateModel.validation

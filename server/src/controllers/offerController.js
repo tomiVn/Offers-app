@@ -6,6 +6,7 @@ const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const { OFFER_PATH } = require('../config/constants');
 const { createOffer } = require('../services/offerService');
+const { updateProfile } = require('../services/authService');
 
 const uploadFile = multer.single('file');
 
@@ -18,12 +19,14 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
         }
 
         try {
-
-            const upload = await cloudinary.uploader.upload(req.file.path, { folder: req.user.id });
+            const userId = req.user.id;
+            const upload = await cloudinary.uploader.upload(req.file.path, { folder: userId });
                       
-            await createOffer({
-                ...req.body, image: upload.url
+            let newOffer = await createOffer({
+                ...req.body, image: upload.url, creator: userId
             });
+          
+            await updateProfile( userId, { "$push": { createdOffers: { "_id": newOffer._id } } });
 
             return res.status(201).json({ message: 'Successfully created' });
 

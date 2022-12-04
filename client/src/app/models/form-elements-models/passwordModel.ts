@@ -18,10 +18,16 @@ export const PasswordModel = FormFactoryFunction
     [  
       requiredField('Password'), 
       minLength(4), 
-      patternError( SPECIAL_CHARACTERS_ARE_NOT_ALLOOWED ),
-      customError('isPasswordsNotMatch', 'Passwords not match!') 
+      patternError( SPECIAL_CHARACTERS_ARE_NOT_ALLOOWED )    
     ]   
   )
+
+let CreateRepeatPasswordModel = Object.assign({}, PasswordModel);
+    CreateRepeatPasswordModel.setElementName('repeatPass');
+    CreateRepeatPasswordModel.setElementLabel('Repeat password');
+    CreateRepeatPasswordModel.setErrors( customError('isPasswordsNotMatch', 'Passwords not match!') );
+    
+export let RepeatPasswordModel = CreateRepeatPasswordModel;  
 
 export function isPasswordsMatch(password: string, repeatPass: string) {
   
