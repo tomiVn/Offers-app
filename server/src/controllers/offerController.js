@@ -17,7 +17,8 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
             
             return res.status(400).json({ message: error.message });
         }
-
+       console.log(req.body);
+       
         try {
             const userId = req.user.id;
             const upload = await cloudinary.uploader.upload(req.file.path, { folder: userId });

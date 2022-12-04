@@ -1,4 +1,4 @@
-import { FormFactoryFunction } from "./utils/form-factory-function";
+import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
-export const DateModel = FormFactoryFunction
+export const DateModel = FormElementFactoryFunction
 ('date', 'Date', '', 0, '', ['', []], []);

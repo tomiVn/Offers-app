@@ -3,9 +3,9 @@ import { ONLY_NUMBERS } from "src/app/utils/const";
 import { IAutoComplete } from "../interfaces/autocompleteModel";
 import countries from "./utils/data/countries.json";
 import { maxLength, minLength, patternError, requiredField } from "./utils/errorsMessages";
-import { FormFactoryFunction } from "./utils/form-factory-function";
+import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
-export const PhoneModel = FormFactoryFunction
+export const PhoneModel = FormElementFactoryFunction
   ('phone', 'Phone', 'number', 6, '',
     ['', 
       [ 
@@ -23,7 +23,7 @@ export const PhoneModel = FormFactoryFunction
     ] 
   );
 
-export const DialCodeModel = FormFactoryFunction
+export const DialCodeModel = FormElementFactoryFunction
   ('dialCode', 'Country code', '', 0, countries,    
     ['', 
       [ 

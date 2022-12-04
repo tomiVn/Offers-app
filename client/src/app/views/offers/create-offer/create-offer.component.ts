@@ -15,13 +15,14 @@ export class CreateOfferComponent implements OnInit {
 
   form!: FormGroup;
 
-  titleModel!:       IFormModel;
+  titleModel:        IFormModel;
   imgModel!:         IFormModel;
   descriptionModel!: IFormModel;
+  contactInfoModel!: IFormModel;
   priceModel!:       IFormModel;
   fromDateModel!:    IFormModel;
   untilDateModel!:   IFormModel;
-
+  
   uploadVisibility = true;
   uploadImage: string | undefined;
   dateNow = new Date();
@@ -33,12 +34,12 @@ export class CreateOfferComponent implements OnInit {
     private toastr: ToastrService ) 
     {
       let formFactoryServiceData = this.formFactoryService.createOffer();
-
       this.form = formFactoryServiceData.form;
 
       this.titleModel       = formFactoryServiceData.TitleModel;
       this.imgModel         = formFactoryServiceData.ImgModel;
       this.descriptionModel = formFactoryServiceData.DescriptionModel;
+      this.contactInfoModel = formFactoryServiceData.OfferContactModel;
       this.priceModel       = formFactoryServiceData.PricenModel;
       this.fromDateModel    = formFactoryServiceData.DateModel;
       this.untilDateModel   = formFactoryServiceData.UntilDateModel;
@@ -47,11 +48,11 @@ export class CreateOfferComponent implements OnInit {
   ngOnInit(): void { }
 
   actionForm(){
-
+    
     if(this.form.valid){
       this.offerApiService.createOffer(this.form.value)
-      .subscribe((res) => console.log(res)
-      );
+      .pipe(take(1))
+      .subscribe();
     }
     
    }

@@ -1,9 +1,9 @@
-import { FormFactoryFunction } from "./utils/form-factory-function";
+import { FormElementFactoryFunction } from "./utils/form-element-factory";
 import { customError } from "./utils/errorsMessages";
 import { fileSizeValidator } from "./utils/validations/fileSizeValidator";
 import { fileTypeValidator } from "./utils/validations/fileTypeValidation";
 
-export const ImgModel = FormFactoryFunction
+export const ImgModel = FormElementFactoryFunction
     ('image', 'Image', '', 0, '.jpeg,.jpg,.png',
         ['', 
             [ 

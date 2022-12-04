@@ -1,5 +1,5 @@
 
-export function FormFactoryFunction(
+export function FormElementFactoryFunction(
     elementName:   string, 
     elementLabel:  string, 
     elementType:   string,

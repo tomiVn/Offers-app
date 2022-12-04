@@ -1,8 +1,8 @@
 import { AbstractControl } from '@angular/forms';
 import { customError } from './utils/errorsMessages';
-import { FormFactoryFunction } from './utils/form-factory-function';
+import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
-export const GenderModel = FormFactoryFunction
+export const GenderModel = FormElementFactoryFunction
     ('gender', 'Gender', '', 0, genderData(), 
 
         ['', [ genderValidator ] ], 

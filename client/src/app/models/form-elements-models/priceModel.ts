@@ -1,10 +1,10 @@
 import { Validators } from "@angular/forms";
 import { ONLY_NUMBERS } from "src/app/utils/const";
 import { customError, patternError, requiredField } from "./utils/errorsMessages";
-import { FormFactoryFunction } from "./utils/form-factory-function";
+import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
 
-export const PricenModel = FormFactoryFunction
+export const PricenModel = FormElementFactoryFunction
   ('price', 'Price', 'number', 0, '',
     ['',
       [ 

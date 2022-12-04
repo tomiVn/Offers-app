@@ -19,6 +19,7 @@ export class OfferService {
     formData.append('title', form.title); 
     formData.append('file', form.image);
     formData.append('description', form.description);
+    formData.append('contactInfo', form.contactInfo)
     formData.append('price', form.price);
     formData.append('fromDate', form.fromDate);
     formData.append('untilDate', form.untilDate);

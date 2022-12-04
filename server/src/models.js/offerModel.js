@@ -18,8 +18,8 @@ const offerModel = new Schema({
 
      contactInfo: {
             type: String,
-        required: [ true, 'Contact information is required'],
-       minLength: [ 6, 'Contact information must be min 6 characters!']
+    //     required: [ true, 'Contact information is required'],
+    //    minLength: [ 6, 'Contact information must be min 6 characters!']
     },
 
            price: { 
