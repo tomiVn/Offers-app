@@ -1,11 +1,20 @@
 <mat-card class="card-decoration">
 
-    <form [formGroup]="form" class="example-form" (ngSubmit)="actionForm()" enctype="multipart/form-data" method="POST">
+    <form [formGroup]="form" 
+        class="example-form" 
+        (ngSubmit)="actionForm()" 
+        enctype="multipart/form-data" 
+        method="POST">
 
-        <app-input-element [context]="form" [model]="FormModels['TitleModel']">
+        <app-input-element 
+            [context]="form" 
+            [model]="FormModels['TitleModel']">
         </app-input-element>
 
-        <app-img-upload [context]="form" [model]="FormModels['ImgModel']" (image)="onImageSelected($event)">
+        <app-img-upload 
+            [context]="form" 
+            [model]="FormModels['ImgModel']" 
+            (image)="onImageSelected($event)">
         </app-img-upload>
 
         <ng-container *ngIf="uploadVisibility; else updateButton">
@@ -27,7 +36,8 @@
         <ng-template #updateButton>
         
             <figure class="image-container">
-                <img [src]="uploadImage" id="upload-image" />
+                <img [src]="uploadImage" 
+                id="upload-image" />
             </figure>
             
             <button mat-button 
@@ -37,15 +47,14 @@
                 <mat-icon class="example-icon" 
                     aria-label="Example icon-button with menu icon">
                     cancel
-                </mat-icon>
-        
+                </mat-icon>        
             </button>
         
         </ng-template>
 
-        
-
-            <app-description [context]="form" [model]="FormModels['DescriptionModel']">
+            <app-description 
+                [context]="form" 
+                [model]="FormModels['DescriptionModel']">
             </app-description>
       
         <mat-card-actions id="button-container">
