@@ -22,7 +22,7 @@ export class OffersFormService {
     }
 
     return {
-      ...ModelsData,
+      models: ModelsData,
       form: this.fb.group( buildFormFunction( ModelsData ))
     } 
   }

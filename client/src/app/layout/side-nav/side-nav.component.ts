@@ -11,12 +11,12 @@ import { OffersFormService } from 'src/app/services/forms/offers-form-factory/of
 export class SideNavComponent implements OnInit {
 
   formOffers!: FormGroup;
-  offersModel: IFormModel;
+  FormModels: { [s: string]: IFormModel; };
   curentDate = new Date();
   constructor(private offersFormFactory: OffersFormService) {
     let formServiceData = this.offersFormFactory.getOffers();
     this.formOffers  = formServiceData.form;
-    this.offersModel = formServiceData.DateModel;
+    this.FormModels = formServiceData.models;
    }
 
   ngOnInit(): void {}

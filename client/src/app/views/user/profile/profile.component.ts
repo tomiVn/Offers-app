@@ -36,8 +36,8 @@ export class ProfileComponent implements OnInit {
       this.FormModels = formServiceData.models;
     }
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
+    
     this.responseData$ = this.userService.getUserDetails()
       .pipe(delay(600), take(1));
   }
@@ -45,19 +45,21 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
       
     if (this.form.valid && this.form.value) {
-      this.uploadVisibility = false; 
+
+      this.uploadVisibility = false;
+
       this.userService.updateUserAvatar(this.form.value)
         .pipe(take(1))
-        .subscribe((avatar) => 
-          {       
-            if(avatar){              
+        .subscribe((avatar) =>  { 
+
+            if (avatar) {              
               this.toastr.success('You successfully updated your profile!');           
               this.newAvatar = avatar.toString();
-            }           
-            return;
+              return;
+            }                      
           }, 
-          (error: any) => 
-          {
+          (error: any) => {
+            
             return this.toastr.error( error.message, 'ERROR' );
           }
         ); 
@@ -68,15 +70,21 @@ export class ProfileComponent implements OnInit {
   }
 
   cancel() {
-    this.uploadVisibility = !this.uploadVisibility;
+
+    this.uploadVisibility = false;
+
     this.uploadImage = '';
+
     return;
   }
 
   upload() {
+
     let filebutton = this.ref.nativeElement.querySelector('#upload');
     filebutton.click(); 
+
     this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image in quadratic form!');
+
     return;
   }
 
@@ -93,14 +101,18 @@ export class ProfileComponent implements OnInit {
     if (this.newAvatar) {
        
       return this.uploadImage;
-    } else if(this.uploadImage){
+    } 
+    else if(this.uploadImage){
       
       return this.uploadImage
-    }
+    } 
     else if(userAvatar) {
-        return userAvatar;
-    } else{
-        return 'https://res.cloudinary.com/duyubdgsj/image/upload/v1669408328/assets/146-1468479_my-profile-icon-blank-profile-picture-circle-hd_qsgtou.png'                  
+
+      return userAvatar;
+    } 
+    else{
+
+      return 'https://res.cloudinary.com/duyubdgsj/image/upload/v1669408328/assets/146-1468479_my-profile-icon-blank-profile-picture-circle-hd_qsgtou.png'                  
     }
   }
 }

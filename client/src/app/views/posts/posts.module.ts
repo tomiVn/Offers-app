@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { LayoutModule } from 'src/app/layout/layout.module';
 import { MatButtonModule } from '@angular/material/button';
 import { NgOptimizedImage } from '@angular/common';
+import { MaterialsModule } from 'src/app/materials/materials.module';
 
 
 
@@ -19,7 +20,8 @@ import { NgOptimizedImage } from '@angular/common';
     ReactiveFormsModule,
     LayoutModule,
     MatButtonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MaterialsModule
   ]
 })
 export class PostsModule { }
