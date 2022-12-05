@@ -2,7 +2,7 @@ import { AbstractControl, Validators } from "@angular/forms";
 import { ONLY_NUMBERS } from "src/app/utils/const";
 import { IAutoComplete } from "../interfaces/autocompleteModel";
 import countries from "./utils/data/countries.json";
-import { maxLength, minLength, patternError, requiredField } from "./utils/errorsMessages";
+import { customError, maxLength, minLength, patternError, requiredField } from "./utils/errorsMessages";
 import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
 export const PhoneModel = FormElementFactoryFunction
@@ -33,7 +33,7 @@ export const DialCodeModel = FormElementFactoryFunction
     ],   
     [ 
       requiredField('Country code'), 
-      dialCodeError()
+      customError('countruCodeError', 'Country code is not valid!')
     ]
   )
 
@@ -52,11 +52,4 @@ export function countryCodeValidator(control: AbstractControl) {
   }
 
   return null;
-}
-
-export function dialCodeError(){    
-  return {
-    name: 'countruCodeError',
-    message: 'Country code is not valid!'
-  }
 }

@@ -14,20 +14,22 @@ export class UserService {
  
   constructor(private http: HttpClient) { }
 
-  getUserDetails(): Observable<User>{
-    return this.http.get<User>(this.userPathString); 
+  getUserDetails(): Observable< User >{
+    return this.http.get< User >( this.userPathString ); 
   }
 
-  updateUserDetails(form: NgForm): Observable<User> {
-    return this.http.put<User>(this.userPathString, form);
+  updateUserDetails( form: NgForm ): Observable< User > {
+    return this.http.put< User >( this.userPathString, form );
   }
 
-  updateUserAvatar(form: any): Observable<User>{
+  updateUserAvatar( form: NgForm ): Observable< User >{
+
     let formData = new FormData();
-    console.log(form.image.name);
-    
-    formData.append('file', form.image, form.image.name);
-    return this.http.put<User>(this.userPathString + '/avatar', formData);
+
+    Object.entries( form ).forEach(([ key, value ]) => { 
+      formData.append( key, value ) } );
+
+    return this.http.put< User >( this.userPathString + '/avatar', formData );
   }
   
 }

@@ -4,7 +4,7 @@ import { fileSizeValidator } from "./utils/validations/fileSizeValidator";
 import { fileTypeValidator } from "./utils/validations/fileTypeValidation";
 
 export const ImgModel = FormElementFactoryFunction
-    ('image', 'Image', '', 0, '.jpeg,.jpg,.png',
+    ('file', 'Image', '', 0, '.jpeg,.jpg,.png',
         ['', 
             [ 
                 fileTypeValidator(['image/jpeg', 'image/jpg', 'image/png']), 

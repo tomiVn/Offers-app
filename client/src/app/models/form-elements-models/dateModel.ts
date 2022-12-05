@@ -4,8 +4,8 @@ export const DateModel = FormElementFactoryFunction
 ('date', 'Date', '', 0, '', ['', []], []);
 
     const FromDate = Object.assign(() => {}, DateModel);   
-        DateModel.setElementName('fromDate');
-        DateModel.setElementLabel('Valid from Date');        
+        FromDate.setElementName('fromDate');
+        FromDate.setElementLabel('Valid from Date');        
 export const FromDateModel = FromDate;
 
     const UntilDate = Object.assign(() => {}, DateModel);
