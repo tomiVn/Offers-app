@@ -93,7 +93,7 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
                                             
                 let user = await updateProfile(userId, {avatar: upload.url});
     
-                return res.status(201).json({ message: 'Successfully created' });
+                return res.status(201).json( user.avatar );
     
             } catch (err) {
                 const errors = parseErrors(err);

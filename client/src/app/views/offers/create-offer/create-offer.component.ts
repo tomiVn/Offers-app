@@ -14,14 +14,7 @@ import { OffersFormService } from 'src/app/services/forms/offers-form-factory/of
 export class CreateOfferComponent implements OnInit {
 
   form!: FormGroup;
-
-  titleModel:        IFormModel;
-  imgModel!:         IFormModel;
-  descriptionModel!: IFormModel;
-  contactInfoModel!: IFormModel;
-  priceModel!:       IFormModel;
-  fromDateModel!:    IFormModel;
-  untilDateModel!:   IFormModel;
+  FormModels!: { [s: string]: IFormModel; };
   
   uploadVisibility = true;
   uploadImage: string | undefined;
@@ -35,14 +28,7 @@ export class CreateOfferComponent implements OnInit {
     {
       let formFactoryServiceData = this.formFactoryService.createOffer();
       this.form = formFactoryServiceData.form;
-
-      this.titleModel       = formFactoryServiceData.TitleModel;
-      this.imgModel         = formFactoryServiceData.ImgModel;
-      this.descriptionModel = formFactoryServiceData.DescriptionModel;
-      this.contactInfoModel = formFactoryServiceData.OfferContactModel;
-      this.priceModel       = formFactoryServiceData.PricenModel;
-      this.fromDateModel    = formFactoryServiceData.DateModel;
-      this.untilDateModel   = formFactoryServiceData.UntilDateModel;
+      this.FormModels = formFactoryServiceData.models;              
     }
 
   ngOnInit(): void { }
@@ -60,7 +46,7 @@ export class CreateOfferComponent implements OnInit {
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');
     filebutton.click(); 
-    this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image in quadratic form!');
+    this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image information!');
   }
 
   onImageSelected(img: string){

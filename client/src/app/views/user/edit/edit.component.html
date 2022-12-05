@@ -6,31 +6,31 @@
 
         <app-input-element
                 [context]="form"
-                  [model]="nameModel"
+                  [model]="FormModels['NameModel']"
                   [value]="user.name">
         </app-input-element>
 
         <app-select-drop-down 
                 [context]="form" 
-                  [model]="genderModel"
+                  [model]="FormModels['GenderModel']"
                   [value]="user.gender">
         </app-select-drop-down>
 
         <app-iput-date-picker 
                [context]="form"
-                 [model]="bornModel"
+                 [model]="FormModels['BornModel']"
                  [value]="user.born">
         </app-iput-date-picker>
 
         <app-autocomplete 
               [context]="form" 
-                [model]="countryCodeModel"
+                [model]="FormModels['DialCodeModel']"
                 [value]="user.dialCode">
         </app-autocomplete>
 
         <app-input-element
                 [context]="form"
-                  [model]="phoneModel"
+                  [model]="FormModels['PhoneModel']"
                   [value]="user.phone">
         </app-input-element>
 

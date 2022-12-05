@@ -16,9 +16,7 @@ import { TokenService } from 'src/app/services/token/token.service';
 export class LoginComponent {
 
   form!:         FormGroup;
-
-  emailModel:    IFormModel;
-  passwordModel: IFormModel;
+  FormModels!: { [s: string]: IFormModel; };
 
   constructor ( 
     private authService: AuthService,
@@ -29,8 +27,7 @@ export class LoginComponent {
     {
       let formServiceData = this.formService.getLogIn();
       this.form = formServiceData.form;
-      this.emailModel = formServiceData.EmailModel;
-      this.passwordModel = formServiceData.PasswordModel;
+      this.FormModels = formServiceData.models;
     }
   
   signIn() {

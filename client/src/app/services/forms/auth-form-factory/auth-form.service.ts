@@ -22,7 +22,7 @@ export class AuthFormService {
     }
     
     return {
-      ...ModelsData,      
+      models: ModelsData,      
       form: this.fb.group( buildFormFunction( ModelsData ),
         { 
           validators: isPasswordsMatch( PasswordModel.elementName, RepeatPasswordModel.elementName )
@@ -40,7 +40,7 @@ export class AuthFormService {
     }
 
     return {
-      ...ModelsData,
+      models: ModelsData,
       form: this.fb.group( buildFormFunction( ModelsData ))
     } 
   }

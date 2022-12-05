@@ -25,7 +25,7 @@ export class UserFormService {
     }
     
     return{
-      ...ModelsData,
+      models: ModelsData,
       form: this.fb.group( buildFormFunction( ModelsData ))    
     } 
   }
@@ -37,7 +37,7 @@ export class UserFormService {
     }
 
     return{
-      ...ModelsData,
+      models: ModelsData,
       form: this.fb.group( buildFormFunction( ModelsData ))     
     }
   }

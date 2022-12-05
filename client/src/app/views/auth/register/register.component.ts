@@ -16,10 +16,7 @@ import { AuthService } from 'src/app/services/api/auth/auth.service';
 export class RegisterComponent {
 
   form!: FormGroup;
-  nameModel:           IFormModel;
-  emailModel:          IFormModel;
-  passwordModel:       IFormModel;
-  repeatPasswordModel: IFormModel;
+  FormModels!: { [s: string]: IFormModel; };
 
   constructor(
     private authService:  AuthService,
@@ -29,13 +26,8 @@ export class RegisterComponent {
     private formService:  AuthFormService) 
     {
       let formServiceData = this.formService.getRegisterForm();
-
       this.form = formServiceData.form;
-
-      this.nameModel           = formServiceData.NameModel;
-      this.emailModel          = formServiceData.EmailModel;
-      this.passwordModel       = formServiceData.PasswordModel;
-      this.repeatPasswordModel = formServiceData.RepeatPasswordModel;
+      this.FormModels = formServiceData.models;
     }
 
   signUp() {

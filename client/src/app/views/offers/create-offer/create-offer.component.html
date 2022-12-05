@@ -8,19 +8,19 @@
 
     <app-input-element 
         [context]="form"
-          [model]="titleModel">
+          [model]="FormModels['TitleModel']">
     </app-input-element>
 
     <app-img-upload 
         [context]="form"
-        [model]="imgModel"
+        [model]="FormModels['ImgModel']"
         (image)="onImageSelected($event)">
     </app-img-upload>
     
     <ng-container *ngIf="uploadVisibility; else updateButton">
 
     <button mat-button 
-        class="menu-button" 
+        class="menu-button red" 
         (click)="upload()">
         Upload image
 
@@ -54,28 +54,28 @@
 
     <app-description 
         [context]="form"
-          [model]="descriptionModel">
+          [model]="FormModels['DescriptionModel']">
     </app-description>
 
     <app-text-area
         [context]="form"
-          [model]="contactInfoModel">
+          [model]="FormModels['OfferContactModel']">
     </app-text-area>
 
     <app-input-element
           [context]="form"
-          [model]="priceModel">
+          [model]="FormModels['PriceModel']">
     </app-input-element>
 
     <app-iput-date-picker
           [context]="form"
-          [model]="fromDateModel"
+          [model]="FormModels['FromDateModel']"
           [value]="dateNow">
     </app-iput-date-picker>
     
     <app-iput-date-picker
           [context]="form"
-          [model]="untilDateModel"
+          [model]="FormModels['UntilDateModel']"
           [value]="dateNow">
     </app-iput-date-picker>
 

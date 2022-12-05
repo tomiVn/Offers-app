@@ -16,12 +16,7 @@ import { UserFormService } from 'src/app/services/forms/user-form-factory/user-f
 export class EditComponent implements OnInit {
 
   form: FormGroup;
-  
-  nameModel:        IFormModel;
-  genderModel:      IFormModel;
-  bornModel:        IFormModel;
-  countryCodeModel: IFormModel;
-  phoneModel:       IFormModel;
+  FormModels!: { [s: string]: IFormModel; };
  
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
@@ -33,14 +28,8 @@ export class EditComponent implements OnInit {
     private formFactoryService: UserFormService) 
     {  
       let formServiceData = this.formFactoryService.formUserDetails();
-
       this.form = formServiceData.form;
-
-      this.nameModel        = formServiceData.NameModel;
-      this.genderModel      = formServiceData.GenderModel; 
-      this.bornModel        = formServiceData.BornModel;
-      this.countryCodeModel = formServiceData.DialCodeModel;
-      this.phoneModel       = formServiceData.PhoneModel;  
+      this.FormModels = formServiceData.models;
     }
   
   ngOnInit(): void {

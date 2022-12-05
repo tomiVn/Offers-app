@@ -18,8 +18,8 @@ export class ProfileComponent implements OnInit {
 
   isData: boolean = false;
   responseData$: Observable<User> | undefined;
-
-  imgModel!: IFormModel;
+  newAvatar: string = '';
+  FormModels!: { [s: string]: IFormModel; };
 
   uploadVisibility: boolean = false;
   uploadImage: string | undefined;
@@ -28,13 +28,12 @@ export class ProfileComponent implements OnInit {
     private userService:        UserService,
     private toastr:             ToastrService,
     private formFactoryService: UserFormService,
-    private ref:                ElementRef ) 
+    private ref:                ElementRef) 
     {
       let formServiceData = this.formFactoryService.formProfileImage();
 
       this.form = formServiceData.form;
-
-      this.imgModel = formServiceData.ImgModel;
+      this.FormModels = formServiceData.models;
     }
 
   ngOnInit(): void 
@@ -46,20 +45,23 @@ export class ProfileComponent implements OnInit {
   updateProfile() {
       
     if (this.form.valid && this.form.value) {
-      
+      this.uploadVisibility = false; 
       this.userService.updateUserAvatar(this.form.value)
         .pipe(take(1))
-        .subscribe(() => 
+        .subscribe((avatar) => 
           {       
-            this.toastr.success('You successfully updated your profile!'); 
-            this.uploadVisibility = false;      
+            if(avatar){              
+              this.toastr.success('You successfully updated your profile!');           
+              this.newAvatar = avatar.toString();
+            }           
             return;
           }, 
           (error: any) => 
           {
             return this.toastr.error( error.message, 'ERROR' );
           }
-        );     
+        ); 
+             
     }else{
       this.toastr.error('Your profile is not updated!', 'Error');
     }
@@ -67,6 +69,7 @@ export class ProfileComponent implements OnInit {
 
   cancel() {
     this.uploadVisibility = !this.uploadVisibility;
+    this.uploadImage = '';
     return;
   }
 
@@ -78,11 +81,29 @@ export class ProfileComponent implements OnInit {
   }
 
   onImageSelected(img: string){
-    this.uploadVisibility = this.form.valid && this.form.controls[this.imgModel.elementName].value; 
+    this.uploadVisibility = this.form.valid && this.form.controls[this.FormModels['ImgModel'].elementName].value; 
     
     if(this.uploadVisibility){
       this.uploadImage = img;
     }      
   }
+
+  avatarCases(userAvatar: string){ 
+    
+    if (this.newAvatar) {
+       
+      return this.uploadImage;
+    } else if(this.uploadImage){
+      
+      return this.uploadImage
+    }
+    else if(userAvatar) {
+        return userAvatar;
+    } else{
+        return 'https://res.cloudinary.com/duyubdgsj/image/upload/v1669408328/assets/146-1468479_my-profile-icon-blank-profile-picture-circle-hd_qsgtou.png'                  
+    }
+  }
 }
 
+
+                     

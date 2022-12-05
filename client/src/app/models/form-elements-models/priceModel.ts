@@ -4,7 +4,7 @@ import { customError, patternError, requiredField } from "./utils/errorsMessages
 import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
 
-export const PricenModel = FormElementFactoryFunction
+export const PriceModel = FormElementFactoryFunction
   ('price', 'Price', 'number', 0, '',
     ['',
       [ 

@@ -9,15 +9,16 @@
 
     <app-input-element 
         [context] ="form"
-           [model]="titleModel">
+           [model]="FormModels['TitleModel']">
     </app-input-element>
 
     <app-image-upload 
         [context]="form">
     </app-image-upload>
+    
     <app-description 
         [context]="form"
-          [model]="descriptionModel">
+          [model]="FormModels['DescriptionModel']">
     </app-description>
 
     <mat-card-actions id="button-container">

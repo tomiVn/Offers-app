@@ -21,7 +21,7 @@ export class PostsFormService {
     }
 
     return{
-      ...ModelsData,     
+      models: ModelsData,     
       form: this.fb.group( buildFormFunction( ModelsData ))
     } 
   }
