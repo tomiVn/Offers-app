@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import { IOffer } from 'src/app/models/interfaces/offerInterface';
 import { OfferService } from 'src/app/services/api/offers/offer.service';
 
@@ -12,16 +12,16 @@ import { OfferService } from 'src/app/services/api/offers/offer.service';
 export class LookingOffersComponent implements OnInit {
   
   offersData$!: Observable< IOffer[] >;
-
+  
   constructor(
     private offerService: OfferService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
 
     this.route.queryParams
       .subscribe(params => {
-        this.offersData$ = this.offerService.GetOffers( params['date'] )
+        this.offersData$ = this.offerService.GetOffers( params['date'] ).pipe(delay(600))
       });
   }
 }

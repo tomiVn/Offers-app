@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 
@@ -9,30 +9,45 @@ import { OffersFormService } from 'src/app/services/forms/offers-form-factory/of
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.less']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit{
 
   form!: FormGroup;
   FormModels: { [s: string]: IFormModel; };
-  curentDate = new Date();
+  curentDate!: Date;
+  queryDate: any;
 
   constructor ( 
     private offersFormFactory: OffersFormService,
-    private router: Router ) 
+    private router: Router,
+    private route: ActivatedRoute ) 
     {
       let formServiceData = this.offersFormFactory.getOffers();
       this.form  = formServiceData.form;
       this.FormModels = formServiceData.models;
-   }
+    }
+  
+  ngOnInit(): void {
+    this.route.queryParams
+      .subscribe( params => {
 
-  ngOnInit(): void {}
+        if( params ){       
+          this.curentDate = new Date(params['date']);        
+        }
+        
+      }
+    );
+    this.curentDate = new Date();
+  }
 
   onSubmit(){
 
     if(this.form.valid){
+       
+      let date = new Date(this.form.get('date')?.value);
       
-      let date = new Date(this.form.get('date')?.value).toISOString();
-
-      this.router.navigate( ['/offers'], { queryParams: { date } })
+      let dateForQuery = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+           
+      this.router.navigate( ['/offers'], { queryParams: { date: dateForQuery } })
     }
   }
 }
