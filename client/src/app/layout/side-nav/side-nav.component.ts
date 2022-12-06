@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 
@@ -10,19 +11,28 @@ import { OffersFormService } from 'src/app/services/forms/offers-form-factory/of
 })
 export class SideNavComponent implements OnInit {
 
-  formOffers!: FormGroup;
+  form!: FormGroup;
   FormModels: { [s: string]: IFormModel; };
   curentDate = new Date();
-  constructor(private offersFormFactory: OffersFormService) {
-    let formServiceData = this.offersFormFactory.getOffers();
-    this.formOffers  = formServiceData.form;
-    this.FormModels = formServiceData.models;
+
+  constructor ( 
+    private offersFormFactory: OffersFormService,
+    private router: Router ) 
+    {
+      let formServiceData = this.offersFormFactory.getOffers();
+      this.form  = formServiceData.form;
+      this.FormModels = formServiceData.models;
    }
 
   ngOnInit(): void {}
 
   onSubmit(){
-    
-  }
 
+    if(this.form.valid){
+      
+      let date = new Date(this.form.get('date')?.value).toISOString();
+
+      this.router.navigate( ['/offers'], { queryParams: { date } })
+    }
+  }
 }

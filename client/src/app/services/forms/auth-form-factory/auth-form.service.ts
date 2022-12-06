@@ -10,7 +10,7 @@ import { buildFormFunction } from 'src/app/utils/build-form';
 })
 export class AuthFormService {
 
-  constructor(private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder ) { }
 
   getRegisterForm() {
 

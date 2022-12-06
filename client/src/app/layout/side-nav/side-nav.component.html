@@ -33,7 +33,7 @@
   <article>
     <section>
       <!-- <mat-form-field  class="example-full-width"> -->
-      <form [formGroup]="formOffers" (onSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <fieldset>
           <legend>Your first vacation day?</legend>
           <table>
@@ -41,7 +41,7 @@
               <td>
                 <div class="date-picker">
                   <app-iput-date-picker 
-                    [context]="formOffers"
+                    [context]="form"
                     [model]="FormModels['DateModel']"
                     [value]="curentDate">
                   </app-iput-date-picker>

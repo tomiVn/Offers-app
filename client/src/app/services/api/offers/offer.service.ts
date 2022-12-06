@@ -11,10 +11,10 @@ import { environment } from 'src/environments/environment';
 export class OfferService {
 
   offerPathString: string = environment.path + '/offers';
- 
+
   constructor( private http: HttpClient ) { }
 
-  createOffer ( form: NgForm ): Observable< IOffer > {
+  CreateOffer ( form: NgForm ): Observable< IOffer > {
       
     let formData = new FormData();
 
@@ -23,5 +23,9 @@ export class OfferService {
    
     return this.http.post< IOffer >( this.offerPathString, formData );
   }
-  
+
+  GetOffers( queryString: string ): Observable< IOffer[] >{
+
+    return  this.http.get< IOffer[] >( this.offerPathString + '?date=' + queryString );
+  }
 }

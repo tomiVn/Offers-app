@@ -36,7 +36,7 @@ export class CreateOfferComponent implements OnInit {
   actionForm(){
     
     if(this.form.valid){
-      this.offerApiService.createOffer(this.form.value)
+      this.offerApiService.CreateOffer(this.form.value)
       .pipe(take(1))
       .subscribe();
     }

@@ -1,4 +1,12 @@
 const { Offer } = require("../models.js/offerModel");
 
 
-exports.createOffer = ( data ) => Offer.create( data );
+exports.PostNewOffer = ( data ) => Offer.create( data );
+
+exports.GetOffersOnSpecificDay = ( date ) => {
+    
+  return Offer.find( {} ).where( 
+        { fromDate: { $gte: date } }, 
+        { untilDate: { $lte: date} } 
+    );   
+}

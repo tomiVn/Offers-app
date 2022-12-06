@@ -1,6 +1,6 @@
 const { AUTH_PATH } = require('../config/constants');
 const { guestOnly, userOnly } = require('../middlewear/guards');
-const { createToken, loginService, registerUserService, getUser, updateProfile } = require('../services/authService');
+const { createToken, LoginService, RegisterUserService, GetUser, UpdateProfile } = require('../services/authService');
 const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const cloudinary = require("../config/cloudinary-configuration");
@@ -14,7 +14,7 @@ const router = require('express').Router();
 router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
    
     try {
-        let { _id, name, role } = await registerUserService(req.body);
+        let { _id, name, role } = await RegisterUserService(req.body);
 
         return res.status(201).json(userInfo(_id, name, role));
 
@@ -30,7 +30,7 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
     .post( AUTH_PATH + '/login', trimForm, guestOnly, async (req, res) => {
 
         try {
-            let { _id, name, role } = await loginService(req.body);
+            let { _id, name, role } = await LoginService(req.body);
 
             return res.status(200).json( userInfo(_id, name, role));
 
@@ -48,7 +48,7 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
         try {
             let userId = req?.user?.id;
 
-            let user = await getUser(userId);
+            let user = await GetUser(userId);
             
             return res.status(200).json( user );
 
@@ -66,7 +66,7 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
         try {
             let userId = req?.user?.id;
                              
-            let user = await updateProfile(userId, req.body);
+            let user = await UpdateProfile(userId, req.body);
                
             return res.status( 201 ).json( { _id: user.id, name: user.name } );
 
@@ -91,7 +91,7 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
 
                 const upload = await cloudinary.uploader.upload(req.file.path, { folder: req.user.id });
                                             
-                let user = await updateProfile(userId, {avatar: upload.url});
+                let user = await UpdateProfile(userId, {avatar: upload.url});
     
                 return res.status(201).json( user.avatar );
     

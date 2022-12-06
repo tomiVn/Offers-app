@@ -5,8 +5,8 @@ const multer = require("../config/multer-configuration");
 const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const { OFFER_PATH } = require('../config/constants');
-const { createOffer } = require('../services/offerService');
-const { updateProfile } = require('../services/authService');
+const { PostNewOffer, GetOffersOnSpecificDay } = require('../services/offerService');
+const { UpdateProfile } = require('../services/authService');
 
 const uploadFile = multer.single('file');
 
@@ -22,11 +22,11 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
             const userId = req.user.id;
             const upload = await cloudinary.uploader.upload(req.file.path, { folder: userId });
                       
-            let newOffer = await createOffer({
+            let newOffer = await PostNewOffer({
                 ...req.body, image: upload.url, creator: userId
             });
           
-            await updateProfile( userId, { "$push": { createdOffers: { "_id": newOffer._id } } });
+            await UpdateProfile( userId, { "$push": { createdOffers: { "_id": newOffer._id } } });
 
             return res.status(201).json({ message: 'Successfully created' });
 
@@ -35,6 +35,19 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
             return res.status(400).json({ message: errors });
         }
     })
+})
+
+.get( OFFER_PATH, async( req, res) => {
+
+   try{
+
+    let data = await GetOffersOnSpecificDay( req.query.date )
+    
+    return res.status(200).json( data );
+
+   }catch( error ){
+
+   }    
 })
 
 module.exports = router;

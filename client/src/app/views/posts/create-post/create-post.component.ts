@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
+import { PostsService } from 'src/app/services/api/posts/posts.service';
 import { PostsFormService } from 'src/app/services/forms/posts-form-factory/posts-form.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor( 
     private postFormFactory: PostsFormService,
+    private posts: PostsService,
     private ref: ElementRef,
     private toastr: ToastrService) 
     {
@@ -28,7 +30,14 @@ export class CreatePostComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  actionForm(){}
+  actionForm(){
+
+    if(this.form.valid){
+      this.posts.newPost(this.form.value).subscribe((e) =>
+      console.log(e)
+      )
+    }
+  }
 
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');

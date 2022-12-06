@@ -12,7 +12,8 @@ const uploadFile = multer.single('file');
 router.post( POSTS_PATH, userOnly, trimForm, async (req, res) => {
 
     uploadFile(req, res, async (error) => {
-
+       console.log('111111111');
+       
         if (error) {
             
             return res.status(400).json({ message: error.message });
@@ -36,6 +37,10 @@ router.post( POSTS_PATH, userOnly, trimForm, async (req, res) => {
             return res.status(400).json({ message: errors });
         }
     })
+})
+
+.get(POSTS_PATH, (req, res) => {
+    return res.status(200).json({ message: 'sqfdgfhgeh' });
 })
 
 module.exports = router;

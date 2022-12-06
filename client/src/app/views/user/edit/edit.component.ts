@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
     private userService:        UserService,              
     private router:             Router,
     private toastr:             ToastrService,
-    private formFactoryService: UserFormService) 
+    private formFactoryService: UserFormService ) 
     {  
       let formServiceData = this.formFactoryService.formUserDetails();
       this.form = formServiceData.form;
