@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/interfaces/userModel';
+import { FormDataAppend } from 'src/app/utils/form-data-append';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,13 +24,17 @@ export class UserService {
   }
 
   updateUserAvatar( form: NgForm ): Observable< User >{
-
-    let formData = new FormData();
-
-    Object.entries( form ).forEach(([ key, value ]) => { 
-      formData.append( key, value ) } );
+  
+    let formData = FormDataAppend( form );
 
     return this.http.put< User >( this.userPathString + '/avatar', formData );
   }
+
+  PutOfferToWatchList( offerId: string ): Observable< User >{
+    
+    return this.http.put< User >( this.userPathString + '/watch-list', { offerId } );
+  }
   
 }
+
+//{ "$push": { watchOfferList: { "_id": offerId } } }

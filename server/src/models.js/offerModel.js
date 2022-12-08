@@ -40,6 +40,12 @@ const offerModel = new Schema({
            type: mongoose.Types.ObjectId,
             ref: 'User'
     },
+
+    watchedList: [{
+           type: mongoose.Types.ObjectId,
+            ref: 'User'
+    }]
+
 });
 
 offerModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {

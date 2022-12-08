@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router, RouterStateSnapshot, RoutesRecognized } from '@angular/router';
+import { time } from 'console';
+import { Observable } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 
@@ -14,7 +16,6 @@ export class SideNavComponent implements OnInit{
   form!: FormGroup;
   FormModels: { [s: string]: IFormModel; };
   curentDate!: Date;
-  queryDate: any;
 
   constructor ( 
     private offersFormFactory: OffersFormService,
@@ -26,16 +27,21 @@ export class SideNavComponent implements OnInit{
       this.FormModels = formServiceData.models;
     }
   
-  ngOnInit(): void {
+  ngOnInit(): void { 
+
+   
+
     this.route.queryParams
+    //ToDo init queryDate
       .subscribe( params => {
 
-        if( params ){       
-          this.curentDate = new Date(params['date']);        
+        if( params ){   
+          
+          this.curentDate = new Date( params['date'] );
         }
-        
       }
     );
+
     this.curentDate = new Date();
   }
 
@@ -51,3 +57,5 @@ export class SideNavComponent implements OnInit{
     }
   }
 }
+
+

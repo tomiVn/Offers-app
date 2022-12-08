@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IOffer } from 'src/app/models/interfaces/offerInterface';
+import { FormDataAppend } from 'src/app/utils/form-data-append';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,21 +12,22 @@ import { environment } from 'src/environments/environment';
 export class OfferService {
 
   offerPathString: string = environment.path + '/offers';
-
+  
   constructor( private http: HttpClient ) { }
 
   CreateOffer ( form: NgForm ): Observable< IOffer > {
       
-    let formData = new FormData();
-
-    Object.entries( form ).forEach(([ key, value ]) => { 
-        formData.append( key, value ) } );
+    let formData = FormDataAppend( form );
    
     return this.http.post< IOffer >( this.offerPathString, formData );
   }
 
   GetOffers( queryString: string ): Observable< IOffer[] >{
-
-    return  this.http.get< IOffer[] >( this.offerPathString + '?date=' + queryString );
+    return this.http.get< IOffer[] >( this.offerPathString + '?date=' + queryString );
   }
+
+  GetOneOfferById( id: string): Observable< IOffer >{
+    return this.http.get< IOffer >( this.offerPathString + '?offerId=' + id );
+  }
+
 }

@@ -5,17 +5,23 @@ import { MaterialsModule } from 'src/app/materials/materials.module';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from 'src/app/layout/forms/forms.module';
 import { LookingOffersComponent } from './looking-offers/looking-offers.component';
+import { MatButtonModule } from '@angular/material/button';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { DetailsOfferComponent } from './details-offer/details-offer.component';
 
 @NgModule({
   declarations: [
     CreateOfferComponent,
-    LookingOffersComponent
+    LookingOffersComponent,
+    DetailsOfferComponent
   ],
   imports: [
     CommonModule,
     MaterialsModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule,
+    AppRoutingModule
   ]
 })
 export class OffersModule { }

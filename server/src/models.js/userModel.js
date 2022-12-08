@@ -51,9 +51,12 @@ const uModel = new Schema({
    createdOffers: [{
             type: mongoose.Types.ObjectId,
              ref: 'Offer'
-           }]
-
-
+           }],
+    
+  watchOfferList: [{
+            type: mongoose.Types.ObjectId,
+             ref: 'Offer'
+            }]
 });
 
 uModel.virtual('repeatPass')

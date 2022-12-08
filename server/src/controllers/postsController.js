@@ -12,7 +12,6 @@ const uploadFile = multer.single('file');
 router.post( POSTS_PATH, userOnly, trimForm, async (req, res) => {
 
     uploadFile(req, res, async (error) => {
-       console.log('111111111');
        
         if (error) {
             

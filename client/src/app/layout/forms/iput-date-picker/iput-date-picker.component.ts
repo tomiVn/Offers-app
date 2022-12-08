@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 
 @Component({
   selector: 'app-iput-date-picker',
@@ -30,8 +31,8 @@ import { FormGroup } from '@angular/forms';
 export class IputDatePickerComponent implements OnInit {
 
   @Input() context!: FormGroup;
-  @Input() model: any;
-  @Input() value: Date | undefined;
+  @Input() model!: IFormModel;
+  @Input() value!: Date;
 
   constructor() {}
 

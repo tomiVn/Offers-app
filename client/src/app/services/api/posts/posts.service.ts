@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FormDataAppend } from 'src/app/utils/form-data-append';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,17 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export class PostsService {
 
-
   PathString: string = environment.path + '/posts';
+  
   constructor(private http: HttpClient) { }
 
   newPost(form: NgForm){
-    console.log(form);
     
-    let formData = new FormData();
-
-    Object.entries( form ).forEach(([ key, value ]) => { 
-      formData.append( key, value ) } );
+    let formData = FormDataAppend( form );
 
      return this.http.post(this.PathString, formData);
 

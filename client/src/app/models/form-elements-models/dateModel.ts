@@ -1,7 +1,7 @@
 import { FormElementFactoryFunction } from "./utils/form-element-factory";
 
 export const DateModel = FormElementFactoryFunction
-('date', 'Date', '', 0, '', ['', []], []);
+('date', 'Date', 'date', 0, '', ['', []], []);
 
     const FromDate = Object.assign(() => {}, DateModel);   
         FromDate.setElementName('fromDate');

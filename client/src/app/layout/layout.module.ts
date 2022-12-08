@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';  
 import { NgOptimizedImage } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu'; 
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatGridListModule,
     NgOptimizedImage,
-    MatMenuModule
+    MatMenuModule,
+    //RouterModule.forRoot([], { enableTracing: true })
   ],
   exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule ],
              
