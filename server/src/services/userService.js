@@ -8,7 +8,7 @@ exports.UpdateProfile = async ( userId, data ) => {
 };
 
 exports.PutNewOffer = async ( userId, offerId ) => { 
-    return await User.findByIdAndUpdate( userId , { "$push": { createdOffers: { "_id": offerId } } }) 
+    return await User.updateOne( { "_id": userId}, { "$push": { createdOffers: { "_id": offerId } } }) 
 };
 
 exports.UpdateWatchList = async ( userId, offerId) => {

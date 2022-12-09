@@ -1,31 +1,61 @@
 <mat-card class="card-decoration">
     <ng-container *ngIf="( offerDetails$ | async) as offer; else loading">
+
         <article class="offer-container" >
-            <div class="col">
+
+            <div class="col">                
                 <header class="header">
                     <h3>{{offer.title}}</h3>
                  </header>
      
                 <figure class="image-container">
-                    <img src="{{offer.image}}"  width="300" height="300">
+                    <img src="{{offer.image}}" width="300" height="300">
                 </figure>     
             </div>
            
             <div class="col">
-                <p><strong>Description: </strong>{{offer.description}}</p>  
-                <p><strong>Offer duration: </strong> from {{offer.fromDate | date}} - until {{offer.untilDate | date }}</p>
-                <p><strong>Contatc info: </strong>{{ offer.contactInfo }}</p>  
+
+                <p><strong>Description: </strong>
+                    {{offer.description}}
+                </p> 
+
+                <p><strong>Offer duration: </strong> 
+                    from {{offer.fromDate | date}} - 
+                    until {{offer.untilDate | date }}
+                </p>
+                
+                <p><strong>Contatc info: </strong>
+                    {{ offer.contactInfo }}
+                </p> 
+
                 <p class="text-align-right">
                     Price <b>{{offer.price | currency }}</b> 
                 </p>
-                <p class="text-align-right"><i>Created {{offer.createdAt | date}}, from {{ offer.creator.name }}</i></p>
-                
-                <button mat-button *ngIf="isUser" (click)="addToWatchList(offer._id)" >Add to watch List</button>
+
+                <p class="text-align-right">
+                    <i>Created {{offer.createdAt | date}}, 
+                        from {{ offer.creator.name }}
+                    </i>
+                </p>
+                                
+                <ng-container *ngIf="curentUser?.id == offer?.creator?._id; else isNotOwner">
+                    <button mat-button routerLink="/offers/{{offer._id}}/edit">Edit</button>
+                    <button mat-button (click)="deleteOffer(offer._id, offer.title)">Delete</button>
+                </ng-container> 
+
+                <ng-template #isNotOwner>
+                    <button mat-button 
+                        *ngIf="isUser && !isInWatchList" 
+                        (click)="addToWatchList(offer._id)" >
+                            Add to watch List
+                    </button>      
+                </ng-template>               
             </div>           
        </article> 
-
     </ng-container>
+
     <ng-template #loading>
         <h3>Loading...</h3>
     </ng-template>
+    
 </mat-card>

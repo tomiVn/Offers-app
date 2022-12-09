@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
@@ -24,7 +25,8 @@ export class CreateOfferComponent implements OnInit {
     private formFactoryService: OffersFormService,
     private offerApiService: OfferService,
     private ref: ElementRef,
-    private toastr: ToastrService ) 
+    private toastr: ToastrService,
+    private router: Router ) 
     {
       let formFactoryServiceData = this.formFactoryService.createOffer();
       this.form = formFactoryServiceData.form;
@@ -38,9 +40,13 @@ export class CreateOfferComponent implements OnInit {
     if(this.form.valid){
       this.offerApiService.CreateOffer(this.form.value)
       .pipe(take(1))
-      .subscribe();
+      .subscribe(e =>
+        this.router.navigate(['/offers/' + e._id + '/view']),      
+      );
+      //this.toastr.success('Successfuly created offer.'); 
     }
     
+
    }
 
   upload() {

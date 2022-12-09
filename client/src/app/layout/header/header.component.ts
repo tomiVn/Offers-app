@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.router.events.subscribe((res) => {
       this.sideNavInit();
     });
-    this.ngDoCheck();
   }
 
   ngAfterViewInit(): void {
@@ -36,27 +35,30 @@ export class HeaderComponent implements OnInit, DoCheck {
   ngDoCheck() {
     
     let payload = this.service.currentUser();
-    if (payload) {
-      this.userId = payload.id;
-      this.isUser = true;
-      return;
-    } else {
-      this.isUser = false;
-      return;
-    }
+    if ( payload ) 
+      {
+        this.userId = payload.id;
+        this.isUser = this.service.isUser();
+      } else 
+          {
+            this.isUser = false;
+          }
   }
 
   sideNavInit() {
     this.observer
       .observe(['(max-width:787px)'])
       .subscribe((res) => {
-        if (res?.matches) {
+
+        if (res?.matches) 
+        {
           this.sideNav.mode = 'over';
           this.sideNav.close();
-        } else {
-          this.sideNav.mode = 'side';
-          this.sideNav.open();
-        }
+        } else 
+          {
+            this.sideNav.mode = 'side';
+            this.sideNav.open();
+          }
       });
     this.cdr.detectChanges();
   }

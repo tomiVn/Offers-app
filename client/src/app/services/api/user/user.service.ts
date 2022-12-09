@@ -29,12 +29,5 @@ export class UserService {
 
     return this.http.put< User >( this.userPathString + '/avatar', formData );
   }
-
-  PutOfferToWatchList( offerId: string ): Observable< User >{
-    
-    return this.http.put< User >( this.userPathString + '/watch-list', { offerId } );
-  }
   
 }
-
-//{ "$push": { watchOfferList: { "_id": offerId } } }

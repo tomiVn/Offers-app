@@ -8,12 +8,14 @@ import { LookingOffersComponent } from './looking-offers/looking-offers.componen
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { DetailsOfferComponent } from './details-offer/details-offer.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
 
 @NgModule({
   declarations: [
     CreateOfferComponent,
     LookingOffersComponent,
-    DetailsOfferComponent
+    DetailsOfferComponent,
+    EditOfferComponent
   ],
   imports: [
     CommonModule,

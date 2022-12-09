@@ -8,7 +8,12 @@ exports.GetOffersOnSpecificDay = ( date ) => {
   return Offer.find({}).where({ fromDate: { $lte: date},  untilDate: { $gte: date }})  
 }
 
-exports.GetOfferById = ( id ) => Offer.findById( id ).populate('creator', ['name']);
+exports.GetOfferById = ( id ) => Offer.findById( id ).populate('creator', ['_id','name']);
 
 exports.PutUserToWatchedList = ( offerId, userId ) => 
-  Offer.updateOne( { "_id": offerId, "watchedList": { "$ne": userId }}, { "$push": { watchedList: { "_id": userId } } } );
+  Offer.updateOne( 
+    { "_id": offerId, "watchedList": { "$ne": userId }}, 
+    { "$push": { watchedList: { "_id": userId } } } 
+  );
+
+exports.DeleteData = ( offerId, userId ) => Offer.findOneAndDelete( { _id: offerId, creator: userId } );

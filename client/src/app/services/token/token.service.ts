@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { IToken } from 'src/app/models/interfaces/tokenModel';
+import { ITokenPayload } from 'src/app/models/interfaces/tokenPayloadInterface';
 import { COOKIE_NAME } from 'src/app/utils/const';
 
 @Injectable({
@@ -30,10 +33,9 @@ export class TokenService {
    
     let token = this.cookie.get( COOKIE_NAME );
 
-    if(token){
+    if( token ){
       return getPayload( token );
     }
-    
     return null;
   }
 

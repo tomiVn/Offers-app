@@ -48,10 +48,14 @@ const offerModel = new Schema({
 
 });
 
-offerModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {
+// offerModel.pre( ['save','updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {
 
-      const data = this.getUpdate();  
-});
+//       if(this.fromDate){
+//         this.fromDate.setHours(1);
+//         next();
+//       }
+//       next();
+// });
 
 offerModel.set('timestamps', true);//To have 
 

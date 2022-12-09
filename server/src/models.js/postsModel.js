@@ -27,10 +27,10 @@ const postModel = new Schema({
         }]
 });
 
-postModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {
+// postModel.pre( ['updateOne', 'findOneAndUpdate', 'findByIdAndUpdate'], function ( next ) {
 
-      const data = this.getUpdate();  
-});
+//       const data = this.getUpdate();  
+// });
 
 postModel.set('timestamps', true);//To have 
 

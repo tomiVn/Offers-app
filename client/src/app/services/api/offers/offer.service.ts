@@ -30,4 +30,13 @@ export class OfferService {
     return this.http.get< IOffer >( this.offerPathString + '?offerId=' + id );
   }
 
+  PutOfferToWatchList( offerId: string ): Observable< {message: string} >{
+    
+    return this.http.put< {message: string} >( this.offerPathString + '/watch-list', { offerId } );
+  }
+
+  DeleteOfferById(offerId: string): Observable< {message: string} >{
+      return this.http.delete< {message: string} >( this.offerPathString + '?offerId=' + offerId );
+  }
+
 }
