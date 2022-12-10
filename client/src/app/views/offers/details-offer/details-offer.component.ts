@@ -51,13 +51,18 @@ export class DetailsOfferComponent implements OnInit {
   
   addToWatchList(offerId: string){
 
-     this.offersService.PutOfferToWatchList( offerId ).pipe(take(1)).subscribe(e =>
-      this.toastr.success(e.message));    
+     this.offersService.PutOfferToWatchList( offerId )
+      .pipe(take(1),
+      tap(e => { 
+        this.toastr.success(e.message);
+        this.router.navigate(['/user/' + this.curentUser?.id + '/profile'])
+      })).subscribe();       
   }
 
   deleteOffer(offerId: string, offerTitle: string){
     if(confirm("Are you sure to delete " + offerTitle)) {
-      this.offersService.DeleteOfferById( offerId ).pipe(take(1),
+      this.offersService.DeleteOfferById( offerId )
+      .pipe(take(1),
       tap(e => { 
         this.toastr.success(e.message);
         this.router.navigate(['/user/' + this.curentUser?.id + '/profile'])
@@ -65,4 +70,14 @@ export class DetailsOfferComponent implements OnInit {
       )).subscribe();
     }
   }
+
+  removeFromWatchList(offerId: string){
+    this.offersService.RemoveOfferFromWatchList( offerId ).pipe(take(1),
+    tap(e => { 
+      this.toastr.success(e.message);
+      this.router.navigate(['/user/' + this.curentUser?.id + '/profile'])
+    }
+    )).subscribe();
+  }
+
 }

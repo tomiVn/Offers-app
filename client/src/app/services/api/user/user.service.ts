@@ -29,5 +29,5 @@ export class UserService {
 
     return this.http.put< User >( this.userPathString + '/avatar', formData );
   }
-  
+
 }

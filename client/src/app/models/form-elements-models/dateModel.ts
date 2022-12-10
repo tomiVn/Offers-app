@@ -7,14 +7,24 @@ export const DateModel = FormElementFactoryFunction
      
 export const FromDateModel = FormElementFactoryFunction
     ('fromDate', 'Date', 'date', 0, '', 
-        ['', [isDatePast]], 
-        [ customError('dateIsPast', 'Date is past!!!')]);
+        ['', 
+            [isDatePast]
+        ], 
+        [ 
+            customError('dateIsPast', 'Date is past!!!')
+        ]
+    );
 
 export const UntilDateModel = FormElementFactoryFunction
     ('untilDate', 'Until date', 'date', 0, '', 
-        ['', [isDatePast]], 
-         [ customError('dateIsPast', 'Date is past!!!'), 
-            customError('isCompareDatesNotValid', 'Until date must be greater than from date!!!')]);; 
+        ['', 
+            [isDatePast]
+        ], 
+        [ 
+            customError('dateIsPast', 'Date is past!!!'), 
+            customError('isCompareDatesNotValid', 'Until date must be greater than from date!!!')
+        ]
+    );
 
 export function isUntilGtThanFrom( fromDate: string, untilDate: string ){
     return (formgroup: FormGroup) => {
@@ -27,12 +37,12 @@ export function isUntilGtThanFrom( fromDate: string, untilDate: string ){
           }
            
       return fromDateElement.value > untilDateElement.value 
-        ? untilDateElement.setErrors({ isCompareDatesNotValid: true }) 
+        ? untilDateElement.setErrors({ 'isCompareDatesNotValid': true }) 
         : untilDateElement.setErrors( null );
       }
   }
 
-  function isDatePast(control: AbstractControl){  
+  function isDatePast( control: AbstractControl ){  
 
         let dateValue   = control.value;
 

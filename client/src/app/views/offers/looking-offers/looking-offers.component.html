@@ -1,33 +1,9 @@
 <mat-card class="card-decoration">
 <ng-container *ngIf="(offersData$ | async) as data; else loading">
     <ng-container *ngFor="let offer of offersData$ | async">
-        <article class="offer-container" >
-
-             <header class="header">
-                <h3>{{offer.title}}</h3>
-            </header>
-
-            <figure class="image-container">
-                <img src="{{offer.image}}"  width="300" height="300">
-            </figure>
-
-            <div class="row">
-
-                <div class="col">
-                    <button mat-button 
-                            class="menu-button" 
-                            routerLink="/offers/{{offer._id}}/view">
-                                More details...
-                    </button>
-                </div>
-
-                <div class="col">
-                    <p class="price-content">
-                        Price <strong>{{offer.price | currency}}</strong> 
-                    </p>
-                </div>
-            </div>
-        </article> 
+        <app-offer-template
+            [offer]="offer">
+        </app-offer-template> 
     </ng-container>   
 </ng-container>
 <ng-template #loading>

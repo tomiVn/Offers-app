@@ -32,7 +32,7 @@ export class OfferService {
 
   PutOfferToWatchList( offerId: string ): Observable< {message: string} >{
     
-    return this.http.put< {message: string} >( this.offerPathString + '/watch-list', { offerId } );
+    return this.http.put< {message: string} >( this.offerPathString + '/watch', { offerId } );
   }
 
   DeleteOfferById(offerId: string): Observable< {message: string} >{
@@ -46,6 +46,11 @@ export class OfferService {
     formData.append('_id', offerId);
 
       return this.http.put< {message: string} >( this.offerPathString, formData );
+  }
+
+  RemoveOfferFromWatchList( offerId: string ): Observable< {message: string} >{
+    
+    return this.http.put< {message: string} >( this.offerPathString + '/unwatch', { offerId } );
   }
 
 }

@@ -5,8 +5,8 @@ const multer = require("../config/multer-configuration");
 const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const { OFFER_PATH } = require('../config/constants');
-const { PostNewOffer, GetOffersOnSpecificDay, GetOfferById, PutUserToWatchedList, DeleteData, UpdateOffer } = require('../services/offerService');
-const { PutNewOfferToUserWatchList, UpdateWatchList } = require('../services/userService');
+const { PostNewOffer, GetOffersOnSpecificDay, GetOfferById, PutUserToWatchedList,  UpdateOffer, GetOfferUsers, DeleteData, RemoveUserFromWatchedList } = require('../services/offerService');
+const { PutNewOfferToUserWatchList, UpdateWatchList, RemoveOfferFromUserWatchList, RemoveOfferFromUserCreator, PushNewOfferToUserCreatedList } = require('../services/userService');
 
 const uploadFile = multer.single('file');
 
@@ -30,7 +30,8 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
                 ...req.body, image: upload?.url, creator: userId
             });
          
-            await PutNewOfferToUserWatchList( userId, newOffer._id );
+            //await PutNewOfferToUserWatchList( userId, newOffer._id );
+            await PushNewOfferToUserCreatedList( userId, newOffer._id );
 
             return res.status(201).json({ _id: newOffer._id });
 
@@ -92,8 +93,15 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
 .delete( OFFER_PATH, async( req, res) => {
 
     try{
-     
-     await DeleteData( req.query.offerId, req.user._id );
+        let offerId = req?.query?.offerId;
+
+        let usersList = await GetOfferUsers ( req?.query?.offerId );
+
+        await RemoveOfferFromUserWatchList( usersList.watchedList,  offerId);
+        
+        await RemoveOfferFromUserCreator( usersList.creator._id.toString(),  offerId );
+
+        await DeleteData( offerId, req.user._id );
      
      return res.status(200).json( {message: 'Successfully deleted offer.'} );
  
@@ -102,7 +110,7 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
     }    
  })
 
-.put( OFFER_PATH + '/watch-list', userOnly, trimForm, async(req, res) => {
+.put( OFFER_PATH + '/watch', userOnly, trimForm, async(req, res) => {
         
     try {
         let userId = req?.user?.id;
@@ -111,6 +119,26 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
         await PutUserToWatchedList( req.body.offerId, userId);
            
         return res.status( 201 ).json( { message: 'Offer is in your list' } );
+
+    }catch( error ){
+        console.log(error);
+        
+        let errors = parseErrors( error );
+        return res.status( 400 ).json( { message: errors.message });
+    }
+})
+
+.put( OFFER_PATH + '/unwatch', userOnly, trimForm, async(req, res) => {
+        
+    try {
+        let userId = req?.user?.id;
+        let offerId = req?.body?.offerId;
+
+        await RemoveOfferFromUserWatchList( [ {'_id': userId} ], offerId );
+
+        await RemoveUserFromWatchedList( offerId, userId);
+           
+        return res.status( 201 ).json( { message: 'Offer is removed from your list.' } );
 
     }catch( error ){
         console.log(error);

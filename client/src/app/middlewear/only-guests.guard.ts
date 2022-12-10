@@ -16,7 +16,7 @@ export class OnlyGuestsGuard implements CanActivate {
     let isCurrentUser = this.tokenService.currentUser();
 
     if (isCurrentUser) {
-      this.router.navigate(['/user/' + isCurrentUser.name + '/profile']);
+      this.router.navigate(['/user/' + isCurrentUser.id + '/profile']);
       this.toastr.error('Please log out first!', 'Already exist user!');
       return false;
     }else{

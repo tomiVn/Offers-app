@@ -19,6 +19,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { NgOptimizedImage } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu'; 
 import { RouterModule } from '@angular/router';
+import { OfferTemplateComponent } from './templates/offer-template/offer-template.component';
+import { TemplatesModule } from './templates/templates.module';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,10 @@ import { RouterModule } from '@angular/router';
     MatGridListModule,
     NgOptimizedImage,
     MatMenuModule,
+    TemplatesModule
     //RouterModule.forRoot([], { enableTracing: true })
   ],
-  exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule ],
+  exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule, OfferTemplateComponent ],
              
   providers: [ CookieService, 
     { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true }],

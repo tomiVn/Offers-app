@@ -44,11 +44,21 @@
                 </ng-container> 
 
                 <ng-template #isNotOwner>
-                    <button mat-button 
-                        *ngIf="isUser && !isInWatchList" 
-                        (click)="addToWatchList(offer._id)" >
-                            Add to watch List
-                    </button>      
+
+                    <ng-container *ngIf="isUser && !isInWatchList; else unwatch">                   
+                        <button mat-button                             
+                            (click)="addToWatchList(offer._id)" >
+                                Add to watch List
+                        </button>
+                    </ng-container>
+
+                    <ng-template #unwatch>
+                        <button mat-button                             
+                            (click)="removeFromWatchList(offer._id)" >
+                                Remove from watch List
+                        </button>
+                    </ng-template>
+
                 </ng-template>               
             </div>           
        </article> 

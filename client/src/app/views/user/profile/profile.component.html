@@ -68,8 +68,36 @@
                 <p>phone: {{user.dialCode}} {{user.phone}}</p>
             </section>
             <section class="profile-details">
-                <h3>posts: {{user.posts.length || 'Not posts yet!'}}</h3>
+                <h3>post offers: {{user?.createdOffers?.length || 'Not post offers yet!'}}</h3>
+                <h3>watched offers: {{user?.watchOfferList?.length || 'Not watched offers yet!'}}</h3>
             </section>
+
+            <section id="user-offers" *ngIf="user?.createdOffers?.length !== 0">
+                <header>
+                    <h3 class="text-center">
+                        Your post offers.
+                    </h3>
+                </header>
+                <div *ngFor="let offer of user?.createdOffers">
+                    <app-offer-template
+                        [offer]="offer">                    
+                    </app-offer-template>
+                </div>
+            </section>
+
+            <section id="watched-offers" *ngIf="user?.watchOfferList?.length !== 0">
+                <header>
+                    <h3 class="text-center">
+                        Your watch offers list.
+                    </h3>
+                </header>
+                <div *ngFor="let offer of user?.watchOfferList">
+                    <app-offer-template
+                        [offer]="offer">                    
+                    </app-offer-template>
+                </div>
+            </section>
+
         </mat-card-content>
     </div>
 

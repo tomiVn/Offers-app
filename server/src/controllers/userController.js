@@ -5,8 +5,7 @@ const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const cloudinary = require("../config/cloudinary-configuration");
 const multer = require("../config/multer-configuration");
-const { GetUser, UpdateProfile, UpdateWatchList } = require('../services/userService');
-const { PutUserToWatchedList } = require('../services/offerService');
+const { GetUser, UpdateProfile } = require('../services/userService');
 
 const uploadFile = multer.single('file');
 
@@ -68,23 +67,5 @@ router.get( AUTH_PATH, userOnly, async (req, res) => {
         }
     })
 })
-
-// .put( AUTH_PATH + '/watch-list', userOnly, trimForm, async(req, res) => {
-        
-//     try {
-//         let userId = req?.user?.id;
-                         
-//         await UpdateWatchList( userId, req.body.offerId );
-//         await PutUserToWatchedList( req.body.offerId, userId);
-           
-//         return res.status( 201 ).json( { message: 'Offer is in your list' } );
-
-//     }catch( error ){
-//         console.log(error);
-        
-//         let errors = parseErrors( error );
-//         return res.status( 400 ).json( { message: errors.message });
-//     }
-// })
 
 module.exports = router;

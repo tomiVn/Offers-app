@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { DetailsOfferComponent } from './details-offer/details-offer.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
+import { TemplatesModule } from 'src/app/layout/templates/templates.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditOfferComponent } from './edit-offer/edit-offer.component';
     MatCardModule,
     FormsModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TemplatesModule
   ]
 })
 export class OffersModule { }
