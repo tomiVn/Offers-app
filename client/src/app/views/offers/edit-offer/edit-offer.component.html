@@ -1,8 +1,7 @@
 <mat-card class="card-decoration">
 <ng-container *ngIf="( offerDetails$ | async) as offer">
     <form [formGroup]="form" 
-          class="example-form" 
-          (ngSubmit)="actionForm()" 
+          class="example-form"  
           enctype="multipart/form-data" 
           method="POST">
 
@@ -57,19 +56,19 @@
     <app-description 
         [context]="form"
           [model]="FormModels['DescriptionModel']"
-          [value]="offer.description">
+          [value]="offer.description ">
     </app-description>
 
     <app-text-area
         [context]="form"
           [model]="FormModels['OfferContactModel']"
-          [value]="">
+          [value]="offer.contactInfo">
     </app-text-area>
 
     <app-input-element
           [context]="form"
           [model]="FormModels['PriceModel']"
-          [value]="">
+          [value]="offer.price.toString()">
     </app-input-element>
 
     <app-iput-date-picker
@@ -87,7 +86,8 @@
     <mat-card-actions id="button-container">
         <button mat-raised-button 
             color="primary" 
-            [disabled]="form.invalid">
+            [disabled]="form.invalid"
+            (click)="actionForm(offer._id)">
             Submit
         </button>
     </mat-card-actions>

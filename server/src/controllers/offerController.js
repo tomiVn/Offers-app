@@ -5,8 +5,8 @@ const multer = require("../config/multer-configuration");
 const { parseErrors } = require('../utils/parseErrors');
 const { trimForm } = require('../utils/trimForm');
 const { OFFER_PATH } = require('../config/constants');
-const { PostNewOffer, GetOffersOnSpecificDay, GetOfferById, PutUserToWatchedList, DeleteData } = require('../services/offerService');
-const { PutNewOffer, UpdateWatchList } = require('../services/userService');
+const { PostNewOffer, GetOffersOnSpecificDay, GetOfferById, PutUserToWatchedList, DeleteData, UpdateOffer } = require('../services/offerService');
+const { PutNewOfferToUserWatchList, UpdateWatchList } = require('../services/userService');
 
 const uploadFile = multer.single('file');
 
@@ -20,19 +20,21 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
        
         try {
             const userId = req.user.id;
-            const upload = await cloudinary.uploader.upload(req.file.path, { folder: userId });
-                            
+           
+            const upload = 
+                req?.file 
+                    ? await cloudinary.uploader.upload(req?.file.path, { folder: userId }) 
+                    : null;
+            
             let newOffer = await PostNewOffer({
-                ...req.body, image: upload.url, creator: userId
+                ...req.body, image: upload?.url, creator: userId
             });
-            console.log(newOffer);
-            await PutNewOffer( userId, newOffer._id );
-
+         
+            await PutNewOfferToUserWatchList( userId, newOffer._id );
 
             return res.status(201).json({ _id: newOffer._id });
 
         } catch (err) {
-            console.log(err);
             
             const errors = parseErrors(err);
             return res.status(400).json({ message: errors });
@@ -51,6 +53,40 @@ router.post( OFFER_PATH, userOnly, trimForm, async (req, res) => {
    }catch( error ){
 
    }    
+})
+
+.put( OFFER_PATH, userOnly, trimForm, async (req, res) => {
+
+    uploadFile(req, res, async (error) => {
+        if (error) {
+            
+            return res.status(400).json({ message: error.message });
+        }
+       
+        try {
+            const userId = req.user.id;
+           
+            const upload = 
+                req?.file 
+                    ? await cloudinary.uploader.upload(req?.file.path, { folder: userId }) 
+                    : null;
+            
+            let offer = await UpdateOffer(
+                {
+                ...req.body, image: upload?.url, creator: userId
+                },
+                userId
+            );
+         
+            return res.status(200).json({message: 'Sucssesfuly update offer.' });
+
+        } catch (err) {
+            console.log(err);
+            
+            const errors = parseErrors(err);
+            return res.status(400).json({ message: errors });
+        }
+    })
 })
 
 .delete( OFFER_PATH, async( req, res) => {

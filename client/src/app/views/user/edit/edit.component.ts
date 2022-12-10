@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { delay, Observable, take } from 'rxjs';
+import { delay, Observable, take, tap } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { User } from 'src/app/models/interfaces/userModel';
 import { UserService } from 'src/app/services/api/user/user.service';
@@ -24,6 +24,7 @@ export class EditComponent implements OnInit {
   constructor ( 
     private userService:        UserService,              
     private router:             Router,
+    private route:              ActivatedRoute,
     private toastr:             ToastrService,
     private formFactoryService: UserFormService ) 
     {  
@@ -34,22 +35,36 @@ export class EditComponent implements OnInit {
   
   ngOnInit(): void {
     
-    this.responseData$ = this.userService.getUserDetails()
+    this.responseData$ = this.userService.GetUser()
     .pipe(delay(600),take(1)); 
+
+    this.route.params.subscribe( params => {
+      this.responseData$ = 
+        this.userService.GetUser( )
+        .pipe(
+          tap( user => {
+            if(user._id !== params['userId'] ){
+              this.router.navigate(['/notfound']);
+              return; 
+            }
+          }
+        ),
+        delay(600));
+    });
   }
 
   updateProfile() {
     
     if (this.form.valid) {
       
-      this.userService.updateUserDetails(this.form.value)
+      this.userService.UpdateUser(this.form.value)
         .pipe(take(1))
         .subscribe(( user ) => 
           {       
             this.toastr.success('You successfully updated your profile!', user.name);       
             this.router.navigate(['/user/' + user._id + '/profile']);
           }, 
-          (error: any) => 
+          ( error: any ) => 
             {
               this.toastr.error( error.message, 'ERROR' );
             }

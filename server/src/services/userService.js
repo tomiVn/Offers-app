@@ -7,7 +7,7 @@ exports.UpdateProfile = async ( userId, data ) => {
     return await User.findByIdAndUpdate( userId , data, { runValidators: true }) 
 };
 
-exports.PutNewOffer = async ( userId, offerId ) => { 
+exports.PutNewOfferToUserWatchList = async ( userId, offerId ) => { 
     return await User.updateOne( { "_id": userId}, { "$push": { createdOffers: { "_id": offerId } } }) 
 };
 

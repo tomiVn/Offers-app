@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder  } from '@angular/forms';
-import { DateModel, FromDateModel, UntilDateModel } from 'src/app/models/form-elements-models/dateModel';
+import { DateModel, FromDateModel, isUntilGtThanFrom, UntilDateModel } from 'src/app/models/form-elements-models/dateModel';
 import { DescriptionModel } from 'src/app/models/form-elements-models/descriptionModel';
 import { ImgModel } from 'src/app/models/form-elements-models/imgModel';
 import { OfferContactModel } from 'src/app/models/form-elements-models/offerContactsModel';
@@ -41,8 +41,10 @@ export class OffersFormService {
 
     return {      
       models: ModelsData,   
-      form: this.fb.group ( buildFormFunction( ModelsData )),
-      
+      form: this.fb.group ( buildFormFunction( ModelsData ),
+      { 
+        validators: isUntilGtThanFrom( FromDateModel.elementName, UntilDateModel.elementName )
+      }),      
     }
   }
 }

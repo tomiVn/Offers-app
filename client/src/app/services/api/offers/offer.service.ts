@@ -39,4 +39,13 @@ export class OfferService {
       return this.http.delete< {message: string} >( this.offerPathString + '?offerId=' + offerId );
   }
 
+  UpdateOffer(form: NgForm, offerId: string): Observable< {message: string} >{
+
+    let formData = FormDataAppend( form );
+
+    formData.append('_id', offerId);
+
+      return this.http.put< {message: string} >( this.offerPathString, formData );
+  }
+
 }

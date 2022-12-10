@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, Observable, tap } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { delay, Observable, take, tap } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { IOffer } from 'src/app/models/interfaces/offerInterface';
 import { ITokenPayload } from 'src/app/models/interfaces/tokenPayloadInterface';
@@ -30,7 +31,9 @@ export class EditOfferComponent implements OnInit {
     private route: ActivatedRoute,
     private offersService: OfferService,
     private tokentService: TokenService,
-    private router: Router) 
+    private router: Router,
+    private ref: ElementRef,
+    private toastr: ToastrService) 
     {
       let formServiceData = this.offerFormService.createOffer();
       this.FormModels = formServiceData.models;
@@ -45,29 +48,49 @@ export class EditOfferComponent implements OnInit {
         this.offersService.GetOneOfferById( params['offerId'] )
         .pipe(
           tap( offer => {
-            if(offer.creator.toString() !== this.user?.id){
+            if( offer.creator._id.toString() !== this.user?.id ){
               this.router.navigate(['/notfound']);
+              return; 
             }
+            this.uploadImage = offer.image
           }
         ),
         delay(600));
     });
   }
 
-  actionForm(){
+  actionForm(offerId: string){
 
+    if( this.form.valid )
+    {
+      this.offersService.UpdateOffer( this.form.value, offerId )
+        .pipe(take(1),
+        tap(r => {
+          this.toastr.success(r.message);
+          this.router.navigate(['/offers/' + offerId + '/view'])
+      }))
+      .subscribe();
+    }    
   }
 
-  upload(){
-
+  upload()
+  {
+    let filebutton = this.ref.nativeElement.querySelector('#upload');
+    filebutton.click(); 
+    this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image information!');
+    return;
   }
 
-  onImageSelected($event: string){
-
+  onImageSelected(img: string)
+  {
+    this.uploadVisibility = !this.uploadVisibility; 
+    this.uploadImage = img; 
   }
 
-  cancel(){
-
+  cancel() 
+  {
+    this.uploadVisibility = !this.uploadVisibility;
+    this.uploadImage = undefined;
   }
 
 }

@@ -15,6 +15,7 @@ export class DescriptionComponent implements OnInit {
   constructor() { }
   
   ngOnInit(): void {
+    this.context.controls[this.model.elementName].setValue(this.value);
   }
 
 }

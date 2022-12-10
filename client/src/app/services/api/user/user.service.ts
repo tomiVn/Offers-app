@@ -15,15 +15,15 @@ export class UserService {
  
   constructor(private http: HttpClient) { }
 
-  getUserDetails(): Observable< User >{
+  GetUser(): Observable< User >{
     return this.http.get< User >( this.userPathString ); 
   }
 
-  updateUserDetails( form: NgForm ): Observable< User > {
+  UpdateUser( form: NgForm ): Observable< User > {
     return this.http.put< User >( this.userPathString, form );
   }
 
-  updateUserAvatar( form: NgForm ): Observable< User >{
+  UpdateAvatar( form: NgForm ): Observable< User >{
   
     let formData = FormDataAppend( form );
 

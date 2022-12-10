@@ -10,6 +10,7 @@ const offerModel = new Schema({
 
            image: {
             type: String, 
+         default: 'https://res.cloudinary.com/duyubdgsj/image/upload/v1670590742/assets/no-image-available_hga1ag.jpg',
     },
 
      description: { 

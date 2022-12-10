@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { delay, Observable, take } from 'rxjs';
+import { delay, Observable, take, tap } from 'rxjs';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { User } from 'src/app/models/interfaces/userModel';
 import { UserService } from 'src/app/services/api/user/user.service';
@@ -28,7 +29,9 @@ export class ProfileComponent implements OnInit {
     private userService:        UserService,
     private toastr:             ToastrService,
     private formFactoryService: UserFormService,
-    private ref:                ElementRef) 
+    private ref:                ElementRef,
+    private route:              ActivatedRoute,
+    private router:             Router) 
     {
       let formServiceData = this.formFactoryService.formProfileImage();
 
@@ -38,8 +41,19 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.responseData$ = this.userService.getUserDetails()
-      .pipe(delay(600), take(1));
+      this.route.params.subscribe( params => {
+        this.responseData$ = 
+          this.userService.GetUser( )
+          .pipe(
+            tap( user => {
+              if(user._id !== params['userId'] ){
+                this.router.navigate(['/notfound']);
+                return; 
+              }
+            }
+          ),
+          delay(600));
+      });
   }
 
   updateProfile() {
@@ -48,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
       this.uploadVisibility = false;
 
-      this.userService.updateUserAvatar(this.form.value)
+      this.userService.UpdateAvatar(this.form.value)
         .pipe(take(1))
         .subscribe((avatar) =>  { 
 
@@ -58,8 +72,7 @@ export class ProfileComponent implements OnInit {
               return;
             }                      
           }, 
-          (error: any) => {
-            
+          (error: any) => {           
             return this.toastr.error( error.message, 'ERROR' );
           }
         ); 
@@ -89,7 +102,9 @@ export class ProfileComponent implements OnInit {
   }
 
   onImageSelected(img: string){
-    this.uploadVisibility = this.form.valid && this.form.controls[this.FormModels['ImgModel'].elementName].value; 
+    this.uploadVisibility = 
+      this.form.valid && 
+      this.form.controls[this.FormModels['ImgModel'].elementName].value; 
     
     if(this.uploadVisibility){
       this.uploadImage = img;

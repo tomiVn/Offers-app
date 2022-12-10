@@ -4,6 +4,7 @@ import { AuthGuard } from '../../middlewear/auth.guard';
 import { EditComponent } from '../user/edit/edit.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { DetailsOfferComponent } from './details-offer/details-offer.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { LookingOffersComponent } from './looking-offers/looking-offers.component';
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
     },
     { 
       path: ':offerId/edit', 
-      component: EditComponent, 
+      component: EditOfferComponent, 
       canActivate: [AuthGuard], 
       title: 'Edit offer' 
     },

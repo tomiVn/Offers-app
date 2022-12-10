@@ -16,6 +16,7 @@ export class TextAreaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.context.controls[this.model.elementName].setValue(this.value);
   }
 
 }
