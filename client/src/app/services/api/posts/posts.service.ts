@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PostsService {
 
-  PathString: string = environment.path + '/posts';
+  PathString: string = environment.path + '/api/posts';
   
   constructor(private http: HttpClient) { }
 

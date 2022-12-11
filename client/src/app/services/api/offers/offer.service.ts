@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class OfferService {
 
-  offerPathString: string = environment.path + '/offers';
+  offerPathString: string = environment.path + '/api/offers';
   
   constructor( private http: HttpClient ) { }
 

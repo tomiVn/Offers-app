@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
@@ -19,11 +20,14 @@ export class HeaderComponent implements OnInit, DoCheck {
     private service: TokenService,
     private observer: BreakpointObserver,
     private cdr: ChangeDetectorRef,
-    private router: Router) { }
+    private router: Router) {
+      
+     }
 
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
       this.sideNavInit();
+      this.isUser = this.service.isUser();
     });
   }
 
@@ -33,16 +37,8 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    
-    let payload = this.service.currentUser();
-    if ( payload ) 
-      {
-        this.userId = payload.id;
-        this.isUser = this.service.isUser();
-      } else 
-          {
-            this.isUser = false;
-          }
+    this.userId = this.service.currentUser()?.id;
+   
   }
 
   sideNavInit() {
@@ -62,5 +58,4 @@ export class HeaderComponent implements OnInit, DoCheck {
       });
     this.cdr.detectChanges();
   }
-
 }

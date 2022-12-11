@@ -47,7 +47,8 @@ import { TemplatesModule } from './templates/templates.module';
   exports: [ HeaderComponent, SideNavComponent, FooterComponent, FormsModule, OfferTemplateComponent ],
              
   providers: [ CookieService, 
-    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true }],
+    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true },
+  ],
     
   bootstrap: [AppComponent]
 })

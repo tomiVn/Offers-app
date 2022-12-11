@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IToken } from 'src/app/models/interfaces/tokenModel';
 import { ITokenPayload } from 'src/app/models/interfaces/tokenPayloadInterface';
 import { COOKIE_NAME } from 'src/app/utils/const';
@@ -36,12 +36,12 @@ export class TokenService {
     if( token ){
       return getPayload( token );
     }
-    return null;
+    return undefined;
   }
 
   isUser(){
-    let result: boolean = this.cookie.get( COOKIE_NAME ) ? true : false;
-    return result;
+    
+    return this.cookie.get( COOKIE_NAME ) ? true : false;
   }
 }
 

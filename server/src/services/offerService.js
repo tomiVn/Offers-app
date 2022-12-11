@@ -16,8 +16,8 @@ exports.PutUserToWatchedList = ( offerId, userId ) =>
     { "$push": { watchedList: { "_id": userId } } } 
   );
 
-exports.DeleteData = async( offerId, userId ) => 
-  await Offer.findOneAndDelete( { _id: offerId, creator: userId } );
+exports.DeleteData = async( offerId, _id ) => 
+  await Offer.findOneAndDelete( { _id: offerId } );
 
 exports.UpdateOffer = ( formData, userId ) => 
   Offer.findOneAndUpdate( { _id: formData._id, creator: userId }, formData );

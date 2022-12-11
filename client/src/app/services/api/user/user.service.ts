@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  userPathString: string = environment.path + '/user';
+  userPathString: string = environment.path + '/api/user';
  
   constructor(private http: HttpClient) { }
 

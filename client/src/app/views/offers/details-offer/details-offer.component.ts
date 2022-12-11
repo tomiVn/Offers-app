@@ -16,7 +16,7 @@ export class DetailsOfferComponent implements OnInit {
 
   offerDetails$: Observable< IOffer > | undefined;
   routeSub: Subscription | undefined;
-  isUser: boolean;
+  isUser: boolean = false;
   curentUser: ITokenPayload | undefined;
   isInWatchList: boolean = false;
 
@@ -26,8 +26,9 @@ export class DetailsOfferComponent implements OnInit {
     private tokenService: TokenService,
     private toastr: ToastrService,
     private router: Router) 
-      {
-        this.isUser = tokenService.isUser();
+      { 
+        this.isUser = this.tokenService.isUser();
+        this.curentUser = this.tokenService.currentUser();
       }
 
   ngOnInit(): void {
@@ -42,11 +43,7 @@ export class DetailsOfferComponent implements OnInit {
         ),
         delay(600));
     });
-    
-    
-    if(this.isUser){
-      this.curentUser = this.tokenService.currentUser();     
-    }  
+
   }
   
   addToWatchList(offerId: string){
@@ -79,5 +76,4 @@ export class DetailsOfferComponent implements OnInit {
     }
     )).subscribe();
   }
-
 }
