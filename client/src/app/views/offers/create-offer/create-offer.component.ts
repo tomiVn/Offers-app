@@ -52,7 +52,7 @@ export class CreateOfferComponent implements OnInit {
   upload() {
     let filebutton = this.ref.nativeElement.querySelector('#upload');
     filebutton.click(); 
-    this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image information!');
+    this.toastr.info('Types JPEG / JPG / PNG | Limit 1MB!', 'Image in quadratic form!');
   }
 
   onImageSelected(img: string){

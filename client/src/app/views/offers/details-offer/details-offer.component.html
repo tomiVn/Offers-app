@@ -14,20 +14,28 @@
             </div>
            
             <div class="col">
-                <span class="example-space"></span>
-                <p><strong>Description: </strong>
+                <p>
+                    <strong>Description:</strong>
+                </p>
+                <p>
                     {{offer.description}}
                 </p> 
-
-                <p><strong>Offer duration: </strong> 
+                <span class="verticle-spacer"></span>
+                <p>
+                    <strong>Offer duration:</strong>
+                </p>
+                <p>
                     from {{offer.fromDate | date}} - 
                     until {{offer.untilDate | date }}
                 </p>
-                
-                <p><strong>Contatc info: </strong>
+                <span class="verticle-spacer"></span>
+                <p>
+                    <strong>Contatc info:</strong>
+                </p>
+                <p>
                     {{ offer.contactInfo }}
                 </p> 
-
+                <span class="verticle-spacer"></span>
                 <p class="text-align-right">
                     Price <b>{{offer.price | currency }}</b> 
                 </p>
@@ -39,22 +47,33 @@
                 </p>
                                 
                 <ng-container *ngIf="curentUser?.id == offer?.creator?._id; else isNotOwner">
-                    <button mat-button routerLink="/offers/{{offer._id}}/edit">Edit</button>
-                    <button mat-button (click)="deleteOffer(offer._id, offer.title)">Delete</button>
+                    <button mat-button 
+                         routerLink="/offers/{{offer._id}}/edit" 
+                        class="color-yellow">
+                        Edit
+                    </button>
+                    &nbsp;
+                    <button mat-button 
+                        (click)="deleteOffer(offer._id, offer.title)" 
+                        class="color-red">
+                        Delete
+                    </button>
                 </ng-container> 
 
                 <ng-template #isNotOwner>
                     <ng-container *ngIf="isUser">
                         <ng-container *ngIf="!isInWatchList; else unwatch">                   
                             <button mat-button                             
-                                (click)="addToWatchList(offer._id)" >
+                                (click)="addToWatchList(offer._id)" 
+                                class="color-yellow">
                                     Add to watch List
                             </button>
                         </ng-container>
     
                         <ng-template #unwatch>
                             <button mat-button                             
-                                (click)="removeFromWatchList(offer._id)" >
+                                (click)="removeFromWatchList(offer._id)" 
+                                class="color-red">
                                     Remove from watch List
                             </button>
                         </ng-template>

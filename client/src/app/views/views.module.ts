@@ -12,6 +12,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { UserModule } from './user/user.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { OffersModule } from './offers/offers.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';  
 
 @NgModule({
   declarations: [ HomeComponent, ContactsComponent, AboutusComponent, NotFoundComponent ],
@@ -27,6 +29,8 @@ import { OffersModule } from './offers/offers.module';
     AppRoutingModule,
     PostsModule,
     NgOptimizedImage, 
+    MatIconModule,
+    MatDividerModule
   ],
 })
 export class ViewsModule { }
