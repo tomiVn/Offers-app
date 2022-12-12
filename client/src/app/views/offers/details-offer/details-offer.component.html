@@ -36,14 +36,17 @@
                     {{ offer.contactInfo }}
                 </p> 
                 <span class="verticle-spacer"></span>
-                <p class="text-align-right">
-                    Price <b>{{offer.price | currency }}</b> 
+                <p class="text-align-right price">
+                    Price <b>{{offer.price | currency:'EUR' }}</b> 
                 </p>
 
                 <p class="text-align-right">
                     <i>Created {{offer.createdAt | date}}, 
                         from {{ offer.creator.name }}
                     </i>
+                </p>
+                <p class="text-align-right" *ngIf="offer.watchedList.length > 0 ">
+                    <i>This offer is watching from: {{offer.watchedList.length}}</i>
                 </p>
                                 
                 <ng-container *ngIf="curentUser?.id == offer?.creator?._id; else isNotOwner">
