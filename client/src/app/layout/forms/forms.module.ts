@@ -13,24 +13,27 @@ import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 import { ImgUploadComponent } from './img-upload/img-upload.component';
 import { TextAreaComponent } from './text-area/text-area.component';
 
-const formElements = [ 
-                       IputDatePickerComponent,
-                       DescriptionComponent,
-                       SelectDropDownComponent,
-                       InputElementComponent, 
-                       AutocompleteComponent,
-                       ImgUploadComponent,
-                       TextAreaComponent
-                      ]
+const formElements = 
+  [ 
+    IputDatePickerComponent,
+    DescriptionComponent,
+    SelectDropDownComponent,
+    InputElementComponent, 
+    AutocompleteComponent,
+    ImgUploadComponent,
+    TextAreaComponent
+  ]
 
 @NgModule({
   declarations: [ formElements ],
 
-    imports: [ CommonModule,
-               AppRoutingModule,
-               MaterialsModule,
-               MatNativeDateModule  
-              ],
+    imports: 
+      [ 
+        CommonModule,
+        AppRoutingModule,
+        MaterialsModule,
+        MatNativeDateModule  
+      ],
 
   //Export Fields is important!!!
     exports: [ formElements ],

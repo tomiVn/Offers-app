@@ -4,10 +4,9 @@
 
 export const environment = {
   production: false,
-   path: 'http://localhost:3030'
+  path: 'http://localhost:3030'
 };
-//path: 'http://localhost:3030'
-//https://easy-erin-goshawk-fez.cyclic.app
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { OffersModule } from './offers/offers.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';  
+import { TemplatesModule } from '../layout/templates/templates.module';
 
 @NgModule({
   declarations: [ HomeComponent, ContactsComponent, AboutusComponent, NotFoundComponent ],
@@ -30,7 +31,8 @@ import { MatDividerModule } from '@angular/material/divider';
     PostsModule,
     NgOptimizedImage, 
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    TemplatesModule
   ],
 })
 export class ViewsModule { }

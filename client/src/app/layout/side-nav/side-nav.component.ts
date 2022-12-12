@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router, RouterStateSnapshot, RoutesRecognized } from '@angular/router';
-import { time } from 'console';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFormModel } from 'src/app/models/interfaces/formElementsInterface';
 import { OffersFormService } from 'src/app/services/forms/offers-form-factory/offers-form.service';
 

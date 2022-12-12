@@ -9,13 +9,15 @@ import { ViewsModule } from './views/views.module';
 import { ToastrModule } from 'ngx-toastr';
 import { LayoutModule } from './layout/layout.module';
 import { AuthInterceptor } from './middlewear/authInterceptor';
+import { TemplatesModule } from './layout/templates/templates.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   
-  imports: [
+  imports: 
+  [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

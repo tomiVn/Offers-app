@@ -9,11 +9,18 @@ import { RouterModule } from '@angular/router';
 import { OfferTemplateComponent } from './offer-template/offer-template.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatMenuModule } from '@angular/material/menu';
+import { StaticPagesTemplateComponent } from './static-pages-template/static-pages-template.component';
+import { MatCardModule } from '@angular/material/card';
+
+let use = 
+  [ 
+    OfferTemplateComponent,
+    StaticPagesTemplateComponent
+  ];
 
 @NgModule({
-  declarations: [
-    OfferTemplateComponent
-  ],
+  declarations: [ use ],
+
   imports: [
     CommonModule, 
     MatButtonModule,
@@ -22,9 +29,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,  
     NgOptimizedImage,
     MatMenuModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
-  exports: [  OfferTemplateComponent ],
+  exports: [ use ],
              
   providers: [ ],
     

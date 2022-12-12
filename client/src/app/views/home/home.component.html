@@ -1,37 +1,5 @@
 <mat-card class="card-decoration">
-    <article class="container" >
-
-        <div class="col">                
-            <header class="header">
-                <h3>Wellcome to our website.</h3>
-             </header>
- 
-            <figure class="image-container">
-                <img src="https://res.cloudinary.com/duyubdgsj/image/upload/v1670750668/assets/wellcome-image_laqgao.png" 
-                    width="300" height="300">
-            </figure>     
-        </div>
-
-        <div class="col">
-            <span class="verticle-spacer"></span>
-            <h3>
-                <b>If you're selling a tourism product</b> 
-            </h3>
-            <p>
-                where your customers 
-                will only truly understand your value when using it, 
-                don't be shy. We do a great job of prompting first-time users to get started right away.
-            </p>
-            <h3>
-                <b>If you're customer </b>
-            </h3>
-            <p>
-                you can check our offers and make your vacation unbelievable.
-            </p>
-        </div>
-
-    </article>
+    <app-static-pages-template
+        [data]="data">
+    </app-static-pages-template>
 </mat-card>
-
-
-

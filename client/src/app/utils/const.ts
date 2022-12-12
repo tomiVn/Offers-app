@@ -9,3 +9,5 @@ export const SPECIAL_CHARACTERS_ARE_NOT_ALLOOWED = 'Special characters < > are n
 export const EMAIL_IS_NOT_VALID = 'Email is not Valid!';
 
 export const ONLY_NUMBERS = 'Only numbers are allowed!';
+
+export const STATIC_PAGES_DEFAULT_IMAGE = 'https://res.cloudinary.com/duyubdgsj/image/upload/v1670750668/assets/wellcome-image_laqgao.png';

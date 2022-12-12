@@ -1,32 +1,5 @@
 <mat-card class="card-decoration">
-    <article class="container" >
-
-        <div class="col">                
-            <header class="header">
-                <h3>About us.</h3>
-             </header>
- 
-            <figure class="image-container">
-                <img src="https://res.cloudinary.com/duyubdgsj/image/upload/v1670750668/assets/wellcome-image_laqgao.png" 
-                    width="300" height="300">
-            </figure>     
-        </div>
-
-        <div class="col">
-            <span class="verticle-spacer"></span>
-            <h3>
-                <b>We are profecional team promoting tourism service offers.</b>
-            </h3>
-            <p>
-                We have business partners in many countries of the world.
-                <br>
-                Our main aim is to provide quality service to you at a very reasonable cost.
-                <br>
-                We take special care of our clients during their Travel.
-                <br><br>
-                Our Guides & Tour managers are trained to form a very friendly relation with tourists.
-            </p>
-        </div>
-
-    </article>
+    <app-static-pages-template
+        [data]="data">
+    </app-static-pages-template>
 </mat-card>

@@ -1,0 +1,29 @@
+<article class="container">
+
+    <div class="col">
+        <header class="header">
+            <h3>{{data.title}}</h3>
+        </header>
+
+        <figure class="image-container">
+            <img src="{{data.image}}"
+                width="300" height="300">
+        </figure>
+    </div>
+
+    <div class="col">
+
+        <ng-container *ngFor="let content of data.content">
+            <span class="verticle-spacer"></span>
+            <h3>
+                <b>{{content.header}}</b>
+            </h3>
+            <p>
+                <ng-container *ngFor="let p of content.text">
+                    {{p}}<br>
+                </ng-container >
+            </p>
+        </ng-container>
+    </div>
+
+</article>
