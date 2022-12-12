@@ -29,11 +29,15 @@
   font-size: large;
 }
 
+mat-card-content{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
 .profile-details {
-  display: block;
-  position: relative;
-  width: calc(50% - 0.24em);
-  float: left;
+  flex: 50%;
 }
 
 .title {
@@ -71,3 +75,9 @@
 .text-center{
   text-align: center;
 }
+
+// @media (max-width: 800px) {
+//   .profile-details {
+//       flex: 100%;
+//   }
+// }
