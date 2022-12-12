@@ -42,7 +42,7 @@
                                 </app-img-upload>
 
                                 <button mat-button class="menu-button" (click)="upload()">
-                                    upload
+                                    Upload
                                     <mat-icon class="example-icon" aria-label="Example icon-button with menu icon">
                                         upload
                                     </mat-icon>
@@ -62,14 +62,27 @@
         <mat-card-content>
             <section class="profile-details">
                 <h3>Basic information:</h3>
-                <p>gender: {{user.gender}}</p>
-                <p>born: {{user.born | date}}</p>
-                <p>email: {{user.email}}</p>
-                <p>phone: {{user.dialCode}} {{user.phone}}</p>
+                    <p>
+                        <b>gender:</b> {{user.gender}}
+                    </p>
+                    <p>
+                        <b>born:</b> {{user.born | date}}
+                    </p>
+                    <p>
+                        <b>email:</b> {{user.email}}
+                    </p>
+                    <p>
+                        <b>phone:</b> {{user.dialCode}} {{user.phone}}
+                    </p>
             </section>
             <section class="profile-details">
-                <h3>Post offers: {{user?.createdOffers?.length || 'Not post offers yet!'}}</h3>
-                <h3>Watching offers: {{user?.watchOfferList?.length || 'Not watching offers yet!'}}</h3>
+                <h3>Offers information:</h3>
+                <p>
+                    <b>Post offers:</b> {{user?.createdOffers?.length || 'Not post offers yet!'}}
+                </p>
+                <p>
+                    <b>Watching offers:</b> {{user?.watchOfferList?.length || 'Not watching offers yet!'}}
+                </p>
             </section>
 
             <section id="user-offers" *ngIf="user?.createdOffers?.length !== 0">
