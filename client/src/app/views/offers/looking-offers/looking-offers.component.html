@@ -1,10 +1,10 @@
 <mat-card class="card-decoration">
 <ng-container *ngIf="(offersData$ | async) as data; else loading">
-    <ng-container *ngFor="let offer of offersData$ | async">
+    <div *ngFor="let offer of offersData$ | async" class="offer">
         <app-offer-template
             [offer]="offer">
         </app-offer-template> 
-    </ng-container>   
+    </div>   
 </ng-container>
 <ng-template #loading>
     <h3>Loading...</h3>

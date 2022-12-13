@@ -91,7 +91,7 @@
                         Your post offers.
                     </h3>
                 </header>
-                <div *ngFor="let offer of user?.createdOffers">
+                <div *ngFor="let offer of user?.createdOffers" class="offer">
                     <app-offer-template
                         [offer]="offer">                    
                     </app-offer-template>
@@ -104,7 +104,7 @@
                         Watching offers.
                     </h3>
                 </header>
-                <div *ngFor="let offer of user?.watchOfferList">
+                <div *ngFor="let offer of user?.watchOfferList" class="offer">
                     <app-offer-template
                         [offer]="offer">                    
                     </app-offer-template>
