@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
         header: 'If you\'re selling a tourism product.',
         text:  
           [
-            'where your customers will only truly understand your value when using it,' + 
+            'where your customers will only truly understand your value when using it, ' + 
             'don\'t be shy. We do a great job of prompting first-time users to get started right away.'
           ]               
       },
