@@ -33,6 +33,7 @@ mat-card-content{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
 }
 
@@ -75,30 +76,23 @@ mat-card-content{
   }
 }
 
-#user-offers{
+header{
   width: 100%;
-  flex: 1 1 auto;
-  overflow: hidden;
 }
-
-#watched-offers{
-  width: 100%;
-  flex: 1 1 auto;
-  overflow: hidden;
-}
-
-.offer{
-  position: relative;
-  float: left;
-  margin: 5px 10px 5px 0;
-}
-
 .text-center{
   text-align: center;
 }
 
-// @media (max-width: 800px) {
-//   .profile-details {
-//       flex: 100%;
-//   }
-// }
+#user-offers{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#watched-offers{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}

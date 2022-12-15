@@ -85,31 +85,38 @@
                 </p>
             </section>
 
-            <section id="user-offers" *ngIf="user?.createdOffers?.length !== 0">
+            <section *ngIf="user?.createdOffers?.length !== 0">
                 <header>
                     <h3 class="text-center">
                         Your post offers.
                     </h3>
                 </header>
-                <div *ngFor="let offer of user?.createdOffers" class="offer">
-                    <app-offer-template
-                        [offer]="offer">                    
-                    </app-offer-template>
-                </div>
+                
+                <article id="user-offers" >
+                    
+                    <div *ngFor="let offer of user?.createdOffers" class="offer">
+                        <app-offer-template
+                            [offer]="offer">                    
+                        </app-offer-template>
+                    </div>
+                </article>
             </section>
 
-            <section id="watched-offers" *ngIf="user?.watchOfferList?.length !== 0">
+
+            <section *ngIf="user?.watchOfferList?.length !== 0">
                 <header>
                     <h3 class="text-center">
                         Watching offers.
                     </h3>
                 </header>
-                <div *ngFor="let offer of user?.watchOfferList" class="offer">
-                    <app-offer-template
-                        [offer]="offer">                    
-                    </app-offer-template>
-                </div>
-            </section>
+                <article id="watched-offers" >                
+                    <div *ngFor="let offer of user?.watchOfferList" class="offer">
+                        <app-offer-template
+                            [offer]="offer">                    
+                        </app-offer-template>
+                    </div>
+                </article>
+           </section>
 
         </mat-card-content>
     </div>
