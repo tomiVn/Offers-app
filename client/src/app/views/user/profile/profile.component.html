@@ -85,7 +85,7 @@
                 </p>
             </section>
 
-            <section *ngIf="user?.createdOffers?.length !== 0">
+            <section *ngIf="user?.createdOffers?.length !== 0" class="offers">
                 <header>
                     <h3 class="text-center">
                         Your post offers.
@@ -101,8 +101,7 @@
                 </article>
             </section>
 
-
-            <section *ngIf="user?.watchOfferList?.length !== 0">
+            <section *ngIf="user?.watchOfferList?.length !== 0" class="offers">
                 <header>
                     <h3 class="text-center">
                         Watching offers.
