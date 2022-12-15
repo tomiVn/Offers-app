@@ -2,7 +2,9 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
+
 .header{
     display: block;
     width: 300px;
@@ -21,9 +23,8 @@
 .image-container{
     display: block;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
 }
-
 
 .col{
     flex: 50%;
@@ -51,8 +52,20 @@ font-size: large;
 color: #3949AB;
 }
 
+.verticle-spacer{
+    padding: 0 10px;
+}
+
 @media (max-width: 800px) {
     .col {
         flex: 100%;
+    }
+
+    .header{
+        margin: 0 auto;
+    }
+    .image-container img{
+        display: block;
+        margin: 0 auto;
     }
   }
