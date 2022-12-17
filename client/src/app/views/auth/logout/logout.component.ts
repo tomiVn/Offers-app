@@ -36,7 +36,6 @@ export class LogoutComponent implements OnInit {
               this.router.navigate(['/notfound']);
               throw ({ message: 'We can\'t recognize you!' })
           }
-
           this.tokenService.deleteToken();
           this.router.navigate(['/auth/login']);
           this.toastr.success('You successfully sign out.', res.name + ' hope to see you again ');

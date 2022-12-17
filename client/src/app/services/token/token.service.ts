@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, of } from 'rxjs';
-import { IToken } from 'src/app/models/interfaces/tokenModel';
-import { ITokenPayload } from 'src/app/models/interfaces/tokenPayloadInterface';
 import { COOKIE_NAME } from 'src/app/utils/const';
 
 @Injectable({
@@ -11,7 +8,7 @@ import { COOKIE_NAME } from 'src/app/utils/const';
 export class TokenService {
 
   constructor( private cookie: CookieService ) { }
-
+ 
   setToken( token: any ){
     this.cookie.set( COOKIE_NAME, token, { secure: true } );  
     return getPayload( token );

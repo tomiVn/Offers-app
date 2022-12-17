@@ -1,8 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, DoCheck, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/services/api/auth/auth.service';
 import { TokenService } from 'src/app/services/token/token.service';
 
 @Component({
@@ -20,15 +20,22 @@ export class HeaderComponent implements OnInit, DoCheck {
     private service: TokenService,
     private observer: BreakpointObserver,
     private cdr: ChangeDetectorRef,
-    private router: Router) {
-      
+    private authService: AuthService) {
+    
      }
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.sideNavInit();
-      this.isUser = this.service.isUser();
+
+    this.authService.isLogIn.asObservable().subscribe( isUser => {
+        this.isUser = isUser;
     });
+
+    let token = this.service.isUser();
+
+    if(!this.isUser && token) {
+      this.authService.checkForUser().pipe(take(1)).subscribe()
+    } 
+
   }
 
   ngAfterViewInit(): void {
@@ -38,7 +45,6 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.userId = this.service.currentUser()?.id;
-   
   }
 
   sideNavInit() {

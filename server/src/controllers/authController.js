@@ -52,6 +52,22 @@ router.post( AUTH_PATH, trimForm, guestOnly, async (req, res) => {
 
     })
 
+    .get( AUTH_PATH + '/test', async (req, res) => {
+
+        try { 
+            let userName = req?.user?.name ? req.user.name : null;
+            
+            return res.status( 200 ).json( { name: userName } );
+
+        } catch ( error ) {
+
+            const errors = parseErrors( error );
+             
+            return res.status( 400 ).json( errors );
+        }
+
+    })
+
 module.exports = router;
 
 function userInfo(id, name, role) {

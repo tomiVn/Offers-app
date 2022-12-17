@@ -2,15 +2,17 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { catchError, Observable, throwError } from "rxjs";
+import { catchError, Observable, tap, throwError } from "rxjs";
+import { AuthService } from "../services/api/auth/auth.service";
 import { TokenService } from "../services/token/token.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
-
-  constructor(private tokenService: TokenService,
+  
+  constructor(
+    private tokenService: TokenService,
     private router: Router,
     private toastr: ToastrService) { }
 
@@ -24,20 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: { 'x-authorization': token }
       });
     }
-
-    return next.handle(request).pipe(
-      catchError((err) => {
-        
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-                       
-            this.toastr.error(err.message, 'ERROR!');
-            this.tokenService.deleteToken();
-            this.router.navigate(['/auth/login']);
-          }
-        }
-        return throwError(err);
-      })
-    )
+    return next.handle(request)
   }
 }
